@@ -3,301 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPI Cashback App</title>
+    <title>Yono777 Voucher Agency</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
-        body { background: #0f1026; color: #fff; min-height: 100vh; padding-bottom: 80px; position: relative; overflow-x: hidden; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; user-select: none; }
+        body { background-color: #004d25; color: #333; min-height: 100vh; padding-bottom: 90px; }
 
-        /* Floating Background Effect (Gifts & Money) */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
+        /* Floating Animation Elements */
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .bg-item { position: absolute; top: -10%; font-size: 20px; opacity: 0.15; animation: fall 8s linear infinite; }
+        @keyframes fall { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(110vh) rotate(360deg); } }
+        .bg-item:nth-child(1) { left: 10%; animation-duration: 6s; }
+        .bg-item:nth-child(2) { left: 35%; animation-duration: 8s; animation-delay: 2s; }
+        .bg-item:nth-child(3) { left: 70%; animation-duration: 7s; animation-delay: 1s; }
 
-        .bg-item {
-            position: absolute;
-            top: -10%;
-            font-size: 22px;
-            opacity: 0.25;
-            animation: fall 8s linear infinite;
-        }
+        .app-container { position: relative; z-index: 1; padding: 12px; }
 
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* Different delays and horizontal positions for floating elements */
-        .bg-item:nth-child(1) { left: 10%; animation-duration: 6s; animation-delay: 0s; }
-        .bg-item:nth-child(2) { left: 25%; animation-duration: 8s; animation-delay: 2s; }
-        .bg-item:nth-child(3) { left: 45%; animation-duration: 7s; animation-delay: 1s; }
-        .bg-item:nth-child(4) { left: 65%; animation-duration: 9s; animation-delay: 3s; }
-        .bg-item:nth-child(5) { left: 85%; animation-duration: 6.5s; animation-delay: 0.5s; }
-        .bg-item:nth-child(6) { left: 35%; animation-duration: 7.5s; animation-delay: 4s; }
-
-        /* App Content Wrapper */
-        .app-container { position: relative; z-index: 1; }
-
-        /* Header */
-        .user-header { background: rgba(255,255,255,0.05); padding: 15px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); }
-        .user-avatar { width: 45px; height: 45px; background: linear-gradient(45deg, #0088cc, #00d2ff); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; }
-        .user-details h3 { font-size: 16px; margin-bottom: 2px; font-weight: 700; }
-        .user-details p { font-size: 12px; color: #aaa; }
-
-        /* Balance Card */
-        .balance-card { background: linear-gradient(135deg, rgba(30, 30, 56, 0.9), rgba(42, 43, 92, 0.9)); margin: 15px; padding: 20px; border-radius: 16px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); }
-        .balance-card h4 { font-size: 14px; color: #ccc; margin-bottom: 5px; }
-        .balance-card h1 { font-size: 32px; color: #38ef7d; font-weight: 800; }
-
-        /* Main Content Views */
-        .tab-content { display: none; padding: 15px; }
-        .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Task Cards */
-        .card { background: rgba(255,255,255,0.05); margin-bottom: 12px; padding: 14px 16px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(5px); }
+        /* Top Bar Header */
+        .top-header { background: #ffffff; border-radius: 25px; padding: 10px 15px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .header-profile { display: flex; align-items: center; gap: 10px; }
+        .bot-logo { width: 38px; height: 38px; border-radius: 50%; background: #004d25; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid #ffcc00; }
+        .header-title h4 { font-size: 14px; font-weight: 800; color: #004d25; line-height: 1.2; }
+        .header-title p { font-size: 10px; font-weight: 700; color: #666; letter-spacing: 0.5px; }
         
-        /* Bold Channel Names */
-        .channel-info { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 15px; color: #ffffff; letter-spacing: 0.3px; }
+        .balance-pill { background: linear-gradient(135deg, #ffcc00, #ffa500); padding: 6px 14px; border-radius: 20px; font-weight: 800; color: #000; font-size: 14px; display: flex; align-items: center; gap: 5px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+
+        /* Tab Layout */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Banner Card */
+        .banner-card { background: linear-gradient(135deg, #005c2d, #003318); border-radius: 20px; padding: 18px; color: white; border: 2px solid rgba(255,255,255,0.2); margin-bottom: 15px; box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
+        .badge { background: #ffcc00; color: #000; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 10px; display: inline-block; margin-bottom: 8px; }
+        .banner-card h2 { font-size: 18px; font-weight: 800; margin-bottom: 5px; }
+        .banner-card p { font-size: 11px; opacity: 0.9; margin-bottom: 12px; }
+        .claim-btn { background: linear-gradient(90deg, #ffcc00, #ffa500); color: #000; border: none; padding: 8px 18px; border-radius: 20px; font-weight: 800; font-size: 12px; cursor: pointer; float: right; }
+
+        /* White Card Container */
+        .card-box { background: #ffffff; border-radius: 20px; padding: 18px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .card-label { font-size: 11px; font-weight: 800; color: #004d25; text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        .card-label::before { content: ''; width: 4px; height: 12px; background: #ffcc00; border-radius: 2px; }
+
+        .big-balance { font-size: 28px; font-weight: 900; color: #004d25; text-align: center; margin: 10px 0; }
         
-        /* Animated Gift Icon Animation */
-        .channel-info i { 
-            color: #ff3366; 
-            font-size: 19px; 
-            animation: giftPulse 1.5s infinite ease-in-out;
-            display: inline-block;
-        }
+        .action-btn { width: 100%; background: linear-gradient(135deg, #ffcc00, #ffa500); border: none; padding: 14px; border-radius: 25px; font-weight: 900; font-size: 14px; color: #000; cursor: pointer; box-shadow: 0 4px 10px rgba(255, 204, 0, 0.4); text-transform: uppercase; letter-spacing: 0.5px; animation: glow 1.5s infinite alternate; }
+        @keyframes glow { 0% { transform: scale(1); } 100% { transform: scale(1.02); box-shadow: 0 6px 15px rgba(255, 204, 0, 0.7); } }
 
-        @keyframes giftPulse {
-            0% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255, 51, 102, 0.4)); }
-            50% { transform: scale(1.25) rotate(-5deg); filter: drop-shadow(0 0 8px rgba(255, 51, 102, 0.8)); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255, 51, 102, 0.4)); }
-        }
+        /* Grid Cards */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .grid-card { background: #ffffff; padding: 15px; border-radius: 16px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .grid-card p { font-size: 10px; font-weight: 800; color: #666; text-transform: uppercase; }
+        .grid-card h3 { font-size: 18px; font-weight: 900; color: #004d25; margin-top: 4px; }
 
-        /* Highly Attractive Animated JOIN Button */
-        .btn-join { 
-            background: linear-gradient(45deg, #0088cc, #00d2ff); 
-            color: white; 
-            text-decoration: none; 
-            padding: 9px 20px; 
-            border-radius: 20px; 
-            font-size: 12px; 
-            font-weight: 800; 
-            display: inline-block;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            animation: btnGlow 1.2s infinite alternate;
-            border: none;
-        }
+        /* Profile Card View */
+        .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: #ffcc00; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 35px; color: #004d25; border: 3px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .profile-name { text-align: center; font-size: 18px; font-weight: 800; color: #004d25; }
+        .profile-id { text-align: center; font-size: 12px; color: #666; margin-top: 2px; font-weight: 600; }
 
-        @keyframes btnGlow {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 5px rgba(0, 210, 255, 0.5);
-            }
-            100% {
-                transform: scale(1.08);
-                box-shadow: 0 0 15px rgba(0, 210, 255, 0.9), 0 0 25px rgba(0, 136, 204, 0.6);
-            }
-        }
-        
-        /* Joined State Style (Animation stops after joining) */
-        .btn-join.joined {
-            background: linear-gradient(45deg, #11998e, #38ef7d) !important;
-            box-shadow: 0 4px 10px rgba(56, 239, 125, 0.3) !important;
-            color: #ffffff !important;
-            animation: none !important;
-            transform: scale(1) !important;
-        }
+        .setting-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 13px; font-weight: 700; color: #004d25; }
+        .setting-item:last-child { border-bottom: none; }
 
-        .btn-submit { width: 100%; margin-top: 15px; padding: 14px; border: none; border-radius: 25px; background: linear-gradient(45deg, #11998e, #38ef7d); color: white; font-weight: bold; font-size: 15px; cursor: pointer; box-shadow: 0 5px 15px rgba(56,239,125,0.3); }
-
-        /* Bottom Nav Bar */
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(22, 23, 48, 0.95); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.1); z-index: 100; backdrop-filter: blur(8px); }
-        .nav-item { color: #888; text-decoration: none; text-align: center; font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; }
-        .nav-item i { font-size: 18px; }
-        .nav-item.active { color: #00d2ff; }
-
-        /* Modal Popup */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; }
-        .modal-content { background: #1e1e38; padding: 25px; border-radius: 20px; text-align: center; max-width: 300px; width: 85%; border: 1px solid #38ef7d; box-shadow: 0 0 20px rgba(56,239,125,0.4); }
-        .modal-content i { font-size: 50px; color: #38ef7d; margin-bottom: 10px; animation: giftPulse 1.5s infinite ease-in-out; }
-        .modal-btn { margin-top: 15px; background: #38ef7d; color: #000; border: none; padding: 10px 25px; border-radius: 20px; font-weight: bold; cursor: pointer; }
-
-        /* Form Input */
-        .input-box { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: white; text-align: center; font-size: 16px; }
+        /* Bottom Nav */
+        .bottom-nav { position: fixed; bottom: 10px; left: 5%; width: 90%; background: #ffffff; border-radius: 30px; display: flex; justify-content: space-around; padding: 8px 0; box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 100; }
+        .nav-item { text-align: center; color: #777; font-size: 10px; font-weight: 700; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+        .nav-item i { font-size: 16px; }
+        .nav-item.active { color: #004d25; }
+        .nav-item.active i { background: #004d25; color: #fff; padding: 6px 14px; border-radius: 20px; }
     </style>
 </head>
 <body>
 
-    <!-- Floating Background Animation (Money & Gifts) -->
+    <!-- Floating Background Animation -->
     <div class="bg-animation">
         <div class="bg-item">🎁</div>
         <div class="bg-item">💰</div>
         <div class="bg-item">💵</div>
-        <div class="bg-item">🎁</div>
-        <div class="bg-item">🪙</div>
-        <div class="bg-item">🎁</div>
     </div>
 
     <div class="app-container">
-        <!-- User Header -->
-        <div class="user-header">
-            <div class="user-avatar" id="avatar">U</div>
-            <div class="user-details">
-                <h3 id="username">User Name</h3>
-                <p id="userid">ID: 00000000</p>
+        <!-- Top Header Bar -->
+        <div class="top-header">
+            <div class="header-profile">
+                <div class="bot-logo">Y7</div>
+                <div class="header-title">
+                    <h4 id="header-name">Yono777 Voucher Agency</h4>
+                    <p>PLAY & WIN 777</p>
+                </div>
+            </div>
+            <div class="balance-pill">
+                <span>₹</span> <span id="top-balance">100.00</span>
             </div>
         </div>
 
-        <!-- Balance Header -->
-        <div class="balance-card">
-            <h4>Wallet Balance</h4>
-            <h1 id="balance">₹100</h1>
+        <!-- HOME TAB -->
+        <div id="home-tab" class="tab-content active">
+            <div class="banner-card">
+                <span class="badge">EXCLUSIVE OFFER</span>
+                <h2>Claim Your Full Cash Voucher</h2>
+                <p>Simple tasks complete karo aur direct withdraw pao!</p>
+                <button class="claim-btn">Claim Now &rarr;</button>
+                <div style="clear:both;"></div>
+            </div>
+
+            <div class="card-box">
+                <div class="card-label">AVAILABLE BALANCE</div>
+                <div class="big-balance">₹<span id="main-balance">100.00</span></div>
+                <button class="action-btn" onclick="switchTab('withdraw-tab', document.querySelectorAll('.nav-item')[2])">WITHDRAW VOUCHER &nearr;</button>
+            </div>
+
+            <div class="grid-2">
+                <div class="grid-card">
+                    <p>TOTAL INVITES</p>
+                    <h3>0</h3>
+                </div>
+                <div class="grid-card">
+                    <p>TOTAL INCOME</p>
+                    <h3 style="color:#004d25;">₹0.00</h3>
+                </div>
+            </div>
         </div>
 
-        <!-- TAB 1: TASKS (10 Channels) -->
-        <div id="tasks-tab" class="tab-content active">
-            <h3 style="margin-bottom:12px;">Complete All Tasks (10/10)</h3>
-            
-            <div class="card">
-                <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Free Cash Trick's ( 1 )</span></div>
-                <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
+        <!-- INVITE TAB -->
+        <div id="invite-tab" class="tab-content">
+            <div class="card-box" style="text-align:center;">
+                <div class="card-label" style="justify-content:center;">REFER & EARN</div>
+                <p style="font-size:12px; margin: 10px 0;">Har Dosto ko invite karne par ₹20 bonus pao!</p>
+                <input type="text" id="ref-link" value="https://t.me/bot?start=123" style="width:100%; padding:10px; border-radius:10px; border:1px solid #ccc; text-align:center; margin-bottom:10px;" readonly>
+                <button class="action-btn" onclick="alert('Link Copied!')">COPY LINK</button>
             </div>
-
-            <div class="card">
-                <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 2</span></div>
-                <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
-            </div>
-
-            <div class="card">
-                <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 3</span></div>
-                <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
-            </div>
-
-            <div class="card">
-                <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 4</span></div>
-                <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
-            </div>
-
-            <div class="card">
-                <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 5</span></div>
-                <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
-            </div>
-
-            <div class="card">
-                <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 6</span></div>
-                <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
-            </div>
-
-            <div class="card">
-                <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 7</span></div>
-                <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
-            </div>
-
-            <div class="card">
-                <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 8</span></div>
-                <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
-            </div>
-
-            <div class="card">
-                <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 9</span></div>
-                <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
-            </div>
-
-            <div class="card">
-                <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 10</span></div>
-                <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
-            </div>
-
-            <button class="btn-submit" onclick="verifyTasks()"><i class="fa-solid fa-circle-check"></i> VERIFY & CLAIM</button>
         </div>
 
-        <!-- TAB 2: REFER -->
-        <div id="refer-tab" class="tab-content">
-            <h3>Refer & Earn</h3>
-            <p style="color:#aaa; font-size:13px; margin: 10px 0;">Har Refer par Payein ₹20 Bonus!</p>
-            <input type="text" id="refer-link" class="input-box" readonly value="https://t.me/CashFree_CB_Bot/UPIcash?start=12345">
-            <button class="btn-submit" onclick="copyRefer()">COPY REFER LINK</button>
-        </div>
-
-        <!-- TAB 3: WITHDRAW -->
+        <!-- WITHDRAW / GIFT TAB -->
         <div id="withdraw-tab" class="tab-content">
-            <h3>Instant Withdrawal</h3>
-            <p style="color:#aaa; font-size:13px; margin: 10px 0;">Apna UPI ID Darj Karein:</p>
-            <input type="text" placeholder="Enter UPI ID (e.g. 9876543210@paytm)" class="input-box">
-            <button class="btn-submit" onclick="attemptWithdraw()">WITHDRAW ₹100 NOW</button>
-        </div>
-
-        <!-- TAB 4: ACCOUNT -->
-        <div id="account-tab" class="tab-content">
-            <h3>My Account</h3>
-            <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin-top:15px; text-align:left;">
-                <p style="margin-bottom:8px;"><b>Status:</b> <span style="color:#38ef7d;">Active</span></p>
-                <p style="margin-bottom:8px;"><b>Sign-up Bonus:</b> ₹100 Received</p>
-                <p><b>Tasks Completed:</b> <span id="joined-count">0</span>/10</p>
+            <div class="card-box">
+                <div class="card-label">WITHDRAW VOUCHER</div>
+                <p style="font-size:12px; margin-bottom:10px;">Enter UPI ID:</p>
+                <input type="text" placeholder="e.g. 9876543210@paytm" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ccc; margin-bottom:15px;">
+                <button class="action-btn" onclick="alert('Withdrawal Request Submitted!')">WITHDRAW NOW</button>
             </div>
         </div>
 
-        <!-- Bottom Navigation -->
-        <div class="bottom-nav">
-            <div class="nav-item active" onclick="switchTab('tasks-tab', this)"><i class="fa-solid fa-list-check"></i>Tasks</div>
-            <div class="nav-item" onclick="switchTab('refer-tab', this)"><i class="fa-solid fa-user-plus"></i>Refer</div>
-            <div class="nav-item" onclick="switchTab('withdraw-tab', this)"><i class="fa-solid fa-wallet"></i>Withdraw</div>
-            <div class="nav-item" onclick="switchTab('account-tab', this)"><i class="fa-solid fa-user"></i>Account</div>
+        <!-- PROFILE TAB -->
+        <div id="profile-tab" class="tab-content">
+            <div class="card-box">
+                <div class="profile-avatar"><i class="fa-solid fa-user"></i></div>
+                <div class="profile-name" id="user-fullname">Top Looters</div>
+                <div class="profile-id" id="user-id">ID: @SONI9477468</div>
+            </div>
+
+            <div class="grid-2">
+                <div class="grid-card">
+                    <p>TOTAL EARNED</p>
+                    <h3 style="color:#004d25;">₹100.00</h3>
+                </div>
+                <div class="grid-card">
+                    <p>TOTAL WITHDRAWN</p>
+                    <h3 style="color:#e63946;">₹0.00</h3>
+                </div>
+            </div>
+
+            <div class="card-box">
+                <div class="card-label">ACCOUNT SETTINGS</div>
+                <div class="setting-item"><span>Personal Details</span> <i class="fa-solid fa-chevron-right"></i></div>
+                <div class="setting-item"><span>Redeem Gift Code</span> <i class="fa-solid fa-chevron-right"></i></div>
+            </div>
         </div>
     </div>
 
-    <!-- Bonus Popup Modal -->
-    <div class="modal" id="bonusModal">
-        <div class="modal-content">
-            <i class="fa-solid fa-gift"></i>
-            <h2>Congratulations!</h2>
-            <p style="margin-top:10px;">Aapko ₹100 Sign-up Bonus mila hai!</p>
-            <button class="modal-btn" onclick="closeModal()">CLAIM NOW</button>
-        </div>
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="switchTab('home-tab', this)"><i class="fa-solid fa-house"></i>Home</div>
+        <div class="nav-item" onclick="switchTab('invite-tab', this)"><i class="fa-solid fa-share-nodes"></i>Invite</div>
+        <div class="nav-item" onclick="switchTab('withdraw-tab', this)"><i class="fa-solid fa-gift"></i>Gift</div>
+        <div class="nav-item" onclick="switchTab('profile-tab', this)"><i class="fa-solid fa-user"></i>Profile</div>
     </div>
 
     <script>
         const tg = window.Telegram.WebApp;
         tg.expand();
 
-        let joinedChannelsCount = 0;
-        const totalChannels = 10;
-
-        // Load Telegram User Data
+        // Auto Load User Details from Telegram
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
             const user = tg.initDataUnsafe.user;
-            document.getElementById('username').innerText = user.first_name + (user.last_name ? ' ' + user.last_name : '');
-            document.getElementById('userid').innerText = 'ID: ' + user.id;
-            document.getElementById('avatar').innerText = user.first_name.charAt(0);
-            document.getElementById('refer-link').value = `https://t.me/CashFree_CB_Bot/UPIcash?start=${user.id}`;
-        }
-
-        // Show Bonus Modal on First Load
-        window.onload = function() {
-            document.getElementById('bonusModal').style.display = 'flex';
-        };
-
-        function closeModal() {
-            document.getElementById('bonusModal').style.display = 'none';
-        }
-
-        function markJoined(element) {
-            if(!element.classList.contains('joined')) {
-                element.classList.add('joined');
-                element.innerHTML = 'JOINED &#10003;';
-                joinedChannelsCount++;
-                document.getElementById('joined-count').innerText = joinedChannelsCount;
-            }
+            document.getElementById('user-fullname').innerText = user.first_name + (user.last_name ? ' ' + user.last_name : '');
+            document.getElementById('user-id').innerText = 'ID: @' + (user.username || user.id);
         }
 
         function switchTab(tabId, element) {
@@ -305,30 +196,6 @@
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             element.classList.add('active');
-        }
-
-        function verifyTasks() {
-            if(joinedChannelsCount < totalChannels) {
-                alert(`Aapne sabhi ${totalChannels} channels join nahi kiye hain! Kripya sabhi channels ko join karein.`);
-            } else {
-                alert("Tasks Verified Successfully! Aap Withdrawal le sakte hain.");
-            }
-        }
-
-        function attemptWithdraw() {
-            if(joinedChannelsCount < totalChannels) {
-                alert(`Withdrawal Fail! Pehle Tasks Tab me jaakar sabhi ${totalChannels} channels join karein.`);
-                switchTab('tasks-tab', document.querySelectorAll('.nav-item')[0]);
-            } else {
-                alert("Withdrawal Request Submitted Successfully! Payment 24 ghante me aa jayega.");
-            }
-        }
-
-        function copyRefer() {
-            const copyText = document.getElementById("refer-link");
-            copyText.select();
-            document.execCommand("copy");
-            alert("Refer link copied!");
         }
     </script>
 </body>
