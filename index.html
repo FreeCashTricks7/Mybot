@@ -3,107 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPI Cash App</title>
+    <title>UPI Cash Rewards</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; user-select: none; }
-        body { background-color: #4a0e17; color: #333; min-height: 100vh; padding-bottom: 90px; position: relative; overflow-x: hidden; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; user-select: none; }
+        
+        /* Unique Dark Violet & Electric Neon Theme */
+        body { 
+            background: linear-gradient(180deg, #120327 0%, #1a0836 50%, #090117 100%); 
+            color: #ffffff; 
+            min-height: 100vh; 
+            padding-bottom: 95px; 
+            position: relative; 
+            overflow-x: hidden; 
+        }
 
-        /* Background Animation */
+        /* Background Particle Effect */
         .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-        .bg-item { position: absolute; top: -10%; font-size: 22px; opacity: 0.2; animation: fall 8s linear infinite; }
+        .bg-item { position: absolute; top: -10%; font-size: 20px; opacity: 0.15; animation: fall 9s linear infinite; filter: drop-shadow(0 0 8px #00ffcc); }
         @keyframes fall { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(110vh) rotate(360deg); } }
-        .bg-item:nth-child(1) { left: 10%; animation-duration: 6s; }
-        .bg-item:nth-child(2) { left: 35%; animation-duration: 8s; animation-delay: 2s; }
-        .bg-item:nth-child(3) { left: 65%; animation-duration: 7s; animation-delay: 1s; }
-        .bg-item:nth-child(4) { left: 85%; animation-duration: 9s; animation-delay: 3s; }
+        .bg-item:nth-child(1) { left: 8%; animation-duration: 7s; }
+        .bg-item:nth-child(2) { left: 30%; animation-duration: 10s; animation-delay: 2s; }
+        .bg-item:nth-child(3) { left: 60%; animation-duration: 8s; animation-delay: 1s; }
+        .bg-item:nth-child(4) { left: 82%; animation-duration: 11s; animation-delay: 3s; }
 
-        .app-container { position: relative; z-index: 1; padding: 12px; }
+        .app-container { position: relative; z-index: 1; padding: 14px; }
 
-        /* Header Card */
-        .user-header-card { background: #ffffff; border-radius: 20px; padding: 15px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        /* Neon Header Card */
+        .user-header-card { 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 22px; 
+            padding: 14px 18px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            margin-bottom: 15px; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4); 
+        }
         .user-info { display: flex; align-items: center; gap: 12px; }
-        .avatar-circle { width: 45px; height: 45px; background: linear-gradient(135deg, #0088cc, #00d2ff); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; border: 2px solid #ffcc00; }
-        .user-text h3 { font-size: 15px; font-weight: 800; color: #4a0e17; }
-        .user-text p { font-size: 11px; color: #666; font-weight: 700; }
+        .avatar-circle { 
+            width: 46px; 
+            height: 46px; 
+            background: linear-gradient(135deg, #a100ff, #00e5ff); 
+            color: #fff; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 20px; 
+            font-weight: 900; 
+            box-shadow: 0 0 12px rgba(0, 229, 255, 0.6); 
+        }
+        .user-text h3 { font-size: 15px; font-weight: 800; color: #fff; letter-spacing: 0.5px; }
+        .user-text p { font-size: 11px; color: #a29bfe; font-weight: 600; }
 
-        .balance-badge { background: linear-gradient(135deg, #ffcc00, #ffa500); padding: 8px 14px; border-radius: 20px; font-weight: 900; color: #000; font-size: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+        .balance-badge { 
+            background: linear-gradient(135deg, #ffe600, #ff0078); 
+            padding: 8px 16px; 
+            border-radius: 20px; 
+            font-weight: 900; 
+            color: #fff; 
+            font-size: 15px; 
+            box-shadow: 0 0 15px rgba(255, 0, 120, 0.5); 
+        }
 
-        /* Tabs */
+        /* Content Switcher */
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Banner */
-        .banner-card { background: linear-gradient(135deg, #6e1522, #2b080d); border-radius: 20px; padding: 16px; color: white; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .banner-card h2 { font-size: 17px; font-weight: 800; color: #ffcc00; margin-bottom: 4px; }
-        .banner-card p { font-size: 12px; opacity: 0.9; line-height: 1.4; }
+        /* Electric Banner Card */
+        .banner-card { 
+            background: linear-gradient(135deg, #2a085c, #140033); 
+            border-radius: 20px; 
+            padding: 18px; 
+            color: white; 
+            border: 1px solid rgba(0, 229, 255, 0.3); 
+            margin-bottom: 15px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5); 
+        }
+        .banner-card h2 { font-size: 17px; font-weight: 800; color: #00f6ff; margin-bottom: 6px; text-shadow: 0 0 8px rgba(0,246,255,0.4); }
+        .banner-card p { font-size: 12px; color: #dcdde1; line-height: 1.5; }
 
-        /* Card Box */
-        .card-box { background: #ffffff; border-radius: 20px; padding: 16px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        .card-title { font-size: 12px; font-weight: 900; color: #4a0e17; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-        .card-title::before { content: ''; width: 4px; height: 14px; background: #ffcc00; border-radius: 2px; }
+        /* Card Container */
+        .card-box { 
+            background: rgba(255, 255, 255, 0.04); 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border-radius: 20px; 
+            padding: 16px; 
+            margin-bottom: 15px; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3); 
+        }
+        .card-title { font-size: 12px; font-weight: 900; color: #ffe600; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; letter-spacing: 1px; }
+        .card-title::before { content: ''; width: 4px; height: 14px; background: #00f6ff; border-radius: 2px; box-shadow: 0 0 8px #00f6ff; }
 
-        /* Tasks */
-        .task-card { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 12px; padding: 12px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-        .channel-info { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 14px; color: #4a0e17; }
-        .channel-info i { color: #ff3366; font-size: 18px; animation: giftPulse 1.5s infinite ease-in-out; }
-        @keyframes giftPulse { 0% { transform: scale(1); } 50% { transform: scale(1.25) rotate(-5deg); } 100% { transform: scale(1); } }
+        /* Tasks Layout */
+        .task-card { 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.06); 
+            border-radius: 14px; 
+            padding: 10px 14px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            margin-bottom: 9px; 
+        }
+        .channel-info { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 13px; color: #f5f6fa; }
+        .channel-info i { color: #ff0078; font-size: 16px; animation: pulseGlow 1.5s infinite ease-in-out; }
+        @keyframes pulseGlow { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
 
-        .btn-join { background: linear-gradient(45deg, #0088cc, #00d2ff); color: white; text-decoration: none; padding: 8px 16px; border-radius: 20px; font-size: 11px; font-weight: 900; animation: btnGlow 1.2s infinite alternate; border: none; cursor: pointer; }
-        @keyframes btnGlow { 0% { transform: scale(1); box-shadow: 0 0 5px rgba(0, 210, 255, 0.5); } 100% { transform: scale(1.06); box-shadow: 0 0 12px rgba(0, 210, 255, 0.9); } }
-        .btn-join.joined { background: linear-gradient(45deg, #11998e, #38ef7d) !important; color: #fff !important; animation: none !important; }
+        .btn-join { 
+            background: linear-gradient(135deg, #00f6ff, #0066ff); 
+            color: #000; 
+            text-decoration: none; 
+            padding: 7px 16px; 
+            border-radius: 20px; 
+            font-size: 11px; 
+            font-weight: 900; 
+            border: none; 
+            cursor: pointer; 
+            box-shadow: 0 0 10px rgba(0, 246, 255, 0.4); 
+            transition: 0.2s;
+        }
+        .btn-join.joined { 
+            background: linear-gradient(135deg, #000, #00b894) !important; 
+            color: #00ffcc !important; 
+            border: 1px solid #00ffcc !important;
+            box-shadow: none !important; 
+        }
 
-        .btn-action { width: 100%; background: linear-gradient(135deg, #ffcc00, #ffa500); border: none; padding: 13px; border-radius: 25px; font-weight: 900; font-size: 14px; color: #000; cursor: pointer; box-shadow: 0 4px 10px rgba(255, 204, 0, 0.4); text-transform: uppercase; margin-top: 10px; }
+        .btn-action { 
+            width: 100%; 
+            background: linear-gradient(135deg, #ffe600, #ff0078); 
+            border: none; 
+            padding: 14px; 
+            border-radius: 25px; 
+            font-weight: 900; 
+            font-size: 14px; 
+            color: #ffffff; 
+            cursor: pointer; 
+            box-shadow: 0 5px 20px rgba(255, 0, 120, 0.4); 
+            text-transform: uppercase; 
+            margin-top: 10px; 
+            letter-spacing: 0.5px;
+        }
 
-        .custom-input { width: 100%; padding: 12px; border-radius: 12px; border: 1.5px solid #4a0e17; background: #f8f9fa; font-size: 14px; text-align: center; font-weight: bold; margin: 10px 0; color: #333; }
+        .custom-input { 
+            width: 100%; 
+            padding: 13px; 
+            border-radius: 14px; 
+            border: 1px solid rgba(0, 246, 255, 0.4); 
+            background: rgba(0, 0, 0, 0.4); 
+            font-size: 14px; 
+            text-align: center; 
+            font-weight: bold; 
+            margin: 10px 0; 
+            color: #00f6ff; 
+            outline: none;
+        }
 
-        .rules-list { font-size: 12px; color: #444; line-height: 1.6; padding-left: 18px; }
+        .rules-list { font-size: 12px; color: #b2bec3; line-height: 1.7; padding-left: 18px; }
         .rules-list li { margin-bottom: 6px; }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-        .grid-card { background: #ffffff; padding: 14px; border-radius: 16px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-        .grid-card p { font-size: 10px; font-weight: 800; color: #666; }
-        .grid-card h3 { font-size: 18px; font-weight: 900; color: #4a0e17; margin-top: 4px; }
+        .grid-card { 
+            background: rgba(255, 255, 255, 0.04); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            padding: 14px; 
+            border-radius: 16px; 
+            text-align: center; 
+        }
+        .grid-card p { font-size: 10px; font-weight: 800; color: #a29bfe; }
+        .grid-card h3 { font-size: 18px; font-weight: 900; color: #00f6ff; margin-top: 4px; }
 
-        /* Bottom Nav */
-        .bottom-nav { position: fixed; bottom: 8px; left: 4%; width: 92%; background: #ffffff; border-radius: 30px; display: flex; justify-content: space-around; padding: 8px 0; box-shadow: 0 8px 20px rgba(0,0,0,0.3); z-index: 100; }
-        .nav-item { text-align: center; color: #777; font-size: 10px; font-weight: 800; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+        /* Floating Modern Bottom Nav */
+        .bottom-nav { 
+            position: fixed; 
+            bottom: 12px; 
+            left: 4%; 
+            width: 92%; 
+            background: rgba(20, 5, 45, 0.85); 
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 35px; 
+            display: flex; 
+            justify-content: space-around; 
+            padding: 9px 0; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
+            z-index: 100; 
+        }
+        .nav-item { text-align: center; color: #a29bfe; font-size: 10px; font-weight: 800; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
         .nav-item i { font-size: 16px; }
-        .nav-item.active { color: #4a0e17; }
-        .nav-item.active i { background: #4a0e17; color: #fff; padding: 5px 12px; border-radius: 15px; }
+        .nav-item.active { color: #00f6ff; }
+        .nav-item.active i { background: linear-gradient(135deg, #a100ff, #00f6ff); color: #fff; padding: 6px 14px; border-radius: 18px; box-shadow: 0 0 10px rgba(0, 246, 255, 0.5); }
 
-        /* Popup Modal */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
-        .modal-content { background: #ffffff; padding: 25px; border-radius: 20px; text-align: center; max-width: 310px; width: 85%; border: 2px solid #ffcc00; box-shadow: 0 0 25px rgba(255,204,0,0.5); }
-        .modal-content i { font-size: 55px; color: #ffcc00; margin-bottom: 12px; animation: giftPulse 1.5s infinite ease-in-out; display: inline-block; }
-        .modal-content h2 { color: #4a0e17; font-size: 18px; font-weight: 900; margin-bottom: 8px; }
-        .modal-content p { color: #555; font-size: 13px; font-weight: 600; margin-bottom: 18px; line-height: 1.4; }
-        .modal-btn { background: linear-gradient(135deg, #ffcc00, #ffa500); color: #000; border: none; padding: 12px 28px; border-radius: 25px; font-weight: 900; font-size: 13px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        /* Glowing Popup Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { 
+            background: linear-gradient(135deg, #1f0842, #0d0221); 
+            padding: 25px; 
+            border-radius: 24px; 
+            text-align: center; 
+            max-width: 310px; 
+            width: 85%; 
+            border: 1px solid #00f6ff; 
+            box-shadow: 0 0 30px rgba(0, 246, 255, 0.4); 
+        }
+        .modal-content i { font-size: 55px; color: #ffe600; margin-bottom: 12px; text-shadow: 0 0 15px rgba(255, 230, 0, 0.6); display: inline-block; }
+        .modal-content h2 { color: #fff; font-size: 18px; font-weight: 900; margin-bottom: 8px; }
+        .modal-content p { color: #b2bec3; font-size: 13px; font-weight: 600; margin-bottom: 18px; line-height: 1.4; }
+        .modal-btn { background: linear-gradient(135deg, #ffe600, #ff0078); color: #fff; border: none; padding: 12px 28px; border-radius: 25px; font-weight: 900; font-size: 13px; cursor: pointer; box-shadow: 0 4px 15px rgba(255,0,120,0.4); }
     </style>
 </head>
 <body>
 
+    <!-- Dynamic Animated Particles -->
     <div class="bg-animation">
-        <div class="bg-item">🎁</div>
+        <div class="bg-item">💎</div>
+        <div class="bg-item">⚡</div>
         <div class="bg-item">💰</div>
-        <div class="bg-item">💵</div>
-        <div class="bg-item">🪙</div>
+        <div class="bg-item">🎁</div>
     </div>
 
-    <!-- Sign-Up Bonus Modal -->
+    <!-- Bonus Claim Popup -->
     <div class="modal" id="bonusModal">
         <div class="modal-content">
             <i class="fa-solid fa-gift"></i>
             <h2>बधाई हो! 🎉</h2>
-            <p>आपको <b>₹100 साइन अप बोनस</b> मिला है। विथड्रॉ करने के लिए सभी टास्क पूरे करें।</p>
-            <button class="modal-btn" onclick="closeModal()">क्लेम करें (CLAIM ₹100)</button>
+            <p>आपको <b>₹100 साइन अप बोनस</b> मिला है। विथड्रॉ करने के लिए सभी 15 टास्क पूरे करें।</p>
+            <button class="modal-btn" onclick="closeModal()">CLAIM ₹100 NOW</button>
         </div>
     </div>
 
     <div class="app-container">
-        <!-- User Top Header -->
+        <!-- Top Dynamic User Header -->
         <div class="user-header-card">
             <div class="user-info">
                 <div class="avatar-circle" id="avatar-letter">U</div>
@@ -117,48 +254,63 @@
             </div>
         </div>
 
-        <!-- 1. TASKS TAB -->
+        <!-- 1. TASKS TAB (15 Channels) -->
         <div id="tasks-tab" class="tab-content active">
             <div class="banner-card">
-                <h2>🎁 Complete All 10 Tasks</h2>
-                <p>Niche दिए गए सभी 10 Telegram Channels को Join करें और <b>₹100 Instant Cash Claim</b> करें!</p>
+                <h2>⚡ Complete All 15 Mandatory Tasks</h2>
+                <p>नीचे दिए गए सभी 15 Telegram Channels को Join करें और <b>₹100 Instant Withdrawal Balance</b> क्लेम करें!</p>
             </div>
 
             <div class="card-box">
-                <div class="card-title">MANDATORY TASKS (10/10)</div>
+                <div class="card-title">CHANNELS TO JOIN (15/15)</div>
 
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Free Cash Trick's (1)</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 2</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 3</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 4</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 5</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 6</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 7</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 8</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 9</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 10</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a></div>
+                <!-- 15 Telegram Channels -->
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 1</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 2</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 3</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 4</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 5</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 6</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 7</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 8</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 9</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 10</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 11</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 12</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 13</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 14</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 15</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
 
-                <button class="btn-action" onclick="verifyTasks()"><i class="fa-solid fa-circle-check"></i> VERIFY & CLAIM ₹100</button>
+                <button class="btn-action" onclick="verifyTasks()"><i class="fa-solid fa-circle-check"></i> VERIFY TASKS & UNLOCK ₹100</button>
             </div>
         </div>
 
         <!-- 2. REFER TAB -->
         <div id="refer-tab" class="tab-content">
             <div class="card-box">
-                <div class="card-title">REFER & EARN CASH</div>
-                <p style="font-size:13px; color:#555; margin-bottom:10px;">अपने दोस्तों को Invite करें और हर Refer पर <b>₹20 Cash</b> पाएं!</p>
+                <div class="card-title">REFER & EARN MORE</div>
+                <p style="font-size:13px; color:#b2bec3; margin-bottom:10px;">अपने दोस्तों को शेयर करें और हर रेफ़र पर <b>₹20 Extra</b> कमाएं!</p>
                 <input type="text" id="refer-link" class="custom-input" readonly value="https://t.me/Bot?start=12345">
-                <button class="btn-action" onclick="copyReferLink()"><i class="fa-solid fa-copy"></i> COPY REFER LINK</button>
+                <button class="btn-action" onclick="copyReferLink()"><i class="fa-solid fa-copy"></i> COPY REFERRAL LINK</button>
             </div>
         </div>
 
         <!-- 3. WITHDRAW TAB -->
         <div id="withdraw-tab" class="tab-content">
             <div class="card-box">
-                <div class="card-title">INSTANT UPI WITHDRAWAL</div>
-                <p style="font-size:12px; color:#666;">Available Balance: <b style="color:#4a0e17;">₹<span id="withdraw-balance">100.00</span></b></p>
+                <div class="card-title">INSTANT UPI TRANSFER</div>
+                <p style="font-size:12px; color:#b2bec3;">Available Balance: <b style="color:#00f6ff;">₹<span id="withdraw-balance">100.00</span></b></p>
                 <input type="text" id="upi-id" class="custom-input" placeholder="Enter UPI ID (e.g. 9876543210@paytm)">
-                <button class="btn-action" onclick="processWithdraw()"><i class="fa-solid fa-wallet"></i> WITHDRAW NOW</button>
+                <button class="btn-action" onclick="processWithdraw()"><i class="fa-solid fa-wallet"></i> REQUEST WITHDRAWAL</button>
+            </div>
+
+            <div class="card-box">
+                <div class="card-title">WITHDRAWAL RULES</div>
+                <ul class="rules-list">
+                    <li>Minimum Withdrawal amount <b>₹100</b> है।</li>
+                    <li>सभी 15 चैनल्स ज्वाइन किए बिना विथड्रॉल अप्रूव नहीं होगा।</li>
+                    <li>बोनस एक ID पर सिर्फ 1 बार ही मिलेगा।</li>
+                </ul>
             </div>
         </div>
 
@@ -171,13 +323,19 @@
                 </div>
                 <div class="grid-card">
                     <p>TOTAL WITHDRAWN</p>
-                    <h3 style="color:#e63946;" id="total-withdrawn">₹0.00</h3>
+                    <h3 style="color:#ff0078;" id="total-withdrawn">₹0.00</h3>
                 </div>
+            </div>
+            
+            <div class="card-box">
+                <div class="card-title">ACCOUNT STATUS</div>
+                <p style="font-size:13px; color:#b2bec3; margin-bottom:6px;"><b>Verification Status:</b> <span style="color:#00ffcc;">ACTIVE</span></p>
+                <p style="font-size:13px; color:#b2bec3;"><b>Claimed Bonus:</b> ₹100 Instant Bonus</p>
             </div>
         </div>
     </div>
 
-    <!-- Bottom Nav -->
+    <!-- Floating Navigation Bar -->
     <div class="bottom-nav">
         <div class="nav-item active" onclick="switchTab('tasks-tab', this)"><i class="fa-solid fa-list-check"></i>Tasks</div>
         <div class="nav-item" onclick="switchTab('refer-tab', this)"><i class="fa-solid fa-users"></i>Refer</div>
@@ -191,10 +349,10 @@
 
         let currentUserId = "default_user";
 
-        // Fetch Telegram User ID Dynamically
+        // Fetch Dynamic User Details
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
             const user = tg.initDataUnsafe.user;
-            currentUserId = user.id.toString(); // Specific Telegram ID of current logged-in user
+            currentUserId = user.id.toString();
 
             document.getElementById('username').innerText = user.first_name + (user.last_name ? ' ' + user.last_name : '');
             document.getElementById('userid').innerText = 'ID: ' + user.id;
@@ -202,16 +360,15 @@
             document.getElementById('refer-link').value = `https://t.me/CashFree_CB_Bot?start=${user.id}`;
         }
 
-        // KEY LOGIC: Balance linked to Telegram User ID
+        // Logic linked specifically to Telegram User ID
         let userBalanceKey = `balance_${currentUserId}`;
         let userBalance = localStorage.getItem(userBalanceKey) !== null 
                           ? parseFloat(localStorage.getItem(userBalanceKey)) 
-                          : 100.00; // If new Telegram ID, give ₹100
+                          : 100.00; // Fresh Telegram ID gets ₹100
 
-        // Render UI based on current user balance
         updateUI();
 
-        // Show Sign-up Popup ONLY if the current user has ₹100 balance
+        // Show Modal only if User has ₹100 Balance
         if (userBalance > 0) {
             document.getElementById('bonusModal').style.display = 'flex';
         }
@@ -247,18 +404,17 @@
 
         function verifyTasks() {
             if (userBalance === 0) {
-                alert("⚠️ You have already claimed and withdrawn your bonus!");
+                alert("⚠️ You have already claimed and withdrawn your ₹100 bonus!");
             } else {
-                alert("✅ Tasks Verification Successful! आपका Wallet Balance अनलॉक हो गया है।");
+                alert("✅ All 15 Tasks Verified Successfully! आपका Wallet Balance अनलॉक हो गया है।");
             }
         }
 
         function processWithdraw() {
             const upiVal = document.getElementById('upi-id').value.trim();
 
-            // Check if current user already withdrew
             if (userBalance <= 0) {
-                alert("⚠️ Insufficient Balance! You have already withdrawn your bonus.");
+                alert("⚠️️ Insufficient Balance! You don't have enough balance to withdraw.");
                 return;
             }
 
@@ -267,14 +423,14 @@
                 return;
             }
 
-            // DEDUCT BALANCE AND SAVE FOR THIS SPECIFIC TELEGRAM USER ID
+            // Lock '0' balance permanently for this specific Telegram ID
             userBalance = 0.00;
-            localStorage.setItem(userBalanceKey, "0"); // Saves '0' specifically for current ID
+            localStorage.setItem(userBalanceKey, "0");
 
             updateUI();
             document.getElementById('upi-id').value = "";
 
-            alert("🎉 Withdrawal Request Submitted Successfully! Payment 24 घंटे में आपके UPI में भेज दिया जाएगा।");
+            alert("🎉 Withdrawal Request Submitted Successfully! Payment 24 घंटे के अंदर ट्रांसफर कर दिया जाएगा।");
         }
 
         function copyReferLink() {
