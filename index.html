@@ -8,11 +8,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; user-select: none; }
-        body { background-color: #004d25; color: #333; min-height: 100vh; padding-bottom: 90px; position: relative; overflow-x: hidden; }
+        /* Background Color: Maroon Theme */
+        body { background-color: #4a0e17; color: #333; min-height: 100vh; padding-bottom: 90px; position: relative; overflow-x: hidden; }
 
-        /* Floating Background Effect (Money & Gifts) */
+        /* Floating Background Effect */
         .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-        .bg-item { position: absolute; top: -10%; font-size: 22px; opacity: 0.18; animation: fall 8s linear infinite; }
+        .bg-item { position: absolute; top: -10%; font-size: 22px; opacity: 0.2; animation: fall 8s linear infinite; }
         @keyframes fall { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(110vh) rotate(360deg); } }
         .bg-item:nth-child(1) { left: 10%; animation-duration: 6s; }
         .bg-item:nth-child(2) { left: 35%; animation-duration: 8s; animation-delay: 2s; }
@@ -22,10 +23,10 @@
         .app-container { position: relative; z-index: 1; padding: 12px; }
 
         /* Header Card */
-        .user-header-card { background: #ffffff; border-radius: 20px; padding: 15px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .user-header-card { background: #ffffff; border-radius: 20px; padding: 15px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
         .user-info { display: flex; align-items: center; gap: 12px; }
         .avatar-circle { width: 45px; height: 45px; background: linear-gradient(135deg, #0088cc, #00d2ff); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; border: 2px solid #ffcc00; }
-        .user-text h3 { font-size: 15px; font-weight: 800; color: #004d25; }
+        .user-text h3 { font-size: 15px; font-weight: 800; color: #4a0e17; }
         .user-text p { font-size: 11px; color: #666; font-weight: 700; }
 
         .balance-badge { background: linear-gradient(135deg, #ffcc00, #ffa500); padding: 8px 14px; border-radius: 20px; font-weight: 900; color: #000; font-size: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
@@ -36,24 +37,22 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Banner Card */
-        .banner-card { background: linear-gradient(135deg, #006633, #003318); border-radius: 20px; padding: 16px; color: white; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .banner-card { background: linear-gradient(135deg, #6e1522, #2b080d); border-radius: 20px; padding: 16px; color: white; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .banner-card h2 { font-size: 17px; font-weight: 800; color: #ffcc00; margin-bottom: 4px; }
         .banner-card p { font-size: 12px; opacity: 0.9; line-height: 1.4; }
 
         /* White Content Box */
-        .card-box { background: #ffffff; border-radius: 20px; padding: 16px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .card-title { font-size: 12px; font-weight: 900; color: #004d25; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+        .card-box { background: #ffffff; border-radius: 20px; padding: 16px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .card-title { font-size: 12px; font-weight: 900; color: #4a0e17; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
         .card-title::before { content: ''; width: 4px; height: 14px; background: #ffcc00; border-radius: 2px; }
 
         /* Task List Channels */
         .task-card { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 12px; padding: 12px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-        .channel-info { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 14px; color: #004d25; }
+        .channel-info { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 14px; color: #4a0e17; }
         
-        /* Animated Gift Icon */
         .channel-info i { color: #ff3366; font-size: 18px; animation: giftPulse 1.5s infinite ease-in-out; }
         @keyframes giftPulse { 0% { transform: scale(1); } 50% { transform: scale(1.25) rotate(-5deg); } 100% { transform: scale(1); } }
 
-        /* Animated Join Button */
         .btn-join { background: linear-gradient(45deg, #0088cc, #00d2ff); color: white; text-decoration: none; padding: 8px 16px; border-radius: 20px; font-size: 11px; font-weight: 900; animation: btnGlow 1.2s infinite alternate; border: none; cursor: pointer; }
         @keyframes btnGlow { 0% { transform: scale(1); box-shadow: 0 0 5px rgba(0, 210, 255, 0.5); } 100% { transform: scale(1.06); box-shadow: 0 0 12px rgba(0, 210, 255, 0.9); } }
         
@@ -61,35 +60,50 @@
 
         .btn-action { width: 100%; background: linear-gradient(135deg, #ffcc00, #ffa500); border: none; padding: 13px; border-radius: 25px; font-weight: 900; font-size: 14px; color: #000; cursor: pointer; box-shadow: 0 4px 10px rgba(255, 204, 0, 0.4); text-transform: uppercase; margin-top: 10px; }
 
-        /* Input Field */
-        .custom-input { width: 100%; padding: 12px; border-radius: 12px; border: 1.5px solid #004d25; background: #f8f9fa; font-size: 14px; text-align: center; font-weight: bold; margin: 10px 0; color: #333; }
+        .custom-input { width: 100%; padding: 12px; border-radius: 12px; border: 1.5px solid #4a0e17; background: #f8f9fa; font-size: 14px; text-align: center; font-weight: bold; margin: 10px 0; color: #333; }
 
-        /* Rules & Info List */
         .rules-list { font-size: 12px; color: #444; line-height: 1.6; padding-left: 18px; }
         .rules-list li { margin-bottom: 6px; }
 
-        /* Profile Details Grid */
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-        .grid-card { background: #ffffff; padding: 14px; border-radius: 16px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .grid-card { background: #ffffff; padding: 14px; border-radius: 16px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
         .grid-card p { font-size: 10px; font-weight: 800; color: #666; }
-        .grid-card h3 { font-size: 18px; font-weight: 900; color: #004d25; margin-top: 4px; }
+        .grid-card h3 { font-size: 18px; font-weight: 900; color: #4a0e17; margin-top: 4px; }
 
         /* Bottom Nav */
         .bottom-nav { position: fixed; bottom: 8px; left: 4%; width: 92%; background: #ffffff; border-radius: 30px; display: flex; justify-content: space-around; padding: 8px 0; box-shadow: 0 8px 20px rgba(0,0,0,0.3); z-index: 100; }
         .nav-item { text-align: center; color: #777; font-size: 10px; font-weight: 800; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
         .nav-item i { font-size: 16px; }
-        .nav-item.active { color: #004d25; }
-        .nav-item.active i { background: #004d25; color: #fff; padding: 5px 12px; border-radius: 15px; }
+        .nav-item.active { color: #4a0e17; }
+        .nav-item.active i { background: #4a0e17; color: #fff; padding: 5px 12px; border-radius: 15px; }
+
+        /* Sign-Up Bonus Pop-Up Modal */
+        .modal { display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: #ffffff; padding: 25px; border-radius: 20px; text-align: center; max-width: 310px; width: 85%; border: 2px solid #ffcc00; box-shadow: 0 0 25px rgba(255,204,0,0.5); }
+        .modal-content i { font-size: 55px; color: #ffcc00; margin-bottom: 12px; animation: giftPulse 1.5s infinite ease-in-out; display: inline-block; }
+        .modal-content h2 { color: #4a0e17; font-size: 18px; font-weight: 900; margin-bottom: 8px; }
+        .modal-content p { color: #555; font-size: 13px; font-weight: 600; margin-bottom: 18px; line-height: 1.4; }
+        .modal-btn { background: linear-gradient(135deg, #ffcc00, #ffa500); color: #000; border: none; padding: 12px 28px; border-radius: 25px; font-weight: 900; font-size: 13px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
 
-    <!-- Floating Money & Gifts Animation -->
+    <!-- Floating Background Animation -->
     <div class="bg-animation">
         <div class="bg-item">🎁</div>
         <div class="bg-item">💰</div>
         <div class="bg-item">💵</div>
         <div class="bg-item">🪙</div>
+    </div>
+
+    <!-- Sign-Up Bonus Pop-Up Modal -->
+    <div class="modal" id="bonusModal">
+        <div class="modal-content">
+            <i class="fa-solid fa-gift"></i>
+            <h2>बधाई हो! 🎉</h2>
+            <p>आपको <b>₹100 साइन अप बोनस</b> मिला है। विथड्रॉ करने के लिए सभी टास्क पूरे करें।</p>
+            <button class="modal-btn" onclick="closeModal()">क्लेम करें (CLAIM ₹100)</button>
+        </div>
     </div>
 
     <div class="app-container">
@@ -111,7 +125,7 @@
         <div id="tasks-tab" class="tab-content active">
             <div class="banner-card">
                 <h2>🎁 Complete All 10 Tasks</h2>
-                <p>Niche diye gaye sabhi 10 Telegram Channels ko Join karein aur <b>₹100 Instant Cash Claim</b> karein!</p>
+                <p>Niche दिए गए सभी 10 Telegram Channels को Join करें और <b>₹100 Instant Cash Claim</b> करें!</p>
             </div>
 
             <div class="card-box">
@@ -162,11 +176,11 @@
             </div>
         </div>
 
-        <!-- 2. REFER / INVITE TAB -->
+        <!-- 2. REFER TAB -->
         <div id="refer-tab" class="tab-content">
             <div class="card-box">
                 <div class="card-title">REFER & EARN CASH</div>
-                <p style="font-size:13px; color:#555; margin-bottom:10px;">Apne dosto ko invite karein aur har successful refer par <b>₹20 Cash</b> paayein!</p>
+                <p style="font-size:13px; color:#555; margin-bottom:10px;">अपने दोस्तों को Invite करें और हर Refer पर <b>₹20 Cash</b> पाएं!</p>
                 
                 <input type="text" id="refer-link" class="custom-input" readonly value="https://t.me/Bot?start=12345">
                 <button class="btn-action" onclick="copyReferLink()"><i class="fa-solid fa-copy"></i> COPY REFER LINK</button>
@@ -175,9 +189,9 @@
             <div class="card-box">
                 <div class="card-title">REFERRAL RULES</div>
                 <ul class="rules-list">
-                    <li>Aapke friend ko Bot join karke 10 channels join karne honge.</li>
-                    <li>Fake ya self-referral karne par account block kar diya jayega.</li>
-                    <li>Referral amount aapke Wallet me instant add hoga.</li>
+                    <li>आपके Friend को Bot जॉइन करके 10 चैनल्स जॉइन करने होंगे।</li>
+                    <li>Fake या Self-referral करने पर अकाउंट ब्लॉक कर दिया जाएगा।</li>
+                    <li>Referral अमाउंट आपके Wallet में Instant ऐड होगा।</li>
                 </ul>
             </div>
         </div>
@@ -186,7 +200,7 @@
         <div id="withdraw-tab" class="tab-content">
             <div class="card-box">
                 <div class="card-title">INSTANT UPI WITHDRAWAL</div>
-                <p style="font-size:12px; color:#666;">Withdrawal Amount: <b style="color:#004d25;">₹100.00</b></p>
+                <p style="font-size:12px; color:#666;">Withdrawal Amount: <b style="color:#4a0e17;">₹100.00</b></p>
                 
                 <input type="text" id="upi-id" class="custom-input" placeholder="Enter UPI ID (e.g. 9876543210@paytm)">
                 
@@ -196,15 +210,15 @@
             <div class="card-box">
                 <div class="card-title">WITHDRAWAL POLICY</div>
                 <ul class="rules-list">
-                    <li>Minimum withdrawal limit <b>₹100</b> hai.</li>
-                    <li>UPI ID sahi darj karein, galat ID par payment nahi hoga.</li>
-                    <li>Payment 24 se 48 ghante ke andar UPI me transfer kar diya jayega.</li>
-                    <li>Sabhi 10 tasks poore kiye bina withdrawal fail ho jayega.</li>
+                    <li>Minimum withdrawal limit <b>₹100</b> है।</li>
+                    <li>UPI ID सही दर्ज करें, गलत ID पर पेमेंट नहीं होगा।</li>
+                    <li>Payment 24 से 48 घंटे के अंदर UPI में ट्रांसफर कर दिया जाएगा।</li>
+                    <li>सभी 10 Tasks पूरे किए बिना Withdrawal फेल हो जाएगा।</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 4. PROFILE / ACCOUNT TAB -->
+        <!-- 4. PROFILE TAB -->
         <div id="profile-tab" class="tab-content">
             <div class="grid-2">
                 <div class="grid-card">
@@ -229,7 +243,7 @@
                 <ul class="rules-list">
                     <li><b>App Name:</b> UPI Cash Rewards</li>
                     <li><b>Version:</b> v2.4 (Official)</li>
-                    <li><b>Help & Support:</b> Task verified hone ke baad withdrawal instant release kiya jata hai.</li>
+                    <li><b>Help & Support:</b> Task verify होने के बाद withdrawal instant रिलीज़ किया जाता है।</li>
                 </ul>
             </div>
         </div>
@@ -258,8 +272,11 @@
             document.getElementById('userid').innerText = 'ID: ' + user.id;
             document.getElementById('avatar-letter').innerText = user.first_name.charAt(0).toUpperCase();
             
-            // Working Telegram Refer Link Dynamic Logic
             document.getElementById('refer-link').value = `https://t.me/CashFree_CB_Bot?start=${user.id}`;
+        }
+
+        function closeModal() {
+            document.getElementById('bonusModal').style.display = 'none';
         }
 
         function markJoined(element) {
@@ -280,31 +297,31 @@
 
         function verifyTasks() {
             if(joinedCount < totalChannels) {
-                alert(`⚠️ Aapne abhi tak sabhi ${totalChannels} channels join nahi kiye hain! Kripya sabhi channels ko JOIN karein.`);
+                alert(`⚠️ आपने अभी तक सभी ${totalChannels} channels join नहीं किए हैं! कृपया सभी channels को JOIN करें।`);
             } else {
-                alert("✅ Tasks Verification Successful! Aapka ₹100 Wallet Balance unlocked ho gaya hai. Aap Withdraw tab se nikal sakte hain.");
+                alert("✅ Tasks Verification Successful! आपका ₹100 Wallet Balance unlocked हो गया है। आप Withdraw tab से निकाल सकते हैं।");
             }
         }
 
         function processWithdraw() {
             const upiVal = document.getElementById('upi-id').value.trim();
             if(joinedCount < totalChannels) {
-                alert(`❌ Withdrawal Fail! Pehle Tasks Tab me jaakar sabhi ${totalChannels} channels join karein.`);
+                alert(`❌ Withdrawal Fail! पहले Tasks Tab में जाकर सभी ${totalChannels} channels join करें।`);
                 switchTab('tasks-tab', document.querySelectorAll('.nav-item')[0]);
                 return;
             }
             if(upiVal === "" || !upiVal.includes("@")) {
-                alert("⚠️ Kripya Sahi UPI ID darj karein (e.g. 9876543210@paytm)");
+                alert("⚠️ कृपया सही UPI ID दर्ज करें (e.g. 9876543210@paytm)");
                 return;
             }
-            alert("🎉 Withdrawal Request Submitted Successfully! Payment 24 ghante me aapke UPI me bhej diya jayega.");
+            alert("🎉 Withdrawal Request Submitted Successfully! Payment 24 घंटे में आपके UPI में भेज दिया जाएगा।");
         }
 
         function copyReferLink() {
             const copyText = document.getElementById("refer-link");
             copyText.select();
             document.execCommand("copy");
-            alert("📋 Refer Link Copied! Apne Dosto ke saath share karein.");
+            alert("📋 Refer Link Copied! अपने दोस्तों के साथ शेयर करें।");
         }
     </script>
 </body>
