@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earn Rewards</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background: #121212; color: white; text-align: center; padding: 20px; }
+        .card { background: #1e1e1e; padding: 15px; margin: 10px 0; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .btn { background: #0088cc; color: white; border: none; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+        .btn-submit { background: #28a745; width: 100%; padding: 12px; margin-top: 20px; font-size: 16px; color: white; border: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <h2>Task Complete Karein</h2>
+    <p>Niche diye gaye sabhi channels ko join karein:</p>
+
+    <div class="card">
+        <span>1. Master Tips</span>
+        <a href="https://t.me/YOUR_CHANNEL_1" class="btn" target="_blank">JOIN</a>
+    </div>
+
+    <div class="card">
+        <span>2. Yono Loots</span>
+        <a href="https://t.me/YOUR_CHANNEL_2" class="btn" target="_blank">JOIN</a>
+    </div>
+
+    <button class="btn-submit" onclick="verifyTasks()">CONTINUE / VERIFY</button>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+
+        function verifyTasks() {
+            alert("Checking channels... Please wait!");
+        }
+    </script>
+</body>
+</html>
