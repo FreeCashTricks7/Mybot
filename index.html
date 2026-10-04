@@ -3,303 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Bling Cash Rewards</title>
+    <title>VIP Rewards Hub</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Teko:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Teko', sans-serif; user-select: none; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; user-select: none; }
         
         body { 
-            background: #06020c; 
-            color: #ffffff; 
+            background: #0f172a; 
+            color: #f8fafc; 
             min-height: 100vh; 
-            padding-bottom: 100px; 
+            padding-bottom: 90px; 
             position: relative; 
-            overflow-x: hidden; 
         }
 
-        /* Glowing Cyber & Casino Background Effect */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(255, 0, 128, 0.2), transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(0, 240, 255, 0.2), transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.15), transparent 50%);
-            z-index: 0;
-            pointer-events: none;
-        }
+        .app-container { max-width: 480px; margin: 0 auto; padding: 16px; }
 
-        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-        .bg-item { position: absolute; top: -10%; font-size: 26px; opacity: 0.3; animation: fall 7s linear infinite; filter: drop-shadow(0 0 8px #ff007f); }
-        @keyframes fall { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(110vh) rotate(360deg); } }
-        .bg-item:nth-child(1) { left: 15%; animation-duration: 6s; }
-        .bg-item:nth-child(2) { left: 40%; animation-duration: 8s; animation-delay: 1.5s; }
-        .bg-item:nth-child(3) { left: 70%; animation-duration: 6.5s; animation-delay: 0.5s; }
-        .bg-item:nth-child(4) { left: 88%; animation-duration: 9s; animation-delay: 2.5s; }
-
-        .app-container { position: relative; z-index: 1; padding: 16px; }
-
-        /* Neon Header Box */
+        /* Professional Header */
         .user-header-card { 
-            background: rgba(18, 5, 36, 0.9); 
-            backdrop-filter: blur(15px);
-            border: 2px solid #00f0ff; 
-            border-radius: 18px; 
-            padding: 10px 16px; 
+            background: #1e293b; 
+            border: 1px solid #334155; 
+            border-radius: 16px; 
+            padding: 12px 16px; 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
             margin-bottom: 20px; 
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4), inset 0 0 10px rgba(0, 240, 255, 0.2); 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
         }
         .user-info { display: flex; align-items: center; gap: 12px; }
         .avatar-circle { 
-            width: 46px; 
-            height: 46px; 
-            background: linear-gradient(135deg, #ff007f, #00f0ff); 
+            width: 42px; 
+            height: 42px; 
+            background: linear-gradient(135deg, #2563eb, #3b82f6); 
             color: #ffffff; 
-            border-radius: 12px; 
+            border-radius: 50%; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            font-size: 22px; 
-            font-family: 'Press Start 2P', cursive;
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.6); 
-            border: 2px solid #ffd700;
+            font-size: 18px; 
+            font-weight: 700; 
         }
-        .user-text h3 { font-size: 20px; font-weight: 700; color: #fff; letter-spacing: 1px; line-height: 1; }
-        .user-text p { font-size: 14px; color: #00f0ff; font-weight: 600; letter-spacing: 1px; }
+        .user-text h3 { font-size: 15px; font-weight: 700; color: #f8fafc; }
+        .user-text p { font-size: 12px; color: #94a3b8; }
 
         .balance-badge { 
-            background: linear-gradient(135deg, #ffd700, #ff8c00); 
-            padding: 6px 16px; 
-            border-radius: 12px; 
-            font-weight: 900; 
-            color: #000; 
-            font-size: 22px; 
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); 
-            border: 2px solid #fff;
-            line-height: 1;
+            background: rgba(37, 99, 235, 0.15); 
+            border: 1px solid #3b82f6;
+            padding: 6px 14px; 
+            border-radius: 20px; 
+            font-weight: 700; 
+            color: #60a5fa; 
+            font-size: 15px; 
         }
 
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: popUp 0.3s ease-out; }
-        @keyframes popUp { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+        .tab-content.active { display: block; animation: fadeIn 0.25s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Jackpot Bling Banner */
+        /* Banner */
         .banner-card { 
-            background: linear-gradient(135deg, #ff0055, #7928ca); 
-            border-radius: 20px; 
-            padding: 16px; 
-            color: white; 
-            border: 2px solid #ffd700; 
+            background: linear-gradient(135deg, #1e293b, #0f172a); 
+            border-radius: 16px; 
+            padding: 18px; 
+            border: 1px solid #334155; 
             margin-bottom: 20px; 
-            box-shadow: 0 0 25px rgba(255, 0, 85, 0.5); 
             text-align: center;
         }
-        .banner-card h2 { font-family: 'Press Start 2P', cursive; font-size: 13px; color: #ffd700; margin-bottom: 8px; text-shadow: 0 0 10px #ffd700; }
-        .banner-card p { font-size: 18px; color: #ffffff; font-weight: 600; line-height: 1.2; letter-spacing: 1px; }
+        .banner-card h2 { font-size: 18px; font-weight: 800; color: #38bdf8; margin-bottom: 6px; }
+        .banner-card p { font-size: 13px; color: #cbd5e1; line-height: 1.4; }
 
         .section-title { 
-            font-size: 20px; 
+            font-size: 13px; 
             font-weight: 700; 
-            color: #00f0ff; 
+            color: #94a3b8; 
             text-transform: uppercase; 
-            margin-bottom: 12px; 
+            margin-bottom: 14px; 
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* SQUARE GRID LAYOUT (2 Boxes Per Row) */
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .task-square-box { 
+            background: #1e293b; 
+            border: 1px solid #334155; 
+            border-radius: 16px; 
+            padding: 16px 12px; 
             display: flex; 
+            flex-direction: column;
             align-items: center; 
             justify-content: center;
-            gap: 8px; 
-            letter-spacing: 2px; 
-            text-shadow: 0 0 10px #00f0ff;
+            text-align: center;
+            aspect-ratio: 1 / 1; /* Makes it perfectly Square */
+            transition: all 0.2s ease;
         }
-
-        /* Game Box Style Channel Cards */
-        .task-card { 
-            background: rgba(22, 10, 40, 0.85); 
-            border: 2px solid rgba(0, 240, 255, 0.3); 
-            border-radius: 16px; 
-            padding: 10px 14px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            margin-bottom: 12px; 
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
-            transition: all 0.2s;
-        }
-        .task-card:nth-child(even) {
-            border-color: rgba(255, 0, 127, 0.4);
-        }
-        .task-card:hover {
+        .task-square-box:hover {
+            border-color: #3b82f6;
             transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
         }
 
-        .channel-info { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; color: #ffffff; letter-spacing: 1px; }
         .channel-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #00f0ff, #0055ff);
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
-            font-size: 16px;
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
-        }
-        .task-card:nth-child(even) .channel-icon {
-            background: linear-gradient(135deg, #ff007f, #ff0055);
-            box-shadow: 0 0 10px rgba(255, 0, 127, 0.4);
+            color: #60a5fa;
+            font-size: 18px;
+            margin-bottom: 8px;
         }
 
-        /* Glowing Action Buttons */
+        .channel-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-bottom: 10px;
+        }
+
+        /* Square Box Join Button */
         .btn-join { 
-            background: linear-gradient(135deg, #ffd700, #ff8c00); 
-            color: #000; 
+            width: 100%;
+            background: #2563eb; 
+            color: #ffffff; 
             border: none;
-            padding: 6px 18px; 
-            border-radius: 20px; 
-            font-size: 16px; 
+            padding: 8px 0; 
+            border-radius: 10px; 
+            font-size: 12px; 
             font-weight: 700; 
             cursor: pointer; 
-            box-shadow: 0 0 12px rgba(255, 215, 0, 0.5); 
             transition: 0.2s;
-            letter-spacing: 1px;
         }
+        .btn-join:active { transform: scale(0.96); }
 
         .btn-join.waiting {
-            background: linear-gradient(135deg, #00f0ff, #0077ff) !important;
+            background: #0284c7 !important;
             color: #fff !important;
-            box-shadow: 0 0 12px rgba(0, 240, 255, 0.6) !important;
             cursor: wait;
         }
 
         .btn-join.joined { 
-            background: #2ed573 !important; 
+            background: #10b981 !important; 
             color: #ffffff !important; 
-            box-shadow: none !important; 
             pointer-events: none;
         }
 
+        /* Action Buttons */
         .btn-action { 
             width: 100%; 
-            background: linear-gradient(135deg, #ff007f, #ff0055); 
-            border: 2px solid #ffd700; 
-            padding: 12px; 
-            border-radius: 25px; 
+            background: linear-gradient(135deg, #2563eb, #1d4ed8); 
+            border: none;
+            padding: 14px; 
+            border-radius: 14px; 
             font-weight: 700; 
-            font-size: 20px; 
+            font-size: 14px; 
             color: #ffffff; 
             cursor: pointer; 
-            box-shadow: 0 0 20px rgba(255, 0, 127, 0.6); 
-            text-transform: uppercase; 
-            margin-top: 15px; 
-            letter-spacing: 2px;
-            transition: 0.3s;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); 
+            transition: 0.2s;
         }
+        .btn-action:hover { opacity: 0.95; }
 
         .card-box { 
-            background: rgba(22, 10, 40, 0.85); 
-            border: 2px solid rgba(255, 215, 0, 0.3); 
-            border-radius: 18px; 
-            padding: 16px; 
+            background: #1e293b; 
+            border: 1px solid #334155; 
+            border-radius: 16px; 
+            padding: 18px; 
             margin-bottom: 16px; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.6); 
         }
 
         .custom-input { 
             width: 100%; 
-            padding: 10px; 
-            border-radius: 12px; 
-            border: 2px solid #00f0ff; 
-            background: rgba(8, 2, 16, 0.9); 
-            font-size: 20px; 
+            padding: 12px; 
+            border-radius: 10px; 
+            border: 1px solid #334155; 
+            background: #0f172a; 
+            font-size: 14px; 
             text-align: center; 
-            font-weight: bold; 
-            margin: 10px 0; 
-            color: #ffd700; 
+            font-weight: 600; 
+            margin: 12px 0; 
+            color: #38bdf8; 
             outline: none;
-            letter-spacing: 1px;
         }
+        .custom-input:focus { border-color: #3b82f6; }
 
-        .rules-list { font-size: 16px; color: #dcdde1; line-height: 1.5; padding-left: 18px; font-weight: 600; }
+        .rules-list { font-size: 13px; color: #94a3b8; line-height: 1.6; padding-left: 18px; }
         .rules-list li { margin-bottom: 6px; }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
         .grid-card { 
-            background: rgba(22, 10, 40, 0.85); 
-            border: 2px solid rgba(0, 240, 255, 0.3); 
-            padding: 14px; 
-            border-radius: 16px; 
+            background: #1e293b; 
+            border: 1px solid #334155; 
+            padding: 16px; 
+            border-radius: 14px; 
             text-align: center; 
         }
-        .grid-card p { font-size: 14px; font-weight: 700; color: #a29bfe; }
-        .grid-card h3 { font-size: 26px; font-weight: 900; color: #ffd700; margin-top: 4px; }
+        .grid-card p { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; }
+        .grid-card h3 { font-size: 20px; font-weight: 800; color: #60a5fa; margin-top: 4px; }
 
-        /* Floating Bottom Bar */
+        /* Floating Bottom Navigation Bar */
         .bottom-nav { 
             position: fixed; 
-            bottom: 15px; 
-            left: 5%; 
-            width: 90%; 
-            background: rgba(15, 4, 28, 0.95); 
-            backdrop-filter: blur(20px);
-            border: 2px solid #00f0ff;
-            border-radius: 30px; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            background: #1e293b; 
+            border-top: 1px solid #334155;
             display: flex; 
             justify-content: space-around; 
-            padding: 10px 0; 
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); 
+            padding: 10px 0 14px 0; 
             z-index: 100; 
         }
-        .nav-item { text-align: center; color: #a29bfe; font-size: 14px; font-weight: 700; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+        .nav-item { text-align: center; color: #64748b; font-size: 11px; font-weight: 600; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
         .nav-item i { font-size: 18px; }
-        .nav-item.active { color: #ffd700; }
-        .nav-item.active i { color: #ff007f; text-shadow: 0 0 10px #ff007f; }
+        .nav-item.active { color: #38bdf8; }
 
-        /* Winner Popup Modal */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); justify-content: center; align-items: center; z-index: 1000; }
+        /* Professional Winner Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(4px); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { 
-            background: linear-gradient(135deg, #1f0638, #0b0214); 
-            padding: 25px; 
+            background: #1e293b; 
+            padding: 24px; 
             border-radius: 20px; 
             text-align: center; 
             max-width: 320px; 
             width: 85%; 
-            border: 2px solid #ffd700; 
-            box-shadow: 0 0 35px rgba(255, 215, 0, 0.5); 
+            border: 1px solid #334155; 
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); 
         }
-        .modal-content i { font-size: 50px; color: #ffd700; margin-bottom: 10px; text-shadow: 0 0 20px #ffd700; }
-        .modal-content h2 { font-family: 'Press Start 2P', cursive; color: #fff; font-size: 14px; margin-bottom: 10px; line-height: 1.4; }
-        .modal-content p { color: #dcdde1; font-size: 16px; font-weight: 600; margin-bottom: 20px; line-height: 1.3; }
-        .modal-btn { background: linear-gradient(135deg, #ffd700, #ff8c00); color: #000; border: none; padding: 10px 24px; border-radius: 20px; font-weight: 900; font-size: 16px; cursor: pointer; box-shadow: 0 0 15px rgba(255,215,0,0.5); }
+        .modal-content i { font-size: 40px; color: #38bdf8; margin-bottom: 12px; }
+        .modal-content h2 { color: #f8fafc; font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        .modal-content p { color: #94a3b8; font-size: 13px; margin-bottom: 20px; line-height: 1.5; }
+        .modal-btn { background: #2563eb; color: #fff; border: none; padding: 12px 24px; border-radius: 12px; font-weight: 700; font-size: 13px; cursor: pointer; width: 100%; }
     </style>
 </head>
 <body>
 
-    <div class="bg-animation">
-        <div class="bg-item">💎</div>
-        <div class="bg-item">💵</div>
-        <div class="bg-item">🔥</div>
-        <div class="bg-item">👑</div>
-    </div>
-
-    <!-- Modal Popup -->
+    <!-- Welcome Modal -->
     <div class="modal" id="bonusModal">
         <div class="modal-content">
-            <i class="fa-solid fa-trophy"></i>
-            <h2>BONUS UNLOCKED!</h2>
-            <p>आपको <b>₹100 साइन अप बोनस</b> मिला है। विथड्रॉ करने के लिए सभी 10 टास्क पूरे करें।</p>
-            <button class="modal-btn" onclick="closeModal()">CLAIM ₹100 NOW</button>
+            <i class="fa-solid fa-gift"></i>
+            <h2>Welcome Bonus! 🎉</h2>
+            <p>आपको <b>₹100 साइन अप बोनस</b> मिला है। इसे विथड्रॉ करने के लिए सभी 10 चैनल्स को ज्वाइन करें।</p>
+            <button class="modal-btn" onclick="closeModal()">Claim Bonus</button>
         </div>
     </div>
 
     <div class="app-container">
+        <!-- User Header -->
         <div class="user-header-card">
             <div class="user-info">
                 <div class="avatar-circle" id="avatar-letter">U</div>
@@ -316,82 +278,103 @@
         <!-- 1. TASKS TAB -->
         <div id="tasks-tab" class="tab-content active">
             <div class="banner-card">
-                <h2>⚡ MEGA CASH BONUS ⚡</h2>
-                <p>नीचे दिए गए सभी Telegram Channels को Join करें और <b>₹100 Instant Withdrawal Balance</b> क्लेम करें!</p>
+                <h2>Complete Tasks & Earn ₹100</h2>
+                <p>नीचे दिए गए सभी 10 टेलीग्राम चैनल्स को ज्वाइन करें और अपना रिवॉर्ड अनलॉक करें।</p>
             </div>
 
-            <div class="section-title"><i class="fa-solid fa-gamepad"></i> COMPLETE 10 TASKS</div>
+            <div class="section-title"><i class="fa-solid fa-grid-2"></i> Required Channels (10)</div>
 
-            <!-- 10 Game Style Channel Boxes -->
-            <div class="task-card">
-                <div class="channel-info"><div class="channel-icon"><i class="fa-solid fa-bolt"></i></div> Channel 1</div>
-                <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-            </div>
-            <div class="task-card">
-                <div class="channel-info"><div class="channel-icon"><i class="fa-solid fa-gem"></i></div> Channel 2</div>
-                <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-            </div>
-            <div class="task-card">
-                <div class="channel-info"><div class="channel-icon"><i class="fa-solid fa-crown"></i></div> Channel 3</div>
-                <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-            </div>
-            <div class="task-card">
-                <div class="channel-info"><div class="channel-icon"><i class="fa-solid fa-fire"></i></div> Channel 4</div>
-                <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-            </div>
-            <div class="task-card">
-                <div class="channel-info"><div class="channel-icon"><i class="fa-solid fa-star"></i></div> Channel 5</div>
-                <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-            </div>
-            <div class="task-card">
-                <div class="channel-info"><div class="channel-icon"><i class="fa-solid fa-coins"></i></div> Channel 6</div>
-                <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-            </div>
-            <div class="task-card">
-                <div class="channel-info"><div class="channel-icon"><i class="fa-solid fa-trophy"></i></div> Channel 7</div>
-                <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-            </div>
-            <div class="task-card">
-                <div class="channel-info"><div class="channel-icon"><i class="fa-solid fa-gift"></i></div> Channel 8</div>
-                <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-            </div>
-            <div class="task-card">
-                <div class="channel-info"><div class="channel-icon"><i class="fa-solid fa-rocket"></i></div> Channel 9</div>
-                <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-            </div>
-            <div class="task-card">
-                <div class="channel-info"><div class="channel-icon"><i class="fa-solid fa-shield-halved"></i></div> Channel 10</div>
-                <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
+            <!-- SQUARE CHANNELS GRID (2 Boxes per Row) -->
+            <div class="channels-grid">
+                <div class="task-square-box">
+                    <div class="channel-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                    <div class="channel-name">Channel 1</div>
+                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
+                </div>
+
+                <div class="task-square-box">
+                    <div class="channel-icon"><div class="channel-icon" style="margin:0;"><i class="fa-solid fa-paper-plane"></i></div></div>
+                    <div class="channel-name">Channel 2</div>
+                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
+                </div>
+
+                <div class="task-square-box">
+                    <div class="channel-icon"><i class="fa-solid fa-star"></i></div>
+                    <div class="channel-name">Channel 3</div>
+                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
+                </div>
+
+                <div class="task-square-box">
+                    <div class="channel-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="channel-name">Channel 4</div>
+                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
+                </div>
+
+                <div class="task-square-box">
+                    <div class="channel-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="channel-name">Channel 5</div>
+                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
+                </div>
+
+                <div class="task-square-box">
+                    <div class="channel-icon"><i class="fa-solid fa-bell"></i></div>
+                    <div class="channel-name">Channel 6</div>
+                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
+                </div>
+
+                <div class="task-square-box">
+                    <div class="channel-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <div class="channel-name">Channel 7</div>
+                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
+                </div>
+
+                <div class="task-square-box">
+                    <div class="channel-icon"><i class="fa-solid fa-gem"></i></div>
+                    <div class="channel-name">Channel 8</div>
+                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
+                </div>
+
+                <div class="task-square-box">
+                    <div class="channel-icon"><i class="fa-solid fa-circle-check"></i></div>
+                    <div class="channel-name">Channel 9</div>
+                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
+                </div>
+
+                <div class="task-square-box">
+                    <div class="channel-icon"><i class="fa-solid fa-award"></i></div>
+                    <div class="channel-name">Channel 10</div>
+                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
+                </div>
             </div>
 
-            <button class="btn-action" onclick="verifyTasks()"><i class="fa-solid fa-circle-check"></i> VERIFY TASKS & UNLOCK ₹100</button>
+            <button class="btn-action" onclick="verifyTasks()"><i class="fa-solid fa-check-double"></i> Verify All & Unlock ₹100</button>
         </div>
 
         <!-- 2. REFER TAB -->
         <div id="refer-tab" class="tab-content">
             <div class="card-box">
-                <div class="section-title"><i class="fa-solid fa-users"></i> REFER & EARN MORE</div>
-                <p style="font-size:16px; color:#dcdde1; margin-bottom:8px; text-align:center;">अपने दोस्तों को शेयर करें और हर रेफ़र पर <b>₹20 Extra</b> कमाएं!</p>
+                <div class="section-title"><i class="fa-solid fa-user-plus"></i> Refer Program</div>
+                <p style="font-size:13px; color:#cbd5e1; margin-bottom:8px; text-align:center;">अपने दोस्तों को इनवाइट करें और हर रेफ़र पर <b>₹20 Extra</b> पाएं!</p>
                 <input type="text" id="refer-link" class="custom-input" readonly value="https://t.me/Bot?start=12345">
-                <button class="btn-action" onclick="copyReferLink()"><i class="fa-solid fa-copy"></i> COPY REFERRAL LINK</button>
+                <button class="btn-action" onclick="copyReferLink()"><i class="fa-solid fa-copy"></i> Copy Referral Link</button>
             </div>
         </div>
 
         <!-- 3. WITHDRAW TAB -->
         <div id="withdraw-tab" class="tab-content">
             <div class="card-box">
-                <div class="section-title"><i class="fa-solid fa-wallet"></i> INSTANT UPI TRANSFER</div>
-                <p style="font-size:16px; color:#dcdde1; text-align:center;">Available Balance: <b style="color:#ffd700;">₹<span id="withdraw-balance">100.00</span></b></p>
+                <div class="section-title"><i class="fa-solid fa-wallet"></i> Instant Withdrawal</div>
+                <p style="font-size:13px; color:#cbd5e1; text-align:center;">Balance: <b style="color:#60a5fa;">₹<span id="withdraw-balance">100.00</span></b></p>
                 <input type="text" id="upi-id" class="custom-input" placeholder="Enter UPI ID (e.g. 9876543210@paytm)">
-                <button class="btn-action" onclick="processWithdraw()"><i class="fa-solid fa-paper-plane"></i> REQUEST WITHDRAWAL</button>
+                <button class="btn-action" onclick="processWithdraw()"><i class="fa-solid fa-paper-plane"></i> Submit Withdrawal</button>
             </div>
 
             <div class="card-box">
-                <div class="section-title"><i class="fa-solid fa-circle-info"></i> WITHDRAWAL RULES</div>
+                <div class="section-title"><i class="fa-solid fa-circle-info"></i> Terms & Conditions</div>
                 <ul class="rules-list">
-                    <li>Minimum Withdrawal amount <b>₹100</b> है।</li>
-                    <li>सभी 10 चैनल्स ज्वाइन किए बिना विथड्रॉल अप्रूव नहीं होगा।</li>
-                    <li>बोनस एक ID पर सिर्फ 1 बार ही मिलेगा।</li>
+                    <li>न्यूनतम विथड्रॉल राशि <b>₹100</b> है।</li>
+                    <li>सभी 10 चैनल्स ज्वाइन करने के बाद ही पेमेंट प्रोसेस होगा।</li>
+                    <li>एक Telegram एकाउंट से केवल एक बार क्लेम किया जा सकता है।</li>
                 </ul>
             </div>
         </div>
@@ -400,26 +383,26 @@
         <div id="profile-tab" class="tab-content">
             <div class="grid-2">
                 <div class="grid-card">
-                    <p>TOTAL EARNED</p>
+                    <p>Total Earned</p>
                     <h3>₹100.00</h3>
                 </div>
                 <div class="grid-card">
-                    <p>TOTAL WITHDRAWAL</p>
-                    <h3 style="color:#ff007f;" id="total-withdrawn">₹0.00</h3>
+                    <p>Total Withdrawn</p>
+                    <h3 style="color:#f43f5e;" id="total-withdrawn">₹0.00</h3>
                 </div>
             </div>
             
             <div class="card-box">
-                <div class="section-title"><i class="fa-solid fa-user-shield"></i> ACCOUNT STATUS</div>
-                <p style="font-size:16px; color:#dcdde1; margin-bottom:6px;"><b>Verification Status:</b> <span style="color:#2ed573; font-weight: bold;">ACTIVE</span></p>
-                <p style="font-size:16px; color:#dcdde1;"><b>Claimed Bonus:</b> ₹100 Instant Bonus</p>
+                <div class="section-title"><i class="fa-solid fa-user-shield"></i> Account Details</div>
+                <p style="font-size:13px; color:#cbd5e1; margin-bottom:6px;"><b>Status:</b> <span style="color:#10b981; font-weight:700;">Verified User</span></p>
+                <p style="font-size:13px; color:#cbd5e1;"><b>Joining Bonus:</b> ₹100.00 (Active)</p>
             </div>
         </div>
     </div>
 
     <!-- Bottom Navigation -->
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="switchTab('tasks-tab', this)"><i class="fa-solid fa-gamepad"></i>Tasks</div>
+        <div class="nav-item active" onclick="switchTab('tasks-tab', this)"><i class="fa-solid fa-list-check"></i>Tasks</div>
         <div class="nav-item" onclick="switchTab('refer-tab', this)"><i class="fa-solid fa-users"></i>Refer</div>
         <div class="nav-item" onclick="switchTab('withdraw-tab', this)"><i class="fa-solid fa-wallet"></i>Withdraw</div>
         <div class="nav-item" onclick="switchTab('profile-tab', this)"><i class="fa-solid fa-user"></i>Profile</div>
@@ -467,7 +450,7 @@
             document.getElementById('bonusModal').style.display = 'none';
         }
 
-        // 5-SECOND TIMER LOGIC FOR JOIN BUTTON
+        /* 5-Second Timer Logic */
         function handleJoinClick(btn, link) {
             if (btn.classList.contains('joined') || btn.classList.contains('waiting')) return;
 
@@ -475,17 +458,17 @@
 
             btn.classList.add('waiting');
             let timeLeft = 5;
-            btn.innerText = `WAIT (${timeLeft}s)`;
+            btn.innerText = `Wait (${timeLeft}s)`;
 
             let countdown = setInterval(() => {
                 timeLeft--;
                 if (timeLeft > 0) {
-                    btn.innerText = `WAIT (${timeLeft}s)`;
+                    btn.innerText = `Wait (${timeLeft}s)`;
                 } else {
                     clearInterval(countdown);
                     btn.classList.remove('waiting');
                     btn.classList.add('joined');
-                    btn.innerText = 'JOINED ✓';
+                    btn.innerText = 'Joined ✓';
                 }
             }, 1000);
         }
@@ -508,14 +491,14 @@
             });
 
             if (!allJoined) {
-                alert("⚠️ कृपया पहले ऊपर दिए गए सभी 10 चैनल्स को ज्वाइन करें!");
+                alert("⚠️ कृपया पहले सभी 10 चैनल्स को ज्वाइन करें!");
             } 
             else {
                 if (userBalance === 0) {
-                    alert("⚠️ You have already claimed and withdrawn your ₹100 bonus!");
+                    alert("⚠️ आपने अपना बोनस पहले ही क्लेम/विथड्रॉ कर लिया है!");
                 } 
                 else {
-                    alert("✅ All 10 Tasks Verified Successfully! आपका Wallet Balance अनलॉक हो गया है।");
+                    alert("✅ सभी टास्क सफलतापूर्वक वेरिफाई हो गए हैं! आपका बैलेंस अब अनलॉक हो गया है।");
                 }
             }
         }
@@ -524,12 +507,12 @@
             const upiVal = document.getElementById('upi-id').value.trim();
 
             if (userBalance <= 0) {
-                alert("⚠️ Insufficient Balance! You don't have enough balance to withdraw.");
+                alert("⚠️ अपर्याप्त बैलेंस! विथड्रॉ करने के लिए पर्याप्त बैलेंस नहीं है।");
                 return;
             }
 
             if (upiVal === "" || !upiVal.includes("@")) {
-                alert("⚠️ Please enter a valid UPI ID (e.g. 9876543210@paytm)");
+                alert("⚠️ कृपया एक सही UPI ID दर्ज करें (उदा. 9876543210@paytm)");
                 return;
             }
 
@@ -539,7 +522,7 @@
             updateUI();
             document.getElementById('upi-id').value = "";
 
-            alert("🎉 Withdrawal Request Submitted Successfully! Payment 24 घंटे के अंदर ट्रांसफर कर दिया जाएगा।");
+            alert("🎉 विथड्रॉल की रिक्वेस्ट सबमिट हो गई है! 24 घंटे के अंदर पेमेंट ट्रांसफर कर दिया जाएगा।");
         }
 
         function copyReferLink() {
