@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP Telegram Hub</title>
+    <title>UPI Cashback Hub</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
@@ -11,46 +11,47 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; user-select: none; }
         
         body { 
-            background: #0b0f19; 
+            background: #0f172a; 
             color: #ffffff; 
             min-height: 100vh; 
             padding-bottom: 95px; 
             position: relative;
             background-image: 
-                radial-gradient(at 0% 0%, rgba(36, 161, 222, 0.08) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(15, 23, 42, 0.5) 0px, transparent 50%);
+                radial-gradient(at 10% 10%, rgba(36, 161, 222, 0.15) 0px, transparent 40%),
+                radial-gradient(at 90% 90%, rgba(99, 102, 241, 0.15) 0px, transparent 40%);
         }
 
         .app-container { max-width: 480px; margin: 0 auto; padding: 16px; }
 
-        /* Header Card */
+        /* Premium Header Card */
         .user-header-card { 
-            background: rgba(17, 24, 39, 0.8); 
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1); 
+            background: rgba(30, 41, 59, 0.7); 
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12); 
             border-radius: 20px; 
             padding: 14px 18px; 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
             margin-bottom: 20px; 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); 
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); 
         }
         .user-info { display: flex; align-items: center; gap: 12px; }
         .avatar-circle { 
             width: 44px; 
             height: 44px; 
-            background: #24A1DE; /* Telegram Original Color */
+            background: linear-gradient(135deg, #24A1DE, #0077b5); 
             color: #ffffff; 
             border-radius: 50%; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            font-size: 20px; 
+            font-size: 18px; 
             font-weight: 800; 
+            box-shadow: 0 4px 12px rgba(36, 161, 222, 0.3);
         }
-        .user-text h3 { font-size: 15px; font-weight: 700; color: #ffffff; letter-spacing: 0.3px; }
-        .user-text p { font-size: 12px; color: #24A1DE; font-weight: 600; }
+        .user-text h3 { font-size: 15px; font-weight: 700; color: #ffffff; }
+        .user-text p { font-size: 12px; color: #38bdf8; font-weight: 600; }
 
         .balance-badge { 
             background: rgba(16, 185, 129, 0.15); 
@@ -58,34 +59,35 @@
             padding: 8px 16px; 
             border-radius: 30px; 
             font-weight: 800; 
-            color: #34d399; 
+            color: #10b981; 
             font-size: 16px; 
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
         }
 
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        @keyframes popIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+        .tab-content.active { display: block; animation: popIn 0.3s ease-out; }
+        @keyframes popIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Banner Box */
         .banner-card { 
-            background: #111827; 
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9)); 
             border-radius: 20px; 
             padding: 20px; 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border: 1px solid rgba(56, 189, 248, 0.2); 
             margin-bottom: 22px; 
             text-align: center;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
-        .banner-card h2 { font-size: 19px; font-weight: 800; color: #24A1DE; margin-bottom: 6px; }
+        .banner-card h2 { font-size: 19px; font-weight: 800; color: #38bdf8; margin-bottom: 6px; }
         .banner-card p { font-size: 13px; color: #94a3b8; line-height: 1.5; font-weight: 500; }
 
         .section-title { 
             font-size: 13px; 
             font-weight: 800; 
-            color: #94a3b8; 
+            color: #cbd5e1; 
             text-transform: uppercase; 
             margin-bottom: 16px; 
-            letter-spacing: 1.2px;
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -99,41 +101,47 @@
             margin-bottom: 22px;
         }
 
+        /* Stylish Card Box */
         .task-square-box { 
-            background: rgba(17, 24, 39, 0.8); 
+            background: rgba(30, 41, 59, 0.7); 
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.08); 
-            border-radius: 20px; 
-            padding: 16px 12px; 
+            border-radius: 22px; 
+            padding: 18px 14px; 
             display: flex; 
             flex-direction: column;
             align-items: center; 
             justify-content: center;
             text-align: center;
-            aspect-ratio: 1 / 1; /* Pure Square */
-            transition: all 0.2s ease;
+            aspect-ratio: 1 / 1;
+            transition: all 0.25s ease;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
         }
         .task-square-box:hover {
-            border-color: #24A1DE;
-            transform: translateY(-2px);
+            border-color: rgba(36, 161, 222, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
         }
 
-        /* Original Telegram Logo Style (Without Blue Glow/Gradients) */
+        /* Telegram Original Icon */
         .telegram-icon-box {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%; /* Circle like real Telegram Icon */
-            background: #24A1DE; /* Exact Telegram Brand Color */
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #24A1DE; 
             display: flex;
             align-items: center;
             justify-content: center;
             color: #ffffff;
-            font-size: 26px;
+            font-size: 24px;
             margin-bottom: 10px;
-            padding-right: 2px; /* Centers paper plane icon naturally */
+            padding-right: 2px;
+            box-shadow: 0 4px 15px rgba(36, 161, 222, 0.4);
         }
 
         .channel-name {
-            font-size: 13px;
+            font-size: 13.5px;
             font-weight: 700;
             color: #ffffff;
             margin-bottom: 12px;
@@ -142,91 +150,97 @@
         /* Square Box Join Button */
         .btn-join { 
             width: 100%;
-            background: #24A1DE; 
+            background: linear-gradient(135deg, #24A1DE, #0088cc); 
             color: #ffffff; 
             border: none;
-            padding: 9px 0; 
+            padding: 10px 0; 
             border-radius: 12px; 
             font-size: 12px; 
             font-weight: 800; 
             cursor: pointer; 
-            transition: 0.2s;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(36, 161, 222, 0.3);
         }
         .btn-join:active { transform: scale(0.95); }
 
         .btn-join.waiting {
-            background: #0284c7 !important;
+            background: linear-gradient(135deg, #0284c7, #0369a1) !important;
             color: #fff !important;
+            box-shadow: none !important;
             cursor: wait;
         }
 
         .btn-join.joined { 
-            background: #10b981 !important; 
+            background: linear-gradient(135deg, #10b981, #059669) !important; 
             color: #ffffff !important; 
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
             pointer-events: none;
         }
 
-        /* Main Submit Button */
+        /* Premium Main Action Button */
         .btn-action { 
             width: 100%; 
-            background: #24A1DE; 
-            border: none;
+            background: linear-gradient(135deg, #6366f1, #4f46e5); 
+            border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 16px; 
-            border-radius: 16px; 
+            border-radius: 18px; 
             font-weight: 800; 
             font-size: 15px; 
             color: #ffffff; 
             cursor: pointer; 
-            transition: 0.2s;
+            transition: all 0.25s;
             letter-spacing: 0.5px;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
         }
-        .btn-action:hover { opacity: 0.9; }
+        .btn-action:hover { opacity: 0.95; transform: translateY(-1px); }
 
         .card-box { 
-            background: rgba(17, 24, 39, 0.8); 
+            background: rgba(30, 41, 59, 0.7); 
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.08); 
             border-radius: 20px; 
             padding: 20px; 
             margin-bottom: 16px; 
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         .custom-input { 
             width: 100%; 
             padding: 14px; 
             border-radius: 14px; 
-            border: 1px solid #24A1DE; 
-            background: #0b0f19; 
+            border: 1px solid rgba(56, 189, 248, 0.3); 
+            background: #0f172a; 
             font-size: 14px; 
             text-align: center; 
             font-weight: 700; 
             margin: 14px 0; 
-            color: #24A1DE; 
+            color: #38bdf8; 
             outline: none;
         }
+        .custom-input:focus { border-color: #38bdf8; box-shadow: 0 0 12px rgba(56, 189, 248, 0.2); }
 
         .rules-list { font-size: 13px; color: #94a3b8; line-height: 1.6; padding-left: 18px; font-weight: 500; }
         .rules-list li { margin-bottom: 8px; }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
         .grid-card { 
-            background: rgba(17, 24, 39, 0.8); 
+            background: rgba(30, 41, 59, 0.7); 
             border: 1px solid rgba(255, 255, 255, 0.08); 
             padding: 18px; 
             border-radius: 18px; 
             text-align: center; 
         }
         .grid-card p { font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
-        .grid-card h3 { font-size: 22px; font-weight: 800; color: #24A1DE; margin-top: 4px; }
+        .grid-card h3 { font-size: 22px; font-weight: 800; color: #38bdf8; margin-top: 4px; }
 
-        /* Floating Bottom Bar */
+        /* Floating Navigation Bar */
         .bottom-nav { 
             position: fixed; 
             bottom: 0; 
             left: 0; 
             width: 100%; 
-            background: rgba(11, 15, 25, 0.95); 
-            backdrop-filter: blur(15px);
+            background: rgba(15, 23, 42, 0.85); 
+            backdrop-filter: blur(20px);
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             display: flex; 
             justify-content: space-around; 
@@ -235,12 +249,12 @@
         }
         .nav-item { text-align: center; color: #64748b; font-size: 11px; font-weight: 700; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; transition: 0.2s; }
         .nav-item i { font-size: 19px; }
-        .nav-item.active { color: #24A1DE; }
+        .nav-item.active { color: #38bdf8; }
 
-        /* Winner Popup Modal */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px); justify-content: center; align-items: center; z-index: 1000; }
+        /* Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { 
-            background: #111827; 
+            background: #1e293b; 
             padding: 26px; 
             border-radius: 24px; 
             text-align: center; 
@@ -249,10 +263,10 @@
             border: 1px solid rgba(255, 255, 255, 0.1); 
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); 
         }
-        .modal-content i { font-size: 42px; color: #24A1DE; margin-bottom: 12px; }
+        .modal-content i { font-size: 42px; color: #38bdf8; margin-bottom: 12px; }
         .modal-content h2 { color: #ffffff; font-size: 19px; font-weight: 800; margin-bottom: 8px; }
         .modal-content p { color: #94a3b8; font-size: 13px; margin-bottom: 20px; line-height: 1.5; font-weight: 500; }
-        .modal-btn { background: #24A1DE; color: #fff; border: none; padding: 12px 24px; border-radius: 14px; font-weight: 800; font-size: 14px; cursor: pointer; width: 100%; }
+        .modal-btn { background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; border: none; padding: 12px 24px; border-radius: 14px; font-weight: 800; font-size: 14px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4); }
     </style>
 </head>
 <body>
@@ -291,72 +305,62 @@
 
             <div class="section-title"><i class="fa-solid fa-list-check"></i> Required Tasks (10)</div>
 
-            <!-- SQUARE CHANNELS GRID (2 Boxes per Row) -->
+            <!-- SQUARE CHANNELS GRID -->
             <div class="channels-grid">
-                <!-- Box 1 -->
                 <div class="task-square-box">
                     <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 1</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
-                <!-- Box 2 -->
                 <div class="task-square-box">
                     <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 2</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
-                <!-- Box 3 -->
                 <div class="task-square-box">
                     <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 3</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
-                <!-- Box 4 -->
                 <div class="task-square-box">
                     <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 4</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
-                <!-- Box 5 -->
                 <div class="task-square-box">
                     <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 5</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
-                <!-- Box 6 -->
                 <div class="task-square-box">
                     <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 6</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
-                <!-- Box 7 -->
                 <div class="task-square-box">
                     <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 7</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
-                <!-- Box 8 -->
                 <div class="task-square-box">
                     <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 8</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
-                <!-- Box 9 -->
                 <div class="task-square-box">
                     <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 9</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
-                <!-- Box 10 -->
                 <div class="task-square-box">
                     <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 10</div>
@@ -381,7 +385,7 @@
         <div id="withdraw-tab" class="tab-content">
             <div class="card-box">
                 <div class="section-title"><i class="fa-solid fa-wallet"></i> UPI Withdrawal</div>
-                <p style="font-size:13px; color:#94a3b8; text-align:center; font-weight:500;">Available Balance: <b style="color:#24A1DE;">₹<span id="withdraw-balance">100.00</span></b></p>
+                <p style="font-size:13px; color:#94a3b8; text-align:center; font-weight:500;">Available Balance: <b style="color:#10b981;">₹<span id="withdraw-balance">100.00</span></b></p>
                 <input type="text" id="upi-id" class="custom-input" placeholder="Enter UPI ID (e.g. 9876543210@paytm)">
                 <button class="btn-action" onclick="processWithdraw()"><i class="fa-solid fa-paper-plane"></i> Request Withdrawal</button>
             </div>
@@ -411,7 +415,7 @@
             
             <div class="card-box">
                 <div class="section-title"><i class="fa-solid fa-id-card"></i> Account Summary</div>
-                <p style="font-size:13px; color:#94a3b8; margin-bottom:8px; font-weight:500;"><b>Status:</b> <span style="color:#34d399; font-weight:700;">Active & Verified</span></p>
+                <p style="font-size:13px; color:#94a3b8; margin-bottom:8px; font-weight:500;"><b>Status:</b> <span style="color:#10b981; font-weight:700;">Active & Verified</span></p>
                 <p style="font-size:13px; color:#94a3b8; font-weight:500;"><b>Signup Bonus:</b> ₹100.00 Claimed</p>
             </div>
         </div>
@@ -467,7 +471,6 @@
             document.getElementById('bonusModal').style.display = 'none';
         }
 
-        /* 5-Second Countdown Logic */
         function handleJoinClick(btn, link) {
             if (btn.classList.contains('joined') || btn.classList.contains('waiting')) return;
 
