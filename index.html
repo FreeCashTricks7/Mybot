@@ -1,127 +1,34 @@
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPI Cashback Rewards</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-        body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            padding: 20px;
-        }
-        .container {
-            width: 100%;
-            max-width: 400px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-            animation: fadeIn 0.8s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .icon-header {
-            font-size: 50px;
-            color: #0088cc;
-            margin-bottom: 10px;
-            text-shadow: 0 0 15px rgba(0, 136, 204, 0.6);
-        }
-        h2 { font-size: 22px; font-weight: 700; margin-bottom: 5px; color: #fff; }
-        p { font-size: 13px; color: #bbb; margin-bottom: 20px; }
-        .card {
-            background: rgba(255, 255, 255, 0.08);
-            margin: 12px 0;
-            padding: 14px 18px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .card:hover { transform: scale(1.02); background: rgba(255, 255, 255, 0.12); }
-        .channel-info { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 500; }
-        .channel-info i { color: #0088cc; font-size: 18px; }
-        .btn-join {
-            background: linear-gradient(45deg, #0088cc, #005588);
-            color: white;
-            text-decoration: none;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            box-shadow: 0 4px 10px rgba(0, 136, 204, 0.3);
-            transition: all 0.3s ease;
-        }
-        .btn-join:hover { box-shadow: 0 6px 15px rgba(0, 136, 204, 0.6); }
-        .btn-submit {
-            width: 100%;
-            margin-top: 25px;
-            padding: 14px;
-            border: none;
-            border-radius: 30px;
-            background: linear-gradient(45deg, #11998e, #38ef7d);
-            color: white;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(56, 239, 125, 0.4);
-            transition: all 0.3s ease;
-        }
-        .btn-submit:active { transform: scale(0.98); }
-    </style>
-</head>
-<body>
+// Show Bonus Modal on First Load
+        window.onload = function() {
+            document.getElementById('bonusModal').style.display = 'flex';
+        };
 
-    <div class="container">
-        <div class="icon-header">
-            <i class="fa-brands font-awesome-brands fa-telegram"></i>
-        </div>
-        <h2>Task Complete Karein</h2>
-        <p>Claim Reward ke liye niche diye gaye dono channels join karein:</p>
+        function closeModal() {
+            document.getElementById('bonusModal').style.display = 'none';
+        }
 
-        <div class="card">
-            <div class="channel-info">
-                <i class="fa-solid fa-bullhorn"></i>
-                <span>Free Cash Trick's</span>
-            </div>
-            <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank">JOIN</a>
-        </div>
-
-        <div class="card">
-            <div class="channel-info">
-                <i class="fa-solid fa-gift"></i>
-                <span>FreeCashTricks 2nd</span>
-            </div>
-            <a href="https://t.me/YonoGame649" class="btn-join" target="_blank">JOIN</a>
-        </div>
-
-        <button class="btn-submit" onclick="verifyTasks()">
-            <i class="fa-solid fa-circle-check"></i> CONTINUE / VERIFY
-        </button>
-    </div>
-
-    <script>
-        const tg = window.Telegram.WebApp;
-        tg.expand();
+        function switchTab(tabId, element) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            element.classList.add('active');
+        }
 
         function verifyTasks() {
-            alert("Checking channels... Please wait!");
+            alert("Aapne sabhi channels join nahi kiye hain! Kripya dono channels join karein.");
+        }
+
+        function attemptWithdraw() {
+            alert("Withdrawal Fail! Pehle Tasks Tab me jaakar sabhi channels join karein.");
+            switchTab('tasks-tab', document.querySelectorAll('.nav-item')[0]);
+        }
+
+        function copyRefer() {
+            const copyText = document.getElementById("refer-link");
+            copyText.select();
+            document.execCommand("copy");
+            alert("Refer link copied!");
         }
     </script>
-
 </body>
 </html>
