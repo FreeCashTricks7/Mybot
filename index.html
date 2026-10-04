@@ -45,6 +45,7 @@
             display: inline-block;
             transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0, 136, 204, 0.3);
+            cursor: pointer;
         }
         
         /* Joined State Style */
@@ -89,65 +90,55 @@
         <h1 id="balance">₹100</h1>
     </div>
 
-    <!-- TAB 1: TASKS (10 Channels) -->
+    <!-- TAB 1: TASKS -->
     <div id="tasks-tab" class="tab-content active">
         <h3 style="margin-bottom:12px;">Complete All Tasks (10/10)</h3>
         
-        <!-- Channel 1 -->
         <div class="card">
             <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Free Cash Trick's ( 1 )</span></div>
-            <a href="https://t.me/+kCr0xkaeeEgwN" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
+            <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
         </div>
 
-        <!-- Channel 2 -->
         <div class="card">
             <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 2</span></div>
             <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
         </div>
 
-        <!-- Channel 3 -->
         <div class="card">
             <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 3</span></div>
             <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
         </div>
 
-        <!-- Channel 4 -->
         <div class="card">
             <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 4</span></div>
             <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
         </div>
 
-        <!-- Channel 5 -->
         <div class="card">
             <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 5</span></div>
             <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
         </div>
 
-        <!-- Channel 6 -->
         <div class="card">
             <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 6</span></div>
             <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
         </div>
 
-        <!-- Channel 7 -->
         <div class="card">
             <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 7</span></div>
             <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
         </div>
 
-        <!-- Channel 8 -->
         <div class="card">
             <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 8</span></div>
             <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
         </div>
 
-        <!-- Channel 9 -->
         <div class="card">
             <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 9</span></div>
             <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
         </div>
 
-        <!-- Channel 10 -->
         <div class="card">
             <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 10</span></div>
             <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
@@ -251,4 +242,18 @@
         function attemptWithdraw() {
             if(joinedChannelsCount < 10) {
                 alert("Withdrawal Fail! Pehle Tasks Tab me jaakar sabhi 10 channels join karein.");
-                switchTab('tasks-tab
+                switchTab('tasks-tab', document.querySelectorAll('.nav-item')[0]);
+            } else {
+                alert("Withdrawal Request Submitted Successfully! Payment 24 ghante me aa jayega.");
+            }
+        }
+
+        function copyRefer() {
+            const copyText = document.getElementById("refer-link");
+            copyText.select();
+            document.execCommand("copy");
+            alert("Refer link copied!");
+        }
+    </script>
+</body>
+</html>
