@@ -30,12 +30,12 @@
 
         .balance-badge { background: linear-gradient(135deg, #ffcc00, #ffa500); padding: 8px 14px; border-radius: 20px; font-weight: 900; color: #000; font-size: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
 
-        /* Tab Control */
+        /* Tabs */
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Banner Card */
+        /* Banner */
         .banner-card { background: linear-gradient(135deg, #6e1522, #2b080d); border-radius: 20px; padding: 16px; color: white; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .banner-card h2 { font-size: 17px; font-weight: 800; color: #ffcc00; margin-bottom: 4px; }
         .banner-card p { font-size: 12px; opacity: 0.9; line-height: 1.4; }
@@ -45,7 +45,7 @@
         .card-title { font-size: 12px; font-weight: 900; color: #4a0e17; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
         .card-title::before { content: ''; width: 4px; height: 14px; background: #ffcc00; border-radius: 2px; }
 
-        /* Task Cards */
+        /* Tasks */
         .task-card { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 12px; padding: 12px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
         .channel-info { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 14px; color: #4a0e17; }
         .channel-info i { color: #ff3366; font-size: 18px; animation: giftPulse 1.5s infinite ease-in-out; }
@@ -53,7 +53,6 @@
 
         .btn-join { background: linear-gradient(45deg, #0088cc, #00d2ff); color: white; text-decoration: none; padding: 8px 16px; border-radius: 20px; font-size: 11px; font-weight: 900; animation: btnGlow 1.2s infinite alternate; border: none; cursor: pointer; }
         @keyframes btnGlow { 0% { transform: scale(1); box-shadow: 0 0 5px rgba(0, 210, 255, 0.5); } 100% { transform: scale(1.06); box-shadow: 0 0 12px rgba(0, 210, 255, 0.9); } }
-        
         .btn-join.joined { background: linear-gradient(45deg, #11998e, #38ef7d) !important; color: #fff !important; animation: none !important; }
 
         .btn-action { width: 100%; background: linear-gradient(135deg, #ffcc00, #ffa500); border: none; padding: 13px; border-radius: 25px; font-weight: 900; font-size: 14px; color: #000; cursor: pointer; box-shadow: 0 4px 10px rgba(255, 204, 0, 0.4); text-transform: uppercase; margin-top: 10px; }
@@ -68,15 +67,15 @@
         .grid-card p { font-size: 10px; font-weight: 800; color: #666; }
         .grid-card h3 { font-size: 18px; font-weight: 900; color: #4a0e17; margin-top: 4px; }
 
-        /* Bottom Navigation */
+        /* Bottom Nav */
         .bottom-nav { position: fixed; bottom: 8px; left: 4%; width: 92%; background: #ffffff; border-radius: 30px; display: flex; justify-content: space-around; padding: 8px 0; box-shadow: 0 8px 20px rgba(0,0,0,0.3); z-index: 100; }
         .nav-item { text-align: center; color: #777; font-size: 10px; font-weight: 800; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
         .nav-item i { font-size: 16px; }
         .nav-item.active { color: #4a0e17; }
         .nav-item.active i { background: #4a0e17; color: #fff; padding: 5px 12px; border-radius: 15px; }
 
-        /* Modal Popup */
-        .modal { display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
+        /* Popup Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { background: #ffffff; padding: 25px; border-radius: 20px; text-align: center; max-width: 310px; width: 85%; border: 2px solid #ffcc00; box-shadow: 0 0 25px rgba(255,204,0,0.5); }
         .modal-content i { font-size: 55px; color: #ffcc00; margin-bottom: 12px; animation: giftPulse 1.5s infinite ease-in-out; display: inline-block; }
         .modal-content h2 { color: #4a0e17; font-size: 18px; font-weight: 900; margin-bottom: 8px; }
@@ -86,7 +85,6 @@
 </head>
 <body>
 
-    <!-- Background Animations -->
     <div class="bg-animation">
         <div class="bg-item">🎁</div>
         <div class="bg-item">💰</div>
@@ -94,7 +92,7 @@
         <div class="bg-item">🪙</div>
     </div>
 
-    <!-- Sign-Up Popup Modal -->
+    <!-- Sign-Up Bonus Modal -->
     <div class="modal" id="bonusModal">
         <div class="modal-content">
             <i class="fa-solid fa-gift"></i>
@@ -105,7 +103,7 @@
     </div>
 
     <div class="app-container">
-        <!-- Top Header -->
+        <!-- User Top Header -->
         <div class="user-header-card">
             <div class="user-info">
                 <div class="avatar-circle" id="avatar-letter">U</div>
@@ -129,46 +127,16 @@
             <div class="card-box">
                 <div class="card-title">MANDATORY TASKS (10/10)</div>
 
-                <div class="task-card">
-                    <div class="channel-info"><i class="fa-solid fa-gift"></i> Free Cash Trick's (1)</div>
-                    <a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a>
-                </div>
-                <div class="task-card">
-                    <div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 2</div>
-                    <a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a>
-                </div>
-                <div class="task-card">
-                    <div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 3</div>
-                    <a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a>
-                </div>
-                <div class="task-card">
-                    <div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 4</div>
-                    <a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a>
-                </div>
-                <div class="task-card">
-                    <div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 5</div>
-                    <a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a>
-                </div>
-                <div class="task-card">
-                    <div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 6</div>
-                    <a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a>
-                </div>
-                <div class="task-card">
-                    <div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 7</div>
-                    <a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a>
-                </div>
-                <div class="task-card">
-                    <div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 8</div>
-                    <a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a>
-                </div>
-                <div class="task-card">
-                    <div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 9</div>
-                    <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
-                </div>
-                <div class="task-card">
-                    <div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 10</div>
-                    <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
-                </div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Free Cash Trick's (1)</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 2</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 3</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 4</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 5</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 6</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 7</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 8</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 9</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Demo 10</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a></div>
 
                 <button class="btn-action" onclick="verifyTasks()"><i class="fa-solid fa-circle-check"></i> VERIFY & CLAIM ₹100</button>
             </div>
@@ -179,18 +147,8 @@
             <div class="card-box">
                 <div class="card-title">REFER & EARN CASH</div>
                 <p style="font-size:13px; color:#555; margin-bottom:10px;">अपने दोस्तों को Invite करें और हर Refer पर <b>₹20 Cash</b> पाएं!</p>
-                
                 <input type="text" id="refer-link" class="custom-input" readonly value="https://t.me/Bot?start=12345">
                 <button class="btn-action" onclick="copyReferLink()"><i class="fa-solid fa-copy"></i> COPY REFER LINK</button>
-            </div>
-
-            <div class="card-box">
-                <div class="card-title">REFERRAL RULES</div>
-                <ul class="rules-list">
-                    <li>आपके Friend को Bot जॉइन करके 10 चैनल्स जॉइन करने होंगे।</li>
-                    <li>Fake या Self-referral करने पर अकाउंट ब्लॉक कर दिया जाएगा।</li>
-                    <li>Referral अमाउंट आपके Wallet में Instant ऐड होगा।</li>
-                </ul>
             </div>
         </div>
 
@@ -199,20 +157,8 @@
             <div class="card-box">
                 <div class="card-title">INSTANT UPI WITHDRAWAL</div>
                 <p style="font-size:12px; color:#666;">Available Balance: <b style="color:#4a0e17;">₹<span id="withdraw-balance">100.00</span></b></p>
-                
                 <input type="text" id="upi-id" class="custom-input" placeholder="Enter UPI ID (e.g. 9876543210@paytm)">
-                
                 <button class="btn-action" onclick="processWithdraw()"><i class="fa-solid fa-wallet"></i> WITHDRAW NOW</button>
-            </div>
-
-            <div class="card-box">
-                <div class="card-title">WITHDRAWAL POLICY</div>
-                <ul class="rules-list">
-                    <li>Minimum withdrawal limit <b>₹100</b> है।</li>
-                    <li>UPI ID सही दर्ज करें, गलत ID पर पेमेंट नहीं होगा।</li>
-                    <li>Payment 24 से 48 घंटे के अंदर UPI में ट्रांसफर कर दिया जाएगा।</li>
-                    <li>सभी 10 Tasks पूरे किए बिना Withdrawal फेल हो जाएगा।</li>
-                </ul>
             </div>
         </div>
 
@@ -227,22 +173,6 @@
                     <p>TOTAL WITHDRAWN</p>
                     <h3 style="color:#e63946;" id="total-withdrawn">₹0.00</h3>
                 </div>
-            </div>
-
-            <div class="card-box">
-                <div class="card-title">ACCOUNT DETAILS</div>
-                <p style="font-size:13px; margin-bottom:8px;"><b>Account Status:</b> <span style="color:#11998e; font-weight:800;">ACTIVE</span></p>
-                <p style="font-size:13px; margin-bottom:8px;"><b>Tasks Status:</b> <span id="completed-count">0</span>/10 Joined</p>
-                <p style="font-size:13px;"><b>Sign-up Bonus:</b> ₹100 Received</p>
-            </div>
-
-            <div class="card-box">
-                <div class="card-title">ABOUT APP & SUPPORT</div>
-                <ul class="rules-list">
-                    <li><b>App Name:</b> UPI Cash Rewards</li>
-                    <li><b>Version:</b> v2.4 (Official)</li>
-                    <li><b>Help & Support:</b> Task verify होने के बाद withdrawal instant रिलीज़ किया जाता है।</li>
-                </ul>
             </div>
         </div>
     </div>
@@ -259,19 +189,42 @@
         const tg = window.Telegram.WebApp;
         tg.expand();
 
-        let userBalance = 100.00; // Total Current Balance
-        let joinedCount = 0;
-        const totalChannels = 10;
+        let currentUserId = "default_user";
 
-        // Auto Load User Info
+        // Fetch Telegram User ID Dynamically
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
             const user = tg.initDataUnsafe.user;
-            const fullUsername = user.first_name + (user.last_name ? ' ' + user.last_name : '');
-            document.getElementById('username').innerText = fullUsername;
+            currentUserId = user.id.toString(); // Specific Telegram ID of current logged-in user
+
+            document.getElementById('username').innerText = user.first_name + (user.last_name ? ' ' + user.last_name : '');
             document.getElementById('userid').innerText = 'ID: ' + user.id;
             document.getElementById('avatar-letter').innerText = user.first_name.charAt(0).toUpperCase();
-            
             document.getElementById('refer-link').value = `https://t.me/CashFree_CB_Bot?start=${user.id}`;
+        }
+
+        // KEY LOGIC: Balance linked to Telegram User ID
+        let userBalanceKey = `balance_${currentUserId}`;
+        let userBalance = localStorage.getItem(userBalanceKey) !== null 
+                          ? parseFloat(localStorage.getItem(userBalanceKey)) 
+                          : 100.00; // If new Telegram ID, give ₹100
+
+        // Render UI based on current user balance
+        updateUI();
+
+        // Show Sign-up Popup ONLY if the current user has ₹100 balance
+        if (userBalance > 0) {
+            document.getElementById('bonusModal').style.display = 'flex';
+        }
+
+        function updateUI() {
+            document.getElementById('header-balance').innerText = userBalance.toFixed(2);
+            document.getElementById('withdraw-balance').innerText = userBalance.toFixed(2);
+            
+            if (userBalance === 0) {
+                document.getElementById('total-withdrawn').innerText = "₹100.00";
+            } else {
+                document.getElementById('total-withdrawn').innerText = "₹0.00";
+            }
         }
 
         function closeModal() {
@@ -282,8 +235,6 @@
             if(!element.classList.contains('joined')) {
                 element.classList.add('joined');
                 element.innerHTML = 'JOINED &#10003;';
-                joinedCount++;
-                document.getElementById('completed-count').innerText = joinedCount;
             }
         }
 
@@ -295,41 +246,33 @@
         }
 
         function verifyTasks() {
-            if(joinedCount < totalChannels) {
-                alert(`⚠️ आपने अभी तक सभी ${totalChannels} channels join नहीं किए हैं! कृपया सभी channels को JOIN करें।`);
+            if (userBalance === 0) {
+                alert("⚠️ You have already claimed and withdrawn your bonus!");
             } else {
-                alert("✅ Tasks Verification Successful! आपका Wallet Balance अनलॉक हो गया है। आप Withdraw tab से निकाल सकते हैं।");
+                alert("✅ Tasks Verification Successful! आपका Wallet Balance अनलॉक हो गया है।");
             }
         }
 
         function processWithdraw() {
             const upiVal = document.getElementById('upi-id').value.trim();
-            
-            // Check 1: Channel Task Completed or Not
-            if(joinedCount < totalChannels) {
-                alert(`❌ Withdrawal Fail! पहले Tasks Tab में जाकर सभी ${totalChannels} channels join करें।`);
-                switchTab('tasks-tab', document.querySelectorAll('.nav-item')[0]);
+
+            // Check if current user already withdrew
+            if (userBalance <= 0) {
+                alert("⚠️ Insufficient Balance! You have already withdrawn your bonus.");
                 return;
             }
 
-            // Check 2: Balance Check
-            if(userBalance < 100) {
-                alert("⚠️ Insufficient Balance! You don't have enough balance to withdraw. Minimum ₹100 required.");
-                return;
-            }
-
-            // Check 3: Valid UPI ID Check
-            if(upiVal === "" || !upiVal.includes("@")) {
+            if (upiVal === "" || !upiVal.includes("@")) {
                 alert("⚠️ Please enter a valid UPI ID (e.g. 9876543210@paytm)");
                 return;
             }
 
-            // DEDUCT BALANCE AND UPDATE UI
+            // DEDUCT BALANCE AND SAVE FOR THIS SPECIFIC TELEGRAM USER ID
             userBalance = 0.00;
-            document.getElementById('header-balance').innerText = "0.00";
-            document.getElementById('withdraw-balance').innerText = "0.00";
-            document.getElementById('total-withdrawn').innerText = "₹100.00";
-            document.getElementById('upi-id').value = ""; // Clear input field
+            localStorage.setItem(userBalanceKey, "0"); // Saves '0' specifically for current ID
+
+            updateUI();
+            document.getElementById('upi-id').value = "";
 
             alert("🎉 Withdrawal Request Submitted Successfully! Payment 24 घंटे में आपके UPI में भेज दिया जाएगा।");
         }
@@ -338,7 +281,7 @@
             const copyText = document.getElementById("refer-link");
             copyText.select();
             document.execCommand("copy");
-            alert("📋 Refer Link Copied! अपने दोस्तों के साथ शेयर करें।");
+            alert("📋 Refer Link Copied!");
         }
     </script>
 </body>
