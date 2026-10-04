@@ -229,7 +229,7 @@
         <div class="bg-item">🎁</div>
     </div>
 
-    <!-- New User Welcome Modal Popup -->
+    <!-- New User Bonus Modal Popup -->
     <div class="modal" id="bonusModal">
         <div class="modal-content">
             <i class="fa-solid fa-gift"></i>
@@ -365,7 +365,7 @@
 
         updateUI();
 
-        // Automatically show "बधाई हो! 🎉" Modal ONLY to new users (Balance > 0)
+        // Show "बधाई हो!" Modal ONLY to new users (whose balance > 0)
         if (userBalance > 0) {
             document.getElementById('bonusModal').style.display = 'flex';
         }
@@ -415,26 +415,30 @@
             element.classList.add('active');
         }
 
-        // VERIFY BUTTON LOGIC
+        // EXACT LOGIC: CHECK CHANNELS FIRST, THEN SHOW ALREADY STARTED IF OLD USER
         function verifyTasks() {
             const allButtons = document.querySelectorAll('.btn-join');
             let allJoined = true;
 
-            // Check if all 15 channels are joined
+            // 1. First, check if all 15 channels are joined
             allButtons.forEach(btn => {
                 if (!btn.classList.contains('joined')) {
                     allJoined = false;
                 }
             });
 
+            // 2. If ANY channel is NOT joined, ALWAYS show channel join message
             if (!allJoined) {
-                // If channels are NOT joined, prompt to join first
                 alert("⚠️ कृपया पहले ऊपर दिए गए सभी 15 चैनल्स को ज्वाइन करें!");
-            } else {
-                // If all channels ARE joined
+            } 
+            // 3. If ALL channels ARE joined:
+            else {
+                // If it's an Old User (Balance 0), show already withdrawn/started alert
                 if (userBalance === 0) {
                     alert("⚠️ You have already claimed and withdrawn your ₹100 bonus!");
-                } else {
+                } 
+                // If it's a New User (Balance > 0), show success alert
+                else {
                     alert("✅ All 15 Tasks Verified Successfully! आपका Wallet Balance अनलॉक हो गया है।");
                 }
             }
