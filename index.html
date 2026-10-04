@@ -103,9 +103,9 @@
         <h1 id="balance">₹100</h1>
     </div>
 
-    <!-- TAB 1: TASKS (15 Channels) -->
+    <!-- TAB 1: TASKS (10 Channels) -->
     <div id="tasks-tab" class="tab-content active">
-        <h3 style="margin-bottom:12px;">Complete All Tasks (15/15)</h3>
+        <h3 style="margin-bottom:12px;">Complete All Tasks (10/10)</h3>
         
         <div class="card">
             <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Free Cash Trick's ( 1 )</span></div>
@@ -157,31 +157,6 @@
             <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
         </div>
 
-        <div class="card">
-            <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 11</span></div>
-            <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
-        </div>
-
-        <div class="card">
-            <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 12</span></div>
-            <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
-        </div>
-
-        <div class="card">
-            <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 13</span></div>
-            <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
-        </div>
-
-        <div class="card">
-            <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 14</span></div>
-            <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
-        </div>
-
-        <div class="card">
-            <div class="channel-info"><i class="fa-solid fa-gift"></i><span>Demo 15</span></div>
-            <a href="https://t.me/+kCr0xkaeeEgwNzRl" class="btn-join" target="_blank" onclick="markJoined(this)">JOIN</a>
-        </div>
-
         <button class="btn-submit" onclick="verifyTasks()"><i class="fa-solid fa-circle-check"></i> VERIFY & CLAIM</button>
     </div>
 
@@ -207,7 +182,7 @@
         <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin-top:15px; text-align:left;">
             <p style="margin-bottom:8px;"><b>Status:</b> <span style="color:#38ef7d;">Active</span></p>
             <p style="margin-bottom:8px;"><b>Sign-up Bonus:</b> ₹100 Received</p>
-            <p><b>Tasks Completed:</b> <span id="joined-count">0</span>/15</p>
+            <p><b>Tasks Completed:</b> <span id="joined-count">0</span>/10</p>
         </div>
     </div>
 
@@ -234,7 +209,7 @@
         tg.expand();
 
         let joinedChannelsCount = 0;
-        const totalChannels = 15;
+        const totalChannels = 10;
 
         // Load Telegram User Data
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
