@@ -124,7 +124,6 @@
             transition: 0.2s;
         }
 
-        /* 5-second Waiting State Style */
         .btn-join.waiting {
             background: linear-gradient(135deg, #ffe600, #ff9900) !important;
             color: #000 !important;
@@ -132,7 +131,6 @@
             cursor: wait;
         }
 
-        /* Completed Joined State Style */
         .btn-join.joined { 
             background: linear-gradient(135deg, #000, #00b894) !important; 
             color: #00ffcc !important; 
@@ -231,6 +229,7 @@
         <div class="bg-item">🎁</div>
     </div>
 
+    <!-- New User Welcome Modal Popup -->
     <div class="modal" id="bonusModal">
         <div class="modal-content">
             <i class="fa-solid fa-gift"></i>
@@ -366,6 +365,7 @@
 
         updateUI();
 
+        // Automatically show "बधाई हो! 🎉" Modal ONLY to new users (Balance > 0)
         if (userBalance > 0) {
             document.getElementById('bonusModal').style.display = 'flex';
         }
@@ -389,10 +389,8 @@
         function handleJoinClick(btn, link) {
             if (btn.classList.contains('joined') || btn.classList.contains('waiting')) return;
 
-            // 1. Redirect to Telegram Link
             window.open(link, '_blank');
 
-            // 2. Start 5 Second Countdown
             btn.classList.add('waiting');
             let timeLeft = 5;
             btn.innerText = `WAIT (${timeLeft}s)`;
@@ -417,11 +415,28 @@
             element.classList.add('active');
         }
 
+        // VERIFY BUTTON LOGIC
         function verifyTasks() {
-            if (userBalance === 0) {
-                alert("⚠️️ You have already claimed and withdrawn your ₹100 bonus!");
+            const allButtons = document.querySelectorAll('.btn-join');
+            let allJoined = true;
+
+            // Check if all 15 channels are joined
+            allButtons.forEach(btn => {
+                if (!btn.classList.contains('joined')) {
+                    allJoined = false;
+                }
+            });
+
+            if (!allJoined) {
+                // If channels are NOT joined, prompt to join first
+                alert("⚠️ कृपया पहले ऊपर दिए गए सभी 15 चैनल्स को ज्वाइन करें!");
             } else {
-                alert("✅ All 15 Tasks Verified Successfully! आपका Wallet Balance अनलॉक हो गया है।");
+                // If all channels ARE joined
+                if (userBalance === 0) {
+                    alert("⚠️ You have already claimed and withdrawn your ₹100 bonus!");
+                } else {
+                    alert("✅ All 15 Tasks Verified Successfully! आपका Wallet Balance अनलॉक हो गया है।");
+                }
             }
         }
 
