@@ -9,7 +9,6 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; user-select: none; }
         
-        /* Unique Dark Violet & Electric Neon Theme */
         body { 
             background: linear-gradient(180deg, #120327 0%, #1a0836 50%, #090117 100%); 
             color: #ffffff; 
@@ -19,7 +18,6 @@
             overflow-x: hidden; 
         }
 
-        /* Background Particle Effect */
         .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .bg-item { position: absolute; top: -10%; font-size: 20px; opacity: 0.15; animation: fall 9s linear infinite; filter: drop-shadow(0 0 8px #00ffcc); }
         @keyframes fall { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(110vh) rotate(360deg); } }
@@ -30,7 +28,6 @@
 
         .app-container { position: relative; z-index: 1; padding: 14px; }
 
-        /* Neon Header Card */
         .user-header-card { 
             background: rgba(255, 255, 255, 0.05); 
             backdrop-filter: blur(15px);
@@ -70,12 +67,10 @@
             box-shadow: 0 0 15px rgba(255, 0, 120, 0.5); 
         }
 
-        /* Content Switcher */
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Electric Banner Card */
         .banner-card { 
             background: linear-gradient(135deg, #2a085c, #140033); 
             border-radius: 20px; 
@@ -88,7 +83,6 @@
         .banner-card h2 { font-size: 17px; font-weight: 800; color: #00f6ff; margin-bottom: 6px; text-shadow: 0 0 8px rgba(0,246,255,0.4); }
         .banner-card p { font-size: 12px; color: #dcdde1; line-height: 1.5; }
 
-        /* Card Container */
         .card-box { 
             background: rgba(255, 255, 255, 0.04); 
             backdrop-filter: blur(10px);
@@ -101,7 +95,6 @@
         .card-title { font-size: 12px; font-weight: 900; color: #ffe600; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; letter-spacing: 1px; }
         .card-title::before { content: ''; width: 4px; height: 14px; background: #00f6ff; border-radius: 2px; box-shadow: 0 0 8px #00f6ff; }
 
-        /* Tasks Layout */
         .task-card { 
             background: rgba(255, 255, 255, 0.03); 
             border: 1px solid rgba(255, 255, 255, 0.06); 
@@ -116,6 +109,7 @@
         .channel-info i { color: #ff0078; font-size: 16px; animation: pulseGlow 1.5s infinite ease-in-out; }
         @keyframes pulseGlow { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
 
+        /* Join Button States */
         .btn-join { 
             background: linear-gradient(135deg, #00f6ff, #0066ff); 
             color: #000; 
@@ -129,11 +123,22 @@
             box-shadow: 0 0 10px rgba(0, 246, 255, 0.4); 
             transition: 0.2s;
         }
+
+        /* 5-second Waiting State Style */
+        .btn-join.waiting {
+            background: linear-gradient(135deg, #ffe600, #ff9900) !important;
+            color: #000 !important;
+            box-shadow: 0 0 10px rgba(255, 230, 0, 0.6) !important;
+            cursor: wait;
+        }
+
+        /* Completed Joined State Style */
         .btn-join.joined { 
             background: linear-gradient(135deg, #000, #00b894) !important; 
             color: #00ffcc !important; 
             border: 1px solid #00ffcc !important;
             box-shadow: none !important; 
+            pointer-events: none;
         }
 
         .btn-action { 
@@ -180,7 +185,6 @@
         .grid-card p { font-size: 10px; font-weight: 800; color: #a29bfe; }
         .grid-card h3 { font-size: 18px; font-weight: 900; color: #00f6ff; margin-top: 4px; }
 
-        /* Floating Modern Bottom Nav */
         .bottom-nav { 
             position: fixed; 
             bottom: 12px; 
@@ -201,7 +205,6 @@
         .nav-item.active { color: #00f6ff; }
         .nav-item.active i { background: linear-gradient(135deg, #a100ff, #00f6ff); color: #fff; padding: 6px 14px; border-radius: 18px; box-shadow: 0 0 10px rgba(0, 246, 255, 0.5); }
 
-        /* Glowing Popup Modal */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { 
             background: linear-gradient(135deg, #1f0842, #0d0221); 
@@ -221,7 +224,6 @@
 </head>
 <body>
 
-    <!-- Dynamic Animated Particles -->
     <div class="bg-animation">
         <div class="bg-item">💎</div>
         <div class="bg-item">⚡</div>
@@ -229,7 +231,6 @@
         <div class="bg-item">🎁</div>
     </div>
 
-    <!-- Bonus Claim Popup -->
     <div class="modal" id="bonusModal">
         <div class="modal-content">
             <i class="fa-solid fa-gift"></i>
@@ -240,7 +241,6 @@
     </div>
 
     <div class="app-container">
-        <!-- Top Dynamic User Header -->
         <div class="user-header-card">
             <div class="user-info">
                 <div class="avatar-circle" id="avatar-letter">U</div>
@@ -254,7 +254,7 @@
             </div>
         </div>
 
-        <!-- 1. TASKS TAB (15 Channels) -->
+        <!-- 1. TASKS TAB -->
         <div id="tasks-tab" class="tab-content active">
             <div class="banner-card">
                 <h2>⚡ Complete All 15 Mandatory Tasks</h2>
@@ -264,22 +264,22 @@
             <div class="card-box">
                 <div class="card-title">CHANNELS TO JOIN (15/15)</div>
 
-                <!-- 15 Telegram Channels -->
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 1</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 2</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 3</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 4</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 5</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 6</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 7</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 8</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 9</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 10</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 11</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 12</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 13</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 14</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
-                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 15</div><a href="https://t.me/+kCr0xkaeeEgwNzRl" target="_blank" class="btn-join" onclick="markJoined(this)">JOIN</a></div>
+                <!-- 15 Channels List -->
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 1</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 2</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 3</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 4</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 5</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 6</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 7</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 8</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 9</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 10</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 11</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 12</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 13</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 14</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-bolt"></i> Channel 15</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
 
                 <button class="btn-action" onclick="verifyTasks()"><i class="fa-solid fa-circle-check"></i> VERIFY TASKS & UNLOCK ₹100</button>
             </div>
@@ -335,7 +335,7 @@
         </div>
     </div>
 
-    <!-- Floating Navigation Bar -->
+    <!-- Navigation -->
     <div class="bottom-nav">
         <div class="nav-item active" onclick="switchTab('tasks-tab', this)"><i class="fa-solid fa-list-check"></i>Tasks</div>
         <div class="nav-item" onclick="switchTab('refer-tab', this)"><i class="fa-solid fa-users"></i>Refer</div>
@@ -349,7 +349,6 @@
 
         let currentUserId = "default_user";
 
-        // Fetch Dynamic User Details
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
             const user = tg.initDataUnsafe.user;
             currentUserId = user.id.toString();
@@ -360,15 +359,13 @@
             document.getElementById('refer-link').value = `https://t.me/CashFree_CB_Bot?start=${user.id}`;
         }
 
-        // Logic linked specifically to Telegram User ID
         let userBalanceKey = `balance_${currentUserId}`;
         let userBalance = localStorage.getItem(userBalanceKey) !== null 
                           ? parseFloat(localStorage.getItem(userBalanceKey)) 
-                          : 100.00; // Fresh Telegram ID gets ₹100
+                          : 100.00;
 
         updateUI();
 
-        // Show Modal only if User has ₹100 Balance
         if (userBalance > 0) {
             document.getElementById('bonusModal').style.display = 'flex';
         }
@@ -388,11 +385,29 @@
             document.getElementById('bonusModal').style.display = 'none';
         }
 
-        function markJoined(element) {
-            if(!element.classList.contains('joined')) {
-                element.classList.add('joined');
-                element.innerHTML = 'JOINED &#10003;';
-            }
+        // 5-SECOND TIMER LOGIC FOR JOIN BUTTON
+        function handleJoinClick(btn, link) {
+            if (btn.classList.contains('joined') || btn.classList.contains('waiting')) return;
+
+            // 1. Redirect to Telegram Link
+            window.open(link, '_blank');
+
+            // 2. Start 5 Second Countdown
+            btn.classList.add('waiting');
+            let timeLeft = 5;
+            btn.innerText = `WAIT (${timeLeft}s)`;
+
+            let countdown = setInterval(() => {
+                timeLeft--;
+                if (timeLeft > 0) {
+                    btn.innerText = `WAIT (${timeLeft}s)`;
+                } else {
+                    clearInterval(countdown);
+                    btn.classList.remove('waiting');
+                    btn.classList.add('joined');
+                    btn.innerText = 'JOINED ✓';
+                }
+            }, 1000);
         }
 
         function switchTab(tabId, element) {
@@ -404,7 +419,7 @@
 
         function verifyTasks() {
             if (userBalance === 0) {
-                alert("⚠️ You have already claimed and withdrawn your ₹100 bonus!");
+                alert("⚠️️ You have already claimed and withdrawn your ₹100 bonus!");
             } else {
                 alert("✅ All 15 Tasks Verified Successfully! आपका Wallet Balance अनलॉक हो गया है।");
             }
@@ -414,7 +429,7 @@
             const upiVal = document.getElementById('upi-id').value.trim();
 
             if (userBalance <= 0) {
-                alert("⚠️️ Insufficient Balance! You don't have enough balance to withdraw.");
+                alert("⚠️ Insufficient Balance! You don't have enough balance to withdraw.");
                 return;
             }
 
@@ -423,7 +438,6 @@
                 return;
             }
 
-            // Lock '0' balance permanently for this specific Telegram ID
             userBalance = 0.00;
             localStorage.setItem(userBalanceKey, "0");
 
