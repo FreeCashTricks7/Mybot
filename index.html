@@ -1,4 +1,143 @@
-// Show Bonus Modal on First Load
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPI Cashback App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
+        body { background: #0f1026; color: #fff; min-height: 100vh; padding-bottom: 70px; }
+
+        /* Header */
+        .user-header { background: rgba(255,255,255,0.05); padding: 15px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .user-avatar { width: 45px; height: 45px; background: linear-gradient(45deg, #0088cc, #00d2ff); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; }
+        .user-details h3 { font-size: 16px; margin-bottom: 2px; }
+        .user-details p { font-size: 12px; color: #aaa; }
+
+        /* Balance Card */
+        .balance-card { background: linear-gradient(135deg, #1e1e38, #2a2b5c); margin: 15px; padding: 20px; border-radius: 16px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); }
+        .balance-card h4 { font-size: 14px; color: #ccc; margin-bottom: 5px; }
+        .balance-card h1 { font-size: 32px; color: #38ef7d; font-weight: 800; }
+
+        /* Main Content Views */
+        .tab-content { display: none; padding: 15px; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Task Cards */
+        .card { background: rgba(255,255,255,0.05); margin-bottom: 12px; padding: 15px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.08); }
+        .channel-info { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+        .channel-info i { color: #0088cc; font-size: 20px; }
+        .btn-join { background: #0088cc; color: white; text-decoration: none; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .btn-submit { width: 100%; margin-top: 15px; padding: 14px; border: none; border-radius: 25px; background: linear-gradient(45deg, #11998e, #38ef7d); color: white; font-weight: bold; font-size: 15px; cursor: pointer; box-shadow: 0 5px 15px rgba(56,239,125,0.3); }
+
+        /* Bottom Nav Bar */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #161730; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.1); }
+        .nav-item { color: #888; text-decoration: none; text-align: center; font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; }
+        .nav-item i { font-size: 18px; }
+        .nav-item.active { color: #00d2ff; }
+
+        /* Modal Popup */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: #1e1e38; padding: 25px; border-radius: 20px; text-align: center; max-width: 300px; width: 85%; border: 1px solid #38ef7d; box-shadow: 0 0 20px rgba(56,239,125,0.4); }
+        .modal-content i { font-size: 50px; color: #38ef7d; margin-bottom: 10px; }
+        .modal-btn { margin-top: 15px; background: #38ef7d; color: #000; border: none; padding: 10px 25px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+
+        /* Form Input */
+        .input-box { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: white; text-align: center; font-size: 16px; }
+    </style>
+</head>
+<body>
+
+    <!-- User Header -->
+    <div class="user-header">
+        <div class="user-avatar" id="avatar">U</div>
+        <div class="user-details">
+            <h3 id="username">User Name</h3>
+            <p id="userid">ID: 00000000</p>
+        </div>
+    </div>
+
+    <!-- Balance Header -->
+    <div class="balance-card">
+        <h4>Wallet Balance</h4>
+        <h1 id="balance">₹100</h1>
+    </div>
+
+    <!-- TAB 1: TASKS -->
+    <div id="tasks-tab" class="tab-content active">
+        <h3 style="margin-bottom:12px;">Complete Tasks</h3>
+        <div class="card">
+            <div class="channel-info"><i class="fa-solid fa-bullhorn"></i><span>Free Cash Trick's</span></div>
+            <a href="https://t.me/FreeCashTricks7" class="btn-join" target="_blank">JOIN</a>
+        </div>
+        <div class="card">
+            <div class="channel-info"><i class="fa-solid fa-gift"></i><span>FreeCashTricks 2nd</span></div>
+            <a href="https://t.me/FreeCashTricks7" class="btn-join" target="_blank">JOIN</a>
+        </div>
+        <button class="btn-submit" onclick="verifyTasks()"><i class="fa-solid fa-circle-check"></i> VERIFY & CLAIM</button>
+    </div>
+
+    <!-- TAB 2: REFER -->
+    <div id="refer-tab" class="tab-content">
+        <h3>Refer & Earn</h3>
+        <p style="color:#aaa; font-size:13px; margin: 10px 0;">Har Refer par Payein ₹20 Bonus!</p>
+        <input type="text" id="refer-link" class="input-box" readonly value="https://t.me/CashFree_CB_Bot/UPIcash?start=12345">
+        <button class="btn-submit" onclick="copyRefer()">COPY REFER LINK</button>
+    </div>
+
+    <!-- TAB 3: WITHDRAW -->
+    <div id="withdraw-tab" class="tab-content">
+        <h3>Instant Withdrawal</h3>
+        <p style="color:#aaa; font-size:13px; margin: 10px 0;">Apna UPI ID Darj Karein:</p>
+        <input type="text" placeholder="Enter UPI ID (e.g. 9876543210@paytm)" class="input-box">
+        <button class="btn-submit" onclick="attemptWithdraw()">WITHDRAW ₹100 NOW</button>
+    </div>
+
+    <!-- TAB 4: ACCOUNT -->
+    <div id="account-tab" class="tab-content">
+        <h3>My Account</h3>
+        <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin-top:15px; text-align:left;">
+            <p style="margin-bottom:8px;"><b>Status:</b> <span style="color:#38ef7d;">Active</span></p>
+            <p style="margin-bottom:8px;"><b>Sign-up Bonus:</b> ₹100 Received</p>
+            <p><b>Tasks Completed:</b> 0/2</p>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="switchTab('tasks-tab', this)"><i class="fa-solid fa-list-check"></i>Tasks</div>
+        <div class="nav-item" onclick="switchTab('refer-tab', this)"><i class="fa-solid fa-user-plus"></i>Refer</div>
+        <div class="nav-item" onclick="switchTab('withdraw-tab', this)"><i class="fa-solid fa-wallet"></i>Withdraw</div>
+        <div class="nav-item" onclick="switchTab('account-tab', this)"><i class="fa-solid fa-user"></i>Account</div>
+    </div>
+
+    <!-- Bonus Popup Modal -->
+    <div class="modal" id="bonusModal">
+        <div class="modal-content">
+            <i class="fa-solid fa-gift"></i>
+            <h2>Congratulations!</h2>
+            <p style="margin-top:10px;">Aapko ₹100 Sign-up Bonus mila hai!</p>
+            <button class="modal-btn" onclick="closeModal()">CLAIM NOW</button>
+        </div>
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+
+        // Load Telegram User Data
+        if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+            const user = tg.initDataUnsafe.user;
+            document.getElementById('username').innerText = user.first_name + (user.last_name ? ' ' + user.last_name : '');
+            document.getElementById('userid').innerText = 'ID: ' + user.id;
+            document.getElementById('avatar').innerText = user.first_name.charAt(0);
+            document.getElementById('refer-link').value = `https://t.me/CashFree_CB_Bot/UPIcash?start=${user.id}`;
+        }
+
+        // Show Bonus Modal on First Load
         window.onload = function() {
             document.getElementById('bonusModal').style.display = 'flex';
         };
