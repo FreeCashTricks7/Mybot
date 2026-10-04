@@ -3,150 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP Rewards Hub</title>
+    <title>VIP Telegram Hub</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; user-select: none; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; user-select: none; }
         
         body { 
-            background: #0f172a; 
-            color: #f8fafc; 
+            background: #0b0f19; 
+            color: #ffffff; 
             min-height: 100vh; 
-            padding-bottom: 90px; 
-            position: relative; 
+            padding-bottom: 95px; 
+            position: relative;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(36, 161, 222, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(15, 23, 42, 0.5) 0px, transparent 50%);
         }
 
         .app-container { max-width: 480px; margin: 0 auto; padding: 16px; }
 
-        /* Professional Header */
+        /* Header Card */
         .user-header-card { 
-            background: #1e293b; 
-            border: 1px solid #334155; 
-            border-radius: 16px; 
-            padding: 12px 16px; 
+            background: rgba(17, 24, 39, 0.8); 
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 20px; 
+            padding: 14px 18px; 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
             margin-bottom: 20px; 
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); 
         }
         .user-info { display: flex; align-items: center; gap: 12px; }
         .avatar-circle { 
-            width: 42px; 
-            height: 42px; 
-            background: linear-gradient(135deg, #2563eb, #3b82f6); 
+            width: 44px; 
+            height: 44px; 
+            background: #24A1DE; /* Telegram Original Color */
             color: #ffffff; 
             border-radius: 50%; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            font-size: 18px; 
-            font-weight: 700; 
+            font-size: 20px; 
+            font-weight: 800; 
         }
-        .user-text h3 { font-size: 15px; font-weight: 700; color: #f8fafc; }
-        .user-text p { font-size: 12px; color: #94a3b8; }
+        .user-text h3 { font-size: 15px; font-weight: 700; color: #ffffff; letter-spacing: 0.3px; }
+        .user-text p { font-size: 12px; color: #24A1DE; font-weight: 600; }
 
         .balance-badge { 
-            background: rgba(37, 99, 235, 0.15); 
-            border: 1px solid #3b82f6;
-            padding: 6px 14px; 
-            border-radius: 20px; 
-            font-weight: 700; 
-            color: #60a5fa; 
-            font-size: 15px; 
+            background: rgba(16, 185, 129, 0.15); 
+            border: 1px solid #10b981;
+            padding: 8px 16px; 
+            border-radius: 30px; 
+            font-weight: 800; 
+            color: #34d399; 
+            font-size: 16px; 
         }
 
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.25s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-content.active { display: block; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
 
-        /* Banner */
+        /* Banner Box */
         .banner-card { 
-            background: linear-gradient(135deg, #1e293b, #0f172a); 
-            border-radius: 16px; 
-            padding: 18px; 
-            border: 1px solid #334155; 
-            margin-bottom: 20px; 
+            background: #111827; 
+            border-radius: 20px; 
+            padding: 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            margin-bottom: 22px; 
             text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
-        .banner-card h2 { font-size: 18px; font-weight: 800; color: #38bdf8; margin-bottom: 6px; }
-        .banner-card p { font-size: 13px; color: #cbd5e1; line-height: 1.4; }
+        .banner-card h2 { font-size: 19px; font-weight: 800; color: #24A1DE; margin-bottom: 6px; }
+        .banner-card p { font-size: 13px; color: #94a3b8; line-height: 1.5; font-weight: 500; }
 
         .section-title { 
             font-size: 13px; 
-            font-weight: 700; 
+            font-weight: 800; 
             color: #94a3b8; 
             text-transform: uppercase; 
-            margin-bottom: 14px; 
-            letter-spacing: 1px;
+            margin-bottom: 16px; 
+            letter-spacing: 1.2px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        /* SQUARE GRID LAYOUT (2 Boxes Per Row) */
+        /* 2x2 SQUARE CHANNELS GRID */
         .channels-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 14px;
+            margin-bottom: 22px;
         }
 
         .task-square-box { 
-            background: #1e293b; 
-            border: 1px solid #334155; 
-            border-radius: 16px; 
+            background: rgba(17, 24, 39, 0.8); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border-radius: 20px; 
             padding: 16px 12px; 
             display: flex; 
             flex-direction: column;
             align-items: center; 
             justify-content: center;
             text-align: center;
-            aspect-ratio: 1 / 1; /* Makes it perfectly Square */
+            aspect-ratio: 1 / 1; /* Pure Square */
             transition: all 0.2s ease;
         }
         .task-square-box:hover {
-            border-color: #3b82f6;
+            border-color: #24A1DE;
             transform: translateY(-2px);
         }
 
-        .channel-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.2);
+        /* Original Telegram Logo Style (Without Blue Glow/Gradients) */
+        .telegram-icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%; /* Circle like real Telegram Icon */
+            background: #24A1DE; /* Exact Telegram Brand Color */
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #60a5fa;
-            font-size: 18px;
-            margin-bottom: 8px;
+            color: #ffffff;
+            font-size: 26px;
+            margin-bottom: 10px;
+            padding-right: 2px; /* Centers paper plane icon naturally */
         }
 
         .channel-name {
             font-size: 13px;
             font-weight: 700;
-            color: #f8fafc;
-            margin-bottom: 10px;
+            color: #ffffff;
+            margin-bottom: 12px;
         }
 
         /* Square Box Join Button */
         .btn-join { 
             width: 100%;
-            background: #2563eb; 
+            background: #24A1DE; 
             color: #ffffff; 
             border: none;
-            padding: 8px 0; 
-            border-radius: 10px; 
+            padding: 9px 0; 
+            border-radius: 12px; 
             font-size: 12px; 
-            font-weight: 700; 
+            font-weight: 800; 
             cursor: pointer; 
             transition: 0.2s;
         }
-        .btn-join:active { transform: scale(0.96); }
+        .btn-join:active { transform: scale(0.95); }
 
         .btn-join.waiting {
             background: #0284c7 !important;
@@ -160,92 +166,93 @@
             pointer-events: none;
         }
 
-        /* Action Buttons */
+        /* Main Submit Button */
         .btn-action { 
             width: 100%; 
-            background: linear-gradient(135deg, #2563eb, #1d4ed8); 
+            background: #24A1DE; 
             border: none;
-            padding: 14px; 
-            border-radius: 14px; 
-            font-weight: 700; 
-            font-size: 14px; 
+            padding: 16px; 
+            border-radius: 16px; 
+            font-weight: 800; 
+            font-size: 15px; 
             color: #ffffff; 
             cursor: pointer; 
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); 
             transition: 0.2s;
+            letter-spacing: 0.5px;
         }
-        .btn-action:hover { opacity: 0.95; }
+        .btn-action:hover { opacity: 0.9; }
 
         .card-box { 
-            background: #1e293b; 
-            border: 1px solid #334155; 
-            border-radius: 16px; 
-            padding: 18px; 
+            background: rgba(17, 24, 39, 0.8); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border-radius: 20px; 
+            padding: 20px; 
             margin-bottom: 16px; 
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
         .custom-input { 
             width: 100%; 
-            padding: 12px; 
-            border-radius: 10px; 
-            border: 1px solid #334155; 
-            background: #0f172a; 
+            padding: 14px; 
+            border-radius: 14px; 
+            border: 1px solid #24A1DE; 
+            background: #0b0f19; 
             font-size: 14px; 
             text-align: center; 
-            font-weight: 600; 
-            margin: 12px 0; 
-            color: #38bdf8; 
+            font-weight: 700; 
+            margin: 14px 0; 
+            color: #24A1DE; 
             outline: none;
         }
-        .custom-input:focus { border-color: #3b82f6; }
 
-        .rules-list { font-size: 13px; color: #94a3b8; line-height: 1.6; padding-left: 18px; }
-        .rules-list li { margin-bottom: 6px; }
+        .rules-list { font-size: 13px; color: #94a3b8; line-height: 1.6; padding-left: 18px; font-weight: 500; }
+        .rules-list li { margin-bottom: 8px; }
 
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
         .grid-card { 
-            background: #1e293b; 
-            border: 1px solid #334155; 
-            padding: 16px; 
-            border-radius: 14px; 
+            background: rgba(17, 24, 39, 0.8); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            padding: 18px; 
+            border-radius: 18px; 
             text-align: center; 
         }
-        .grid-card p { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; }
-        .grid-card h3 { font-size: 20px; font-weight: 800; color: #60a5fa; margin-top: 4px; }
+        .grid-card p { font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+        .grid-card h3 { font-size: 22px; font-weight: 800; color: #24A1DE; margin-top: 4px; }
 
-        /* Floating Bottom Navigation Bar */
+        /* Floating Bottom Bar */
         .bottom-nav { 
             position: fixed; 
             bottom: 0; 
             left: 0; 
             width: 100%; 
-            background: #1e293b; 
-            border-top: 1px solid #334155;
+            background: rgba(11, 15, 25, 0.95); 
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             display: flex; 
             justify-content: space-around; 
-            padding: 10px 0 14px 0; 
+            padding: 12px 0 16px 0; 
             z-index: 100; 
         }
-        .nav-item { text-align: center; color: #64748b; font-size: 11px; font-weight: 600; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-        .nav-item i { font-size: 18px; }
-        .nav-item.active { color: #38bdf8; }
+        .nav-item { text-align: center; color: #64748b; font-size: 11px; font-weight: 700; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; transition: 0.2s; }
+        .nav-item i { font-size: 19px; }
+        .nav-item.active { color: #24A1DE; }
 
-        /* Professional Winner Modal */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(4px); justify-content: center; align-items: center; z-index: 1000; }
+        /* Winner Popup Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { 
-            background: #1e293b; 
-            padding: 24px; 
-            border-radius: 20px; 
+            background: #111827; 
+            padding: 26px; 
+            border-radius: 24px; 
             text-align: center; 
             max-width: 320px; 
             width: 85%; 
-            border: 1px solid #334155; 
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); 
         }
-        .modal-content i { font-size: 40px; color: #38bdf8; margin-bottom: 12px; }
-        .modal-content h2 { color: #f8fafc; font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-        .modal-content p { color: #94a3b8; font-size: 13px; margin-bottom: 20px; line-height: 1.5; }
-        .modal-btn { background: #2563eb; color: #fff; border: none; padding: 12px 24px; border-radius: 12px; font-weight: 700; font-size: 13px; cursor: pointer; width: 100%; }
+        .modal-content i { font-size: 42px; color: #24A1DE; margin-bottom: 12px; }
+        .modal-content h2 { color: #ffffff; font-size: 19px; font-weight: 800; margin-bottom: 8px; }
+        .modal-content p { color: #94a3b8; font-size: 13px; margin-bottom: 20px; line-height: 1.5; font-weight: 500; }
+        .modal-btn { background: #24A1DE; color: #fff; border: none; padding: 12px 24px; border-radius: 14px; font-weight: 800; font-size: 14px; cursor: pointer; width: 100%; }
     </style>
 </head>
 <body>
@@ -256,12 +263,12 @@
             <i class="fa-solid fa-gift"></i>
             <h2>Welcome Bonus! 🎉</h2>
             <p>आपको <b>₹100 साइन अप बोनस</b> मिला है। इसे विथड्रॉ करने के लिए सभी 10 चैनल्स को ज्वाइन करें।</p>
-            <button class="modal-btn" onclick="closeModal()">Claim Bonus</button>
+            <button class="modal-btn" onclick="closeModal()">Claim ₹100 Bonus</button>
         </div>
     </div>
 
     <div class="app-container">
-        <!-- User Header -->
+        <!-- User Header Card -->
         <div class="user-header-card">
             <div class="user-info">
                 <div class="avatar-circle" id="avatar-letter">U</div>
@@ -278,83 +285,93 @@
         <!-- 1. TASKS TAB -->
         <div id="tasks-tab" class="tab-content active">
             <div class="banner-card">
-                <h2>Complete Tasks & Earn ₹100</h2>
-                <p>नीचे दिए गए सभी 10 टेलीग्राम चैनल्स को ज्वाइन करें और अपना रिवॉर्ड अनलॉक करें।</p>
+                <h2>Join & Earn Instant ₹100</h2>
+                <p>नीचे दिए गए सभी 10 Telegram चैनल्स को ज्वाइन करें और अपना पेमेंट अनलॉक करें।</p>
             </div>
 
-            <div class="section-title"><i class="fa-solid fa-grid-2"></i> Required Channels (10)</div>
+            <div class="section-title"><i class="fa-solid fa-list-check"></i> Required Tasks (10)</div>
 
             <!-- SQUARE CHANNELS GRID (2 Boxes per Row) -->
             <div class="channels-grid">
+                <!-- Box 1 -->
                 <div class="task-square-box">
-                    <div class="channel-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 1</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
+                <!-- Box 2 -->
                 <div class="task-square-box">
-                    <div class="channel-icon"><div class="channel-icon" style="margin:0;"><i class="fa-solid fa-paper-plane"></i></div></div>
+                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 2</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
+                <!-- Box 3 -->
                 <div class="task-square-box">
-                    <div class="channel-icon"><i class="fa-solid fa-star"></i></div>
+                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 3</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
+                <!-- Box 4 -->
                 <div class="task-square-box">
-                    <div class="channel-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 4</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
+                <!-- Box 5 -->
                 <div class="task-square-box">
-                    <div class="channel-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 5</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
+                <!-- Box 6 -->
                 <div class="task-square-box">
-                    <div class="channel-icon"><i class="fa-solid fa-bell"></i></div>
+                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 6</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
+                <!-- Box 7 -->
                 <div class="task-square-box">
-                    <div class="channel-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 7</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
+                <!-- Box 8 -->
                 <div class="task-square-box">
-                    <div class="channel-icon"><i class="fa-solid fa-gem"></i></div>
+                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 8</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
+                <!-- Box 9 -->
                 <div class="task-square-box">
-                    <div class="channel-icon"><i class="fa-solid fa-circle-check"></i></div>
+                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 9</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
 
+                <!-- Box 10 -->
                 <div class="task-square-box">
-                    <div class="channel-icon"><i class="fa-solid fa-award"></i></div>
+                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
                     <div class="channel-name">Channel 10</div>
                     <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
                 </div>
             </div>
 
-            <button class="btn-action" onclick="verifyTasks()"><i class="fa-solid fa-check-double"></i> Verify All & Unlock ₹100</button>
+            <button class="btn-action" onclick="verifyTasks()"><i class="fa-solid fa-circle-check"></i> Verify & Unlock Balance</button>
         </div>
 
         <!-- 2. REFER TAB -->
         <div id="refer-tab" class="tab-content">
             <div class="card-box">
-                <div class="section-title"><i class="fa-solid fa-user-plus"></i> Refer Program</div>
-                <p style="font-size:13px; color:#cbd5e1; margin-bottom:8px; text-align:center;">अपने दोस्तों को इनवाइट करें और हर रेफ़र पर <b>₹20 Extra</b> पाएं!</p>
+                <div class="section-title"><i class="fa-solid fa-user-plus"></i> Invite Friends</div>
+                <p style="font-size:13px; color:#94a3b8; margin-bottom:10px; text-align:center; font-weight:500;">अपने दोस्तों को इनवाइट करें और प्रति रेफ़रल <b>₹20 Extra</b> पाएं!</p>
                 <input type="text" id="refer-link" class="custom-input" readonly value="https://t.me/Bot?start=12345">
                 <button class="btn-action" onclick="copyReferLink()"><i class="fa-solid fa-copy"></i> Copy Referral Link</button>
             </div>
@@ -363,18 +380,18 @@
         <!-- 3. WITHDRAW TAB -->
         <div id="withdraw-tab" class="tab-content">
             <div class="card-box">
-                <div class="section-title"><i class="fa-solid fa-wallet"></i> Instant Withdrawal</div>
-                <p style="font-size:13px; color:#cbd5e1; text-align:center;">Balance: <b style="color:#60a5fa;">₹<span id="withdraw-balance">100.00</span></b></p>
+                <div class="section-title"><i class="fa-solid fa-wallet"></i> UPI Withdrawal</div>
+                <p style="font-size:13px; color:#94a3b8; text-align:center; font-weight:500;">Available Balance: <b style="color:#24A1DE;">₹<span id="withdraw-balance">100.00</span></b></p>
                 <input type="text" id="upi-id" class="custom-input" placeholder="Enter UPI ID (e.g. 9876543210@paytm)">
-                <button class="btn-action" onclick="processWithdraw()"><i class="fa-solid fa-paper-plane"></i> Submit Withdrawal</button>
+                <button class="btn-action" onclick="processWithdraw()"><i class="fa-solid fa-paper-plane"></i> Request Withdrawal</button>
             </div>
 
             <div class="card-box">
-                <div class="section-title"><i class="fa-solid fa-circle-info"></i> Terms & Conditions</div>
+                <div class="section-title"><i class="fa-solid fa-shield-halved"></i> Payment Terms</div>
                 <ul class="rules-list">
                     <li>न्यूनतम विथड्रॉल राशि <b>₹100</b> है।</li>
-                    <li>सभी 10 चैनल्स ज्वाइन करने के बाद ही पेमेंट प्रोसेस होगा।</li>
-                    <li>एक Telegram एकाउंट से केवल एक बार क्लेम किया जा सकता है।</li>
+                    <li>सभी 10 चैनल्स ज्वाइन करने के बाद ही विथड्रॉल प्रोसेस होगा।</li>
+                    <li>एक Telegram आईडी पर बोनस केवल एक बार मिलेगा।</li>
                 </ul>
             </div>
         </div>
@@ -393,16 +410,16 @@
             </div>
             
             <div class="card-box">
-                <div class="section-title"><i class="fa-solid fa-user-shield"></i> Account Details</div>
-                <p style="font-size:13px; color:#cbd5e1; margin-bottom:6px;"><b>Status:</b> <span style="color:#10b981; font-weight:700;">Verified User</span></p>
-                <p style="font-size:13px; color:#cbd5e1;"><b>Joining Bonus:</b> ₹100.00 (Active)</p>
+                <div class="section-title"><i class="fa-solid fa-id-card"></i> Account Summary</div>
+                <p style="font-size:13px; color:#94a3b8; margin-bottom:8px; font-weight:500;"><b>Status:</b> <span style="color:#34d399; font-weight:700;">Active & Verified</span></p>
+                <p style="font-size:13px; color:#94a3b8; font-weight:500;"><b>Signup Bonus:</b> ₹100.00 Claimed</p>
             </div>
         </div>
     </div>
 
-    <!-- Bottom Navigation -->
+    <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="switchTab('tasks-tab', this)"><i class="fa-solid fa-list-check"></i>Tasks</div>
+        <div class="nav-item active" onclick="switchTab('tasks-tab', this)"><i class="fa-solid fa-border-all"></i>Tasks</div>
         <div class="nav-item" onclick="switchTab('refer-tab', this)"><i class="fa-solid fa-users"></i>Refer</div>
         <div class="nav-item" onclick="switchTab('withdraw-tab', this)"><i class="fa-solid fa-wallet"></i>Withdraw</div>
         <div class="nav-item" onclick="switchTab('profile-tab', this)"><i class="fa-solid fa-user"></i>Profile</div>
@@ -450,7 +467,7 @@
             document.getElementById('bonusModal').style.display = 'none';
         }
 
-        /* 5-Second Timer Logic */
+        /* 5-Second Countdown Logic */
         function handleJoinClick(btn, link) {
             if (btn.classList.contains('joined') || btn.classList.contains('waiting')) return;
 
@@ -495,10 +512,10 @@
             } 
             else {
                 if (userBalance === 0) {
-                    alert("⚠️ आपने अपना बोनस पहले ही क्लेम/विथड्रॉ कर लिया है!");
+                    alert("⚠️ आपने अपना बोनस पहले ही विथड्रॉ कर लिया है!");
                 } 
                 else {
-                    alert("✅ सभी टास्क सफलतापूर्वक वेरिफाई हो गए हैं! आपका बैलेंस अब अनलॉक हो गया है।");
+                    alert("✅ सभी 10 चैनल्स वेरिफाई हो चुके हैं! आपका बैलेंस अनलॉक कर दिया गया है।");
                 }
             }
         }
@@ -512,7 +529,7 @@
             }
 
             if (upiVal === "" || !upiVal.includes("@")) {
-                alert("⚠️ कृपया एक सही UPI ID दर्ज करें (उदा. 9876543210@paytm)");
+                alert("⚠️ कृपया सही UPI ID दर्ज करें (उदा. 9876543210@paytm)");
                 return;
             }
 
@@ -522,14 +539,14 @@
             updateUI();
             document.getElementById('upi-id').value = "";
 
-            alert("🎉 विथड्रॉल की रिक्वेस्ट सबमिट हो गई है! 24 घंटे के अंदर पेमेंट ट्रांसफर कर दिया जाएगा।");
+            alert("🎉 विथड्रॉल की रिक्वेस्ट सबमिट कर दी गई है! 24 घंटे के अंदर पेमेंट क्रेडिट कर दिया जाएगा।");
         }
 
         function copyReferLink() {
             const copyText = document.getElementById("refer-link");
             copyText.select();
             document.execCommand("copy");
-            alert("📋 Refer Link Copied!");
+            alert("📋 Referral Link Copied!");
         }
     </script>
 </body>
