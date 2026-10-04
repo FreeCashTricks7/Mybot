@@ -234,7 +234,7 @@
         <div class="modal-content">
             <i class="fa-solid fa-gift"></i>
             <h2>बधाई हो! 🎉</h2>
-            <p>आपको <b>₹100 साइन अप बोनस</b> मिला है। विथड्रॉ करने के लिए सभी 15 टास्क पूरे करें।</p>
+            <p>आपको <b>₹100 साइन अप बोनस</b> मिला है। विथड्रॉ करने के लिए सभी 10 टास्क पूरे करें।</p>
             <button class="modal-btn" onclick="closeModal()">CLAIM ₹100 NOW</button>
         </div>
     </div>
@@ -256,14 +256,14 @@
         <!-- 1. TASKS TAB -->
         <div id="tasks-tab" class="tab-content active">
             <div class="banner-card">
-                <h2>🎁 Complete All 15 Mandatory Tasks</h2>
+                <h2>🎁 Complete All 10 Mandatory Tasks</h2>
                 <p>नीचे दिए गए सभी Telegram Channels को Join करें और <b>₹100 Instant Withdrawal Balance</b> क्लेम करें!</p>
             </div>
 
             <div class="card-box">
-                <div class="card-title">JOIN ALL CHANNELS</div>
+                <div class="card-title">CHANNELS TO JOIN (10/10)</div>
 
-                <!-- 15 Channels List -->
+                <!-- 10 Channels List -->
                 <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Channel 1</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
                 <div class="task-card"><div class="channel-info"><i class="fa-solid fa-rocket"></i> Channel 2</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
                 <div class="task-card"><div class="channel-info"><i class="fa-solid fa-rocket"></i> Channel 3</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
@@ -302,7 +302,7 @@
                 <div class="card-title">WITHDRAWAL RULES</div>
                 <ul class="rules-list">
                     <li>Minimum Withdrawal amount <b>₹100</b> है।</li>
-                    <li>सभी 15 चैनल्स ज्वाइन किए बिना विथड्रॉल अप्रूव नहीं होगा।</li>
+                    <li>सभी 10 चैनल्स ज्वाइन किए बिना विथड्रॉल अप्रूव नहीं होगा।</li>
                     <li>बोनस एक ID पर सिर्फ 1 बार ही मिलेगा।</li>
                 </ul>
             </div>
@@ -415,7 +415,7 @@
             const allButtons = document.querySelectorAll('.btn-join');
             let allJoined = true;
 
-            // 1. First, check if all 15 channels are joined
+            // 1. First, check if all 10 channels are joined
             allButtons.forEach(btn => {
                 if (!btn.classList.contains('joined')) {
                     allJoined = false;
@@ -424,7 +424,7 @@
 
             // 2. If ANY channel is NOT joined, ALWAYS show channel join message
             if (!allJoined) {
-                alert("⚠️ कृपया पहले ऊपर दिए गए सभी 15 चैनल्स को ज्वाइन करें!");
+                alert("⚠️ कृपया पहले ऊपर दिए गए सभी 10 चैनल्स को ज्वाइन करें!");
             } 
             // 3. If ALL channels ARE joined:
             else {
@@ -434,7 +434,7 @@
                 } 
                 // If it's a New User (Balance > 0), show success alert
                 else {
-                    alert("✅ All 15 Tasks Verified Successfully! आपका Wallet Balance अनलॉक हो गया है।");
+                    alert("✅ All 10 Tasks Verified Successfully! आपका Wallet Balance अनलॉक हो गया है।");
                 }
             }
         }
@@ -470,4 +470,3 @@
     </script>
 </body>
 </html>
-
