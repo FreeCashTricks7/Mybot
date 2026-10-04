@@ -23,7 +23,6 @@
 
         .app-container { max-width: 480px; margin: 0 auto; padding: 16px; }
 
-        /* Premium Header Card */
         .user-header-card { 
             background: rgba(30, 41, 59, 0.7); 
             backdrop-filter: blur(16px);
@@ -68,7 +67,6 @@
         .tab-content.active { display: block; animation: popIn 0.3s ease-out; }
         @keyframes popIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Banner Box */
         .banner-card { 
             background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9)); 
             border-radius: 20px; 
@@ -93,7 +91,6 @@
             gap: 8px;
         }
 
-        /* 2x2 SQUARE CHANNELS GRID */
         .channels-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -101,7 +98,6 @@
             margin-bottom: 22px;
         }
 
-        /* Stylish Card Box */
         .task-square-box { 
             background: rgba(30, 41, 59, 0.7); 
             backdrop-filter: blur(10px);
@@ -118,13 +114,7 @@
             position: relative;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
         }
-        .task-square-box:hover {
-            border-color: rgba(36, 161, 222, 0.5);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
-        }
 
-        /* Telegram Original Icon */
         .telegram-icon-box {
             width: 48px;
             height: 48px;
@@ -140,14 +130,8 @@
             box-shadow: 0 4px 15px rgba(36, 161, 222, 0.4);
         }
 
-        .channel-name {
-            font-size: 13.5px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 12px;
-        }
+        .channel-name { font-size: 13.5px; font-weight: 700; color: #ffffff; margin-bottom: 12px; }
 
-        /* Square Box Join Button */
         .btn-join { 
             width: 100%;
             background: linear-gradient(135deg, #24A1DE, #0088cc); 
@@ -161,23 +145,19 @@
             transition: all 0.2s;
             box-shadow: 0 4px 12px rgba(36, 161, 222, 0.3);
         }
-        .btn-join:active { transform: scale(0.95); }
 
         .btn-join.waiting {
             background: linear-gradient(135deg, #0284c7, #0369a1) !important;
             color: #fff !important;
-            box-shadow: none !important;
             cursor: wait;
         }
 
         .btn-join.joined { 
             background: linear-gradient(135deg, #10b981, #059669) !important; 
             color: #ffffff !important; 
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
             pointer-events: none;
         }
 
-        /* Premium Main Action Button */
         .btn-action { 
             width: 100%; 
             background: linear-gradient(135deg, #6366f1, #4f46e5); 
@@ -192,7 +172,6 @@
             letter-spacing: 0.5px;
             box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
         }
-        .btn-action:hover { opacity: 0.95; transform: translateY(-1px); }
 
         .card-box { 
             background: rgba(30, 41, 59, 0.7); 
@@ -217,7 +196,6 @@
             color: #38bdf8; 
             outline: none;
         }
-        .custom-input:focus { border-color: #38bdf8; box-shadow: 0 0 12px rgba(56, 189, 248, 0.2); }
 
         .rules-list { font-size: 13px; color: #94a3b8; line-height: 1.6; padding-left: 18px; font-weight: 500; }
         .rules-list li { margin-bottom: 8px; }
@@ -230,10 +208,9 @@
             border-radius: 18px; 
             text-align: center; 
         }
-        .grid-card p { font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+        .grid-card p { font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; }
         .grid-card h3 { font-size: 22px; font-weight: 800; color: #38bdf8; margin-top: 4px; }
 
-        /* Floating Navigation Bar */
         .bottom-nav { 
             position: fixed; 
             bottom: 0; 
@@ -247,11 +224,10 @@
             padding: 12px 0 16px 0; 
             z-index: 100; 
         }
-        .nav-item { text-align: center; color: #64748b; font-size: 11px; font-weight: 700; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; transition: 0.2s; }
+        .nav-item { text-align: center; color: #64748b; font-size: 11px; font-weight: 700; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
         .nav-item i { font-size: 19px; }
         .nav-item.active { color: #38bdf8; }
 
-        /* Modal */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { 
             background: #1e293b; 
@@ -261,12 +237,11 @@
             max-width: 320px; 
             width: 85%; 
             border: 1px solid rgba(255, 255, 255, 0.1); 
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); 
         }
         .modal-content i { font-size: 42px; color: #38bdf8; margin-bottom: 12px; }
         .modal-content h2 { color: #ffffff; font-size: 19px; font-weight: 800; margin-bottom: 8px; }
         .modal-content p { color: #94a3b8; font-size: 13px; margin-bottom: 20px; line-height: 1.5; font-weight: 500; }
-        .modal-btn { background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; border: none; padding: 12px 24px; border-radius: 14px; font-weight: 800; font-size: 14px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4); }
+        .modal-btn { background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; border: none; padding: 12px 24px; border-radius: 14px; font-weight: 800; font-size: 14px; cursor: pointer; width: 100%; }
     </style>
 </head>
 <body>
@@ -305,67 +280,19 @@
 
             <div class="section-title"><i class="fa-solid fa-list-check"></i> Required Tasks (10)</div>
 
-            <!-- SQUARE CHANNELS GRID -->
             <div class="channels-grid">
-                <div class="task-square-box">
-                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
-                    <div class="channel-name">Channel 1</div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-                </div>
-
-                <div class="task-square-box">
-                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
-                    <div class="channel-name">Channel 2</div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-                </div>
-
-                <div class="task-square-box">
-                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
-                    <div class="channel-name">Channel 3</div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-                </div>
-
-                <div class="task-square-box">
-                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
-                    <div class="channel-name">Channel 4</div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-                </div>
-
-                <div class="task-square-box">
-                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
-                    <div class="channel-name">Channel 5</div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-                </div>
-
-                <div class="task-square-box">
-                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
-                    <div class="channel-name">Channel 6</div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-                </div>
-
-                <div class="task-square-box">
-                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
-                    <div class="channel-name">Channel 7</div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-                </div>
-
-                <div class="task-square-box">
-                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
-                    <div class="channel-name">Channel 8</div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-                </div>
-
-                <div class="task-square-box">
-                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
-                    <div class="channel-name">Channel 9</div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-                </div>
-
-                <div class="task-square-box">
-                    <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
-                    <div class="channel-name">Channel 10</div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-                </div>
+                <!-- 10 Channels -->
+                <script>
+                    for(let i=1; i<=10; i++) {
+                        document.write(`
+                            <div class="task-square-box">
+                                <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
+                                <div class="channel-name">Channel ${i}</div>
+                                <button class="btn-join" id="task-btn-${i}" onclick="handleJoinClick(this, ${i}, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
+                            </div>
+                        `);
+                    }
+                </script>
             </div>
 
             <button class="btn-action" onclick="verifyTasks()"><i class="fa-solid fa-circle-check"></i> Verify & Unlock Balance</button>
@@ -394,7 +321,7 @@
                 <div class="section-title"><i class="fa-solid fa-shield-halved"></i> Payment Terms</div>
                 <ul class="rules-list">
                     <li>न्यूनतम विथड्रॉल राशि <b>₹100</b> है।</li>
-                    <li>सभी 10 चैनल्स ज्वाइन करने के बाद ही विथड्रॉल प्रोसेस होगा।</li>
+                    <li>सभी 10 चैनल्स ज्वाइन और वेरिफाई करने के बाद ही विथड्रॉल प्रोसेस होगा।</li>
                     <li>एक Telegram आईडी पर बोनस केवल एक बार मिलेगा।</li>
                 </ul>
             </div>
@@ -415,7 +342,7 @@
             
             <div class="card-box">
                 <div class="section-title"><i class="fa-solid fa-id-card"></i> Account Summary</div>
-                <p style="font-size:13px; color:#94a3b8; margin-bottom:8px; font-weight:500;"><b>Status:</b> <span style="color:#10b981; font-weight:700;">Active & Verified</span></p>
+                <p style="font-size:13px; color:#94a3b8; margin-bottom:8px; font-weight:500;"><b>Status:</b> <span id="account-status" style="color:#f59e0b; font-weight:700;">Unverified</span></p>
                 <p style="font-size:13px; color:#94a3b8; font-weight:500;"><b>Signup Bonus:</b> ₹100.00 Claimed</p>
             </div>
         </div>
@@ -445,14 +372,31 @@
             document.getElementById('refer-link').value = `https://t.me/CashFree_CB_Bot?start=${user.id}`;
         }
 
+        // Keys for local memory
         let userBalanceKey = `balance_${currentUserId}`;
+        let userVerifiedKey = `verified_${currentUserId}`;
+        let userJoinedTasksKey = `joined_tasks_${currentUserId}`;
+
         let userBalance = localStorage.getItem(userBalanceKey) !== null 
                           ? parseFloat(localStorage.getItem(userBalanceKey)) 
                           : 100.00;
 
-        updateUI();
+        let isVerified = localStorage.getItem(userVerifiedKey) === "true";
+        let joinedTasks = JSON.parse(localStorage.getItem(userJoinedTasksKey) || "[]");
 
-        if (userBalance > 0) {
+        // Restore Task Buttons State
+        window.onload = function() {
+            joinedTasks.forEach(taskId => {
+                let btn = document.getElementById(`task-btn-${taskId}`);
+                if(btn) {
+                    btn.classList.add('joined');
+                    btn.innerText = 'Joined ✓';
+                }
+            });
+            updateUI();
+        };
+
+        if (userBalance > 0 && !isVerified) {
             document.getElementById('bonusModal').style.display = 'flex';
         }
 
@@ -465,13 +409,22 @@
             } else {
                 document.getElementById('total-withdrawn').innerText = "₹0.00";
             }
+
+            const statusElem = document.getElementById('account-status');
+            if (isVerified) {
+                statusElem.innerText = "Verified & Unlocked";
+                statusElem.style.color = "#10b981";
+            } else {
+                statusElem.innerText = "Unverified (Tasks Pending)";
+                statusElem.style.color = "#f59e0b";
+            }
         }
 
         function closeModal() {
             document.getElementById('bonusModal').style.display = 'none';
         }
 
-        function handleJoinClick(btn, link) {
+        function handleJoinClick(btn, taskId, link) {
             if (btn.classList.contains('joined') || btn.classList.contains('waiting')) return;
 
             window.open(link, '_blank');
@@ -489,6 +442,12 @@
                     btn.classList.remove('waiting');
                     btn.classList.add('joined');
                     btn.innerText = 'Joined ✓';
+
+                    // Save joined state
+                    if (!joinedTasks.includes(taskId)) {
+                        joinedTasks.push(taskId);
+                        localStorage.setItem(userJoinedTasksKey, JSON.stringify(joinedTasks));
+                    }
                 }
             }, 1000);
         }
@@ -501,48 +460,46 @@
         }
 
         function verifyTasks() {
-            const allButtons = document.querySelectorAll('.btn-join');
-            let allJoined = true;
-
-            allButtons.forEach(btn => {
-                if (!btn.classList.contains('joined')) {
-                    allJoined = false;
-                }
-            });
-
-            if (!allJoined) {
-                alert("⚠️ कृपया पहले सभी 10 चैनल्स को ज्वाइन करें!");
-            } 
-            else {
-                if (userBalance === 0) {
-                    alert("⚠️ आपने अपना बोनस पहले ही विथड्रॉ कर लिया है!");
-                } 
-                else {
-                    alert("✅ सभी 10 चैनल्स वेरिफाई हो चुके हैं! आपका बैलेंस अनलॉक कर दिया गया है।");
-                }
+            if (joinedTasks.length < 10) {
+                alert(`⚠️ आपने अभी तक केवल ${joinedTasks.length}/10 चैनल्स ही ज्वाइन किए हैं! कृपया पहले सभी 10 चैनल्स ज्वाइन करें।`);
+            } else {
+                isVerified = true;
+                localStorage.setItem(userVerifiedKey, "true");
+                updateUI();
+                alert("✅ बधाई हो! आपके सभी 10 चैनल्स सफलतापूर्वक वेरिफाई हो चुके हैं। अब आप विथड्रॉ कर सकते हैं।");
             }
         }
 
+        /* HARD SECURITY CHECK BEFORE WITHDRAWAL */
         function processWithdraw() {
-            const upiVal = document.getElementById('upi-id').value.trim();
+            // Check 1: Must be Verified
+            if (!isVerified || joinedTasks.length < 10) {
+                alert("🚫 सिक्योरिटी ब्लॉक! आप बिना सभी 10 चैनल्स को ज्वाइन और वेरिफाई किए विथड्रॉ नहीं कर सकते।");
+                switchTab('tasks-tab', document.querySelectorAll('.nav-item')[0]);
+                return;
+            }
 
+            // Check 2: Balance Check
             if (userBalance <= 0) {
                 alert("⚠️ अपर्याप्त बैलेंस! विथड्रॉ करने के लिए पर्याप्त बैलेंस नहीं है।");
                 return;
             }
 
+            // Check 3: Valid UPI ID
+            const upiVal = document.getElementById('upi-id').value.trim();
             if (upiVal === "" || !upiVal.includes("@")) {
                 alert("⚠️ कृपया सही UPI ID दर्ज करें (उदा. 9876543210@paytm)");
                 return;
             }
 
+            // Success Withdrawal
             userBalance = 0.00;
             localStorage.setItem(userBalanceKey, "0");
 
             updateUI();
             document.getElementById('upi-id').value = "";
 
-            alert("🎉 विथड्रॉल की रिक्वेस्ट सबमिट कर दी गई है! 24 घंटे के अंदर पेमेंट क्रेडिट कर दिया जाएगा।");
+            alert("🎉 विथड्रॉल रिक्वेस्ट सबमिट हो गई है! 24 घंटे के अंदर पेमेंट क्रेडिट कर दिया जाएगा।");
         }
 
         function copyReferLink() {
