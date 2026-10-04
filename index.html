@@ -31,7 +31,20 @@
         
         /* Bold Channel Names */
         .channel-info { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 15px; color: #ffffff; letter-spacing: 0.3px; }
-        .channel-info i { color: #0088cc; font-size: 18px; }
+        
+        /* Animated Gift Icon Animation */
+        .channel-info i { 
+            color: #ff3366; 
+            font-size: 19px; 
+            animation: giftPulse 1.5s infinite ease-in-out;
+            display: inline-block;
+        }
+
+        @keyframes giftPulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255, 51, 102, 0.4)); }
+            50% { transform: scale(1.25) rotate(-5deg); filter: drop-shadow(0 0 8px rgba(255, 51, 102, 0.8)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255, 51, 102, 0.4)); }
+        }
 
         /* Interactive JOIN Button */
         .btn-join { 
@@ -66,7 +79,7 @@
         /* Modal Popup */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { background: #1e1e38; padding: 25px; border-radius: 20px; text-align: center; max-width: 300px; width: 85%; border: 1px solid #38ef7d; box-shadow: 0 0 20px rgba(56,239,125,0.4); }
-        .modal-content i { font-size: 50px; color: #38ef7d; margin-bottom: 10px; }
+        .modal-content i { font-size: 50px; color: #38ef7d; margin-bottom: 10px; animation: giftPulse 1.5s infinite ease-in-out; }
         .modal-btn { margin-top: 15px; background: #38ef7d; color: #000; border: none; padding: 10px 25px; border-radius: 20px; font-weight: bold; cursor: pointer; }
 
         /* Form Input */
