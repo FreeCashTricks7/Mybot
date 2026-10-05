@@ -188,9 +188,9 @@
         
         .channel-info { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 13px; color: #1e293b; }
 
-        /* --- ANIMATED EMOJIS & ROCKET FIRE EFFECT --- */
+        /* --- GIFT EMOJI ANIMATION --- */
         .animated-emoji { 
-            font-size: 18px; 
+            font-size: 20px; 
             display: inline-block;
             line-height: 1;
             animation: pulseGlow 1.5s infinite ease-in-out; 
@@ -198,51 +198,49 @@
 
         @keyframes pulseGlow { 
             0% { transform: scale(1); } 
-            50% { transform: scale(1.22); } 
+            50% { transform: scale(1.2); } 
             100% { transform: scale(1); } 
         }
 
-        /* Rocket Wrapper Container with Flame */
+        /* --- EXACT VIDEO-STYLE ROCKET & FIRE ANIMATION --- */
         .rocket-box {
             position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            width: 28px;
+            height: 28px;
         }
 
+        /* Diagonal 45-degree Angled Rocket */
         .animated-rocket {
-            font-size: 18px;
+            font-size: 20px;
             display: inline-block;
             line-height: 1;
-            transform: rotate(-45deg);
-            animation: rocketShake 0.15s infinite alternate ease-in-out;
             position: relative;
             z-index: 2;
+            animation: rocketShake 0.12s infinite alternate ease-in-out;
         }
 
-        /* Fire effect behind rocket */
+        /* Fire Thruster Flame at the Tail */
         .rocket-fire {
             position: absolute;
-            bottom: -6px;
-            left: -4px;
-            width: 8px;
-            height: 14px;
-            background: linear-gradient(to bottom, #ff0000, #ff8c00, #ffff00);
-            border-radius: 50% 50% 20% 20%;
-            transform: rotate(135deg);
-            filter: drop-shadow(0 0 6px #ff4500);
-            animation: fireThruster 0.1s infinite alternate;
+            bottom: -3px;
+            left: -3px;
+            font-size: 14px;
             z-index: 1;
+            transform-origin: top right;
+            animation: videoFireAnim 0.15s infinite alternate ease-in-out;
         }
 
         @keyframes rocketShake {
-            0% { transform: rotate(-45deg) translate(0, 0); }
-            100% { transform: rotate(-45deg) translate(1px, -2px); }
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(1px, -1px); }
         }
 
-        @keyframes fireThruster {
-            0% { height: 10px; opacity: 0.8; transform: rotate(135deg) scaleX(0.8); }
-            100% { height: 16px; opacity: 1; transform: rotate(135deg) scaleX(1.2); }
+        @keyframes videoFireAnim {
+            0% { transform: scale(0.8) rotate(0deg); opacity: 0.8; }
+            100% { transform: scale(1.25) rotate(-5deg); opacity: 1; filter: drop-shadow(0 0 8px #ff4500); }
         }
 
         /* Focusing Electric Blue Channel Buttons */
@@ -411,17 +409,17 @@
             <div class="card-box">
                 <div class="card-title">LUCKY DRAW CHANNELS (10/10)</div>
 
-                <!-- 10 Channels List with Animated Gift & Fire Rocket -->
+                <!-- 10 Channels List Matching Exact Video Style -->
                 <div class="task-card"><div class="channel-info"><span class="animated-emoji">🎁</span> Channel 1</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
-                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><div class="rocket-fire"></div></div> Channel 2</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
-                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><div class="rocket-fire"></div></div> Channel 3</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
-                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><div class="rocket-fire"></div></div> Channel 4</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
-                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><div class="rocket-fire"></div></div> Channel 5</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
-                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><div class="rocket-fire"></div></div> Channel 6</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
-                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><div class="rocket-fire"></div></div> Channel 7</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
-                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><div class="rocket-fire"></div></div> Channel 8</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
-                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><div class="rocket-fire"></div></div> Channel 9</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
-                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><div class="rocket-fire"></div></div> Channel 10</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><span class="rocket-fire">🔥</span></div> Channel 2</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><span class="rocket-fire">🔥</span></div> Channel 3</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><span class="rocket-fire">🔥</span></div> Channel 4</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><span class="rocket-fire">🔥</span></div> Channel 5</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><span class="rocket-fire">🔥</span></div> Channel 6</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><span class="rocket-fire">🔥</span></div> Channel 7</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><span class="rocket-fire">🔥</span></div> Channel 8</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><span class="rocket-fire">🔥</span></div> Channel 9</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><div class="rocket-box"><span class="animated-rocket">🚀</span><span class="rocket-fire">🔥</span></div> Channel 10</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
 
                 <button class="btn-action" onclick="verifyTasks()"><i class="fa-solid fa-circle-check"></i> VERIFY TASKS & UNLOCK ₹100</button>
             </div>
