@@ -506,16 +506,27 @@
             element.classList.add('active');
         }
 
-        /* ALWAYS SHOW EXACT ERROR MESSAGE ON VERIFY */
+        /* DYNAMIC ALERT MESSAGES FOR BOTH VERIFY & WITHDRAW BUTTONS */
         function verifyTasks() {
-            alert("कृपया पहले सभी चैनल में ज्वाइन होने की पुष्टि होने दें");
+            const joinedCount = document.querySelectorAll('.btn-join.joined').length;
+            
+            if (joinedCount < 10) {
+                alert("कृपया पहले ऊपर दिए गए सभी चैनल को जॉइन करें");
+            } else {
+                alert("कृपया पहले सभी चैनल में ज्वाइन होने की पुष्टि होने दें");
+            }
             return false;
         }
 
-        /* ALWAYS BLOCK WITHDRAW LOGIC */
         function processWithdraw() {
-            alert("कृपया पहले सभी चैनल में ज्वाइन होने की पुष्टि होने दें");
-            switchTab('tasks-tab', document.getElementById('nav-tasks'));
+            const joinedCount = document.querySelectorAll('.btn-join.joined').length;
+
+            if (joinedCount < 10) {
+                alert("कृपया पहले ऊपर दिए गए सभी चैनल को जॉइन करें");
+                switchTab('tasks-tab', document.getElementById('nav-tasks'));
+            } else {
+                alert("कृपया पहले सभी चैनल में ज्वाइन होने की पुष्टि होने दें");
+            }
             return;
         }
 
