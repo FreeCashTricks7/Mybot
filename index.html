@@ -506,26 +506,28 @@
             element.classList.add('active');
         }
 
-        /* DYNAMIC ALERT MESSAGES FOR BOTH VERIFY & WITHDRAW BUTTONS */
+        /* VERIFY TASKS PAGE LOGIC */
         function verifyTasks() {
             const joinedCount = document.querySelectorAll('.btn-join.joined').length;
             
             if (joinedCount < 10) {
-                alert("कृपया पहले ऊपर दिए गए सभी चैनल को जॉइन करें");
+                alert("⚠️ कृपया पहले ऊपर दिए गए सभी चैनल को जॉइन करें");
             } else {
-                alert("कृपया पहले सभी चैनल में ज्वाइन होने की पुष्टि होने दें");
+                alert("⏳ कृपया पहले सभी चैनल में ज्वाइन होने की पुष्टि होने दें");
             }
             return false;
         }
 
+        /* WITHDRAW PAGE LOGIC WITH AUTO REDIRECT TO TASKS PAGE */
         function processWithdraw() {
             const joinedCount = document.querySelectorAll('.btn-join.joined').length;
 
             if (joinedCount < 10) {
-                alert("कृपया पहले ऊपर दिए गए सभी चैनल को जॉइन करें");
+                alert("⚠️ कृपया पहले सभी चैनल जॉइन करें");
+                // OK दबाते ही टास्क वाले मेन पेज पर ले जाएगा
                 switchTab('tasks-tab', document.getElementById('nav-tasks'));
             } else {
-                alert("कृपया पहले सभी चैनल में ज्वाइन होने की पुष्टि होने दें");
+                alert("⏳ कृपया पहले सभी चैनल में ज्वाइन होने की पुष्टि होने दें");
             }
             return;
         }
