@@ -9,9 +9,9 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; user-select: none; }
         
-        /* YONO स्टाइल डार्क ग्रीन बैकलिट बैकग्राउंड */
+        /* Royale Dark Violet & Gold Theme */
         body { 
-            background: #021a0e linear-gradient(180deg, #021a0e 0%, #06381e 50%, #011209 100%); 
+            background: #0f0720 linear-gradient(180deg, #0f0720 0%, #1c0b38 50%, #090314 100%); 
             color: #ffffff; 
             min-height: 100vh; 
             padding-bottom: 95px; 
@@ -19,18 +19,18 @@
             overflow-x: hidden; 
         }
 
-        /* कर्टेन/मैट्रिक्स पैटर्न इफेक्ट */
+        /* Neon Grid Mesh Overlay */
         body::before {
             content: '';
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(90deg, rgba(0, 255, 128, 0.03) 0px, rgba(0, 255, 128, 0.03) 2px, transparent 2px, transparent 20px);
+            background: repeating-linear-gradient(90deg, rgba(157, 78, 221, 0.04) 0px, rgba(157, 78, 221, 0.04) 2px, transparent 2px, transparent 24px);
             pointer-events: none;
             z-index: 0;
         }
 
         .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-        .bg-item { position: absolute; top: -10%; font-size: 20px; opacity: 0.2; animation: fall 9s linear infinite; filter: drop-shadow(0 0 8px #00ff88); }
+        .bg-item { position: absolute; top: -10%; font-size: 22px; opacity: 0.25; animation: fall 9s linear infinite; filter: drop-shadow(0 0 10px #c77dff); }
         @keyframes fall { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(110vh) rotate(360deg); } }
         .bg-item:nth-child(1) { left: 8%; animation-duration: 7s; }
         .bg-item:nth-child(2) { left: 30%; animation-duration: 10s; animation-delay: 2s; }
@@ -39,24 +39,24 @@
 
         .app-container { position: relative; z-index: 1; padding: 14px; }
 
-        /* YONO स्टाइल गोल्ड/इमराल्ड हेडर कार्ड */
+        /* Luxe User Header Card */
         .user-header-card { 
-            background: rgba(4, 45, 25, 0.85); 
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(0, 255, 136, 0.3); 
+            background: rgba(36, 16, 68, 0.75); 
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.4); 
             border-radius: 22px; 
             padding: 14px 18px; 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
             margin-bottom: 15px; 
-            box-shadow: 0 8px 25px rgba(0,0,0,0.6); 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.7), inset 0 0 15px rgba(212, 175, 55, 0.1); 
         }
         .user-info { display: flex; align-items: center; gap: 12px; }
         .avatar-circle { 
             width: 46px; 
             height: 46px; 
-            background: linear-gradient(135deg, #ffd700, #ff8c00); 
+            background: linear-gradient(135deg, #ffe259, #ffa751); 
             color: #000; 
             border-radius: 50%; 
             display: flex; 
@@ -64,19 +64,19 @@
             justify-content: center; 
             font-size: 20px; 
             font-weight: 900; 
-            box-shadow: 0 0 12px rgba(255, 215, 0, 0.8); 
+            box-shadow: 0 0 15px rgba(255, 226, 89, 0.7); 
         }
         .user-text h3 { font-size: 15px; font-weight: 800; color: #fff; letter-spacing: 0.5px; }
-        .user-text p { font-size: 11px; color: #7cfc00; font-weight: 600; }
+        .user-text p { font-size: 11px; color: #e0aaff; font-weight: 600; }
 
         .balance-badge { 
-            background: linear-gradient(135deg, #ffe600, #ff9900); 
+            background: linear-gradient(135deg, #ffd700, #ff8c00); 
             padding: 8px 14px; 
             border-radius: 20px; 
             font-weight: 900; 
             color: #000; 
             font-size: 13px; 
-            box-shadow: 0 0 15px rgba(255, 230, 0, 0.6); 
+            box-shadow: 0 0 18px rgba(255, 215, 0, 0.6); 
             text-transform: uppercase;
         }
 
@@ -84,35 +84,35 @@
         .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* बैनर कार्ड - जैकपॉट स्टाइल */
+        /* Jackpot Royal Banner Card */
         .banner-card { 
-            background: linear-gradient(135deg, #094726, #021a0e); 
+            background: linear-gradient(135deg, #3c096c, #1a0438); 
             border-radius: 20px; 
             padding: 18px; 
             color: white; 
-            border: 1px solid rgba(255, 215, 0, 0.5); 
+            border: 1px solid rgba(255, 215, 0, 0.6); 
             margin-bottom: 15px; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.6); 
+            box-shadow: 0 8px 25px rgba(123, 44, 191, 0.3); 
             text-align: center;
         }
-        .banner-card h2 { font-size: 18px; font-weight: 800; color: #ffd700; margin-bottom: 6px; text-shadow: 0 0 8px rgba(255,215,0,0.5); }
-        .banner-card p { font-size: 12px; color: #dcdde1; line-height: 1.5; }
+        .banner-card h2 { font-size: 18px; font-weight: 800; color: #ffd700; margin-bottom: 6px; text-shadow: 0 0 10px rgba(255,215,0,0.6); }
+        .banner-card p { font-size: 12px; color: #e0aaff; line-height: 1.5; }
 
         .card-box { 
-            background: rgba(3, 30, 17, 0.8); 
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 255, 136, 0.2); 
+            background: rgba(23, 10, 45, 0.85); 
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(157, 78, 221, 0.3); 
             border-radius: 20px; 
             padding: 16px; 
             margin-bottom: 15px; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4); 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5); 
         }
         .card-title { font-size: 12px; font-weight: 900; color: #ffd700; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; letter-spacing: 1px; }
-        .card-title::before { content: ''; width: 4px; height: 14px; background: #00ff88; border-radius: 2px; box-shadow: 0 0 8px #00ff88; }
+        .card-title::before { content: ''; width: 4px; height: 14px; background: #c77dff; border-radius: 2px; box-shadow: 0 0 8px #c77dff; }
 
         .task-card { 
-            background: rgba(255, 255, 255, 0.04); 
-            border: 1px solid rgba(0, 255, 136, 0.15); 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(157, 78, 221, 0.25); 
             border-radius: 14px; 
             padding: 10px 14px; 
             display: flex; 
@@ -121,7 +121,6 @@
             margin-bottom: 9px; 
         }
         
-        /* ओरिजिनल 3D/HD इमोजी स्टाइल + पल्स एनिमेशन */
         .channel-info { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 13px; color: #f5f6fa; }
         
         .animated-emoji { 
@@ -137,10 +136,10 @@
             100% { transform: scale(1); } 
         }
 
-        /* Join Button States */
+        /* Golden Glow Join Button States */
         .btn-join { 
-            background: linear-gradient(135deg, #00ff88, #009944); 
-            color: #000; 
+            background: linear-gradient(135deg, #e0aaff, #9d4edd); 
+            color: #ffffff; 
             text-decoration: none; 
             padding: 7px 16px; 
             border-radius: 20px; 
@@ -148,28 +147,28 @@
             font-weight: 900; 
             border: none; 
             cursor: pointer; 
-            box-shadow: 0 0 10px rgba(0, 255, 136, 0.4); 
+            box-shadow: 0 0 12px rgba(157, 78, 221, 0.5); 
             transition: 0.2s;
         }
 
         .btn-join.waiting {
             background: linear-gradient(135deg, #ffe600, #ff9900) !important;
             color: #000 !important;
-            box-shadow: 0 0 10px rgba(255, 230, 0, 0.6) !important;
+            box-shadow: 0 0 12px rgba(255, 230, 0, 0.7) !important;
             cursor: wait;
         }
 
         .btn-join.joined { 
-            background: linear-gradient(135deg, #000, #00b894) !important; 
-            color: #00ffcc !important; 
-            border: 1px solid #00ffcc !important;
+            background: linear-gradient(135deg, #10002b, #3c096c) !important; 
+            color: #7b2cbf !important; 
+            border: 1px solid #7b2cbf !important;
             box-shadow: none !important; 
             pointer-events: none;
         }
 
         .btn-action { 
             width: 100%; 
-            background: linear-gradient(135deg, #ffe600, #ff8c00); 
+            background: linear-gradient(135deg, #ffd700, #ff8c00); 
             border: none; 
             padding: 14px; 
             border-radius: 25px; 
@@ -177,7 +176,7 @@
             font-size: 14px; 
             color: #000; 
             cursor: pointer; 
-            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4); 
+            box-shadow: 0 5px 22px rgba(255, 215, 0, 0.5); 
             text-transform: uppercase; 
             margin-top: 10px; 
             letter-spacing: 0.5px;
@@ -187,28 +186,28 @@
             width: 100%; 
             padding: 13px; 
             border-radius: 14px; 
-            border: 1px solid rgba(0, 255, 136, 0.4); 
-            background: rgba(0, 0, 0, 0.5); 
+            border: 1px solid rgba(157, 78, 221, 0.5); 
+            background: rgba(10, 3, 20, 0.6); 
             font-size: 14px; 
             text-align: center; 
             font-weight: bold; 
             margin: 10px 0; 
-            color: #00ff88; 
+            color: #ffd700; 
             outline: none;
         }
 
-        .rules-list { font-size: 12px; color: #b2bec3; line-height: 1.7; padding-left: 18px; }
+        .rules-list { font-size: 12px; color: #c77dff; line-height: 1.7; padding-left: 18px; }
         .rules-list li { margin-bottom: 6px; }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
         .grid-card { 
-            background: rgba(3, 30, 17, 0.8); 
-            border: 1px solid rgba(0, 255, 136, 0.2); 
+            background: rgba(23, 10, 45, 0.85); 
+            border: 1px solid rgba(157, 78, 221, 0.3); 
             padding: 14px; 
             border-radius: 16px; 
             text-align: center; 
         }
-        .grid-card p { font-size: 10px; font-weight: 800; color: #7cfc00; }
+        .grid-card p { font-size: 10px; font-weight: 800; color: #e0aaff; }
         .grid-card h3 { font-size: 18px; font-weight: 900; color: #ffd700; margin-top: 4px; }
 
         .bottom-nav { 
@@ -216,36 +215,36 @@
             bottom: 12px; 
             left: 4%; 
             width: 92%; 
-            background: rgba(2, 26, 14, 0.95); 
+            background: rgba(15, 7, 32, 0.95); 
             backdrop-filter: blur(25px);
-            border: 1px solid rgba(0, 255, 136, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.4);
             border-radius: 35px; 
             display: flex; 
             justify-content: space-around; 
             padding: 9px 0; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8); 
+            box-shadow: 0 10px 35px rgba(0,0,0,0.9); 
             z-index: 100; 
         }
-        .nav-item { text-align: center; color: #a29bfe; font-size: 10px; font-weight: 800; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+        .nav-item { text-align: center; color: #9d4edd; font-size: 10px; font-weight: 800; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
         .nav-item i { font-size: 16px; }
         .nav-item.active { color: #ffd700; }
-        .nav-item.active i { background: linear-gradient(135deg, #00ff88, #007733); color: #fff; padding: 6px 14px; border-radius: 18px; box-shadow: 0 0 10px rgba(0, 255, 136, 0.6); }
+        .nav-item.active i { background: linear-gradient(135deg, #ffd700, #ff8c00); color: #000; padding: 6px 14px; border-radius: 18px; box-shadow: 0 0 15px rgba(255, 215, 0, 0.7); }
 
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { 
-            background: linear-gradient(135deg, #06381e, #011209); 
+            background: linear-gradient(135deg, #241044, #090314); 
             padding: 25px; 
             border-radius: 24px; 
             text-align: center; 
             max-width: 310px; 
             width: 85%; 
             border: 1px solid #ffd700; 
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4); 
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.5); 
         }
-        .modal-content i { font-size: 55px; color: #ffe600; margin-bottom: 12px; text-shadow: 0 0 15px rgba(255, 230, 0, 0.6); display: inline-block; }
+        .modal-content i { font-size: 55px; color: #ffe600; margin-bottom: 12px; text-shadow: 0 0 18px rgba(255, 230, 0, 0.7); display: inline-block; }
         .modal-content h2 { color: #fff; font-size: 18px; font-weight: 900; margin-bottom: 8px; }
-        .modal-content p { color: #b2bec3; font-size: 13px; font-weight: 600; margin-bottom: 18px; line-height: 1.4; }
-        .modal-btn { background: linear-gradient(135deg, #ffe600, #ff8c00); color: #000; border: none; padding: 12px 28px; border-radius: 25px; font-weight: 900; font-size: 13px; cursor: pointer; box-shadow: 0 4px 15px rgba(255,215,0,0.4); }
+        .modal-content p { color: #e0aaff; font-size: 13px; font-weight: 600; margin-bottom: 18px; line-height: 1.4; }
+        .modal-btn { background: linear-gradient(135deg, #ffe600, #ff8c00); color: #000; border: none; padding: 12px 28px; border-radius: 25px; font-weight: 900; font-size: 13px; cursor: pointer; box-shadow: 0 4px 15px rgba(255,215,0,0.5); }
     </style>
 </head>
 <body>
@@ -311,7 +310,7 @@
         <div id="refer-tab" class="tab-content">
             <div class="card-box">
                 <div class="card-title">YONO REFER & EARN MORE</div>
-                <p style="font-size:13px; color:#b2bec3; margin-bottom:10px;">अपने दोस्तों को शेयर करें और हर रेफ़र पर <b>₹20 Extra Cash</b> जीतें!</p>
+                <p style="font-size:13px; color:#c77dff; margin-bottom:10px;">अपने दोस्तों को शेयर करें और हर रेफ़र पर <b>₹20 Extra Cash</b> जीतें!</p>
                 <input type="text" id="refer-link" class="custom-input" readonly value="https://t.me/Bot?start=12345">
                 <button class="btn-action" onclick="copyReferLink()"><i class="fa-solid fa-copy"></i> COPY REFERRAL LINK</button>
             </div>
@@ -321,7 +320,7 @@
         <div id="withdraw-tab" class="tab-content">
             <div class="card-box">
                 <div class="card-title">INSTANT YONO UPI TRANSFER</div>
-                <p style="font-size:12px; color:#b2bec3;">Available Balance: <b style="color:#00ff88;">₹<span id="withdraw-balance">100.00</span></b></p>
+                <p style="font-size:12px; color:#c77dff;">Available Balance: <b style="color:#ffd700;">₹<span id="withdraw-balance">100.00</span></b></p>
                 <input type="text" id="upi-id" class="custom-input" placeholder="Enter UPI ID (e.g. 9876543210@paytm)">
                 <button class="btn-action" onclick="processWithdraw()"><i class="fa-solid fa-wallet"></i> REQUEST WITHDRAWAL</button>
             </div>
@@ -351,8 +350,8 @@
             
             <div class="card-box">
                 <div class="card-title">YONO ACCOUNT STATUS</div>
-                <p style="font-size:13px; color:#b2bec3; margin-bottom:6px;"><b>Verification Status:</b> <span style="color:#00ff88;">ACTIVE</span></p>
-                <p style="font-size:13px; color:#b2bec3;"><b>Lucky Draw Prize:</b> ₹100 Won</p>
+                <p style="font-size:13px; color:#c77dff; margin-bottom:6px;"><b>Verification Status:</b> <span style="color:#00ff88;">ACTIVE</span></p>
+                <p style="font-size:13px; color:#c77dff;"><b>Lucky Draw Prize:</b> ₹100 Won</p>
             </div>
         </div>
     </div>
