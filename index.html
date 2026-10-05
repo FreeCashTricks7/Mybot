@@ -1,262 +1,245 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPI Cashback Hub</title>
+    <title>UPI Cash Rewards</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; user-select: none; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; user-select: none; }
         
         body { 
-            background: #0f172a; 
+            background: linear-gradient(180deg, #120327 0%, #1a0836 50%, #090117 100%); 
             color: #ffffff; 
             min-height: 100vh; 
             padding-bottom: 95px; 
-            position: relative;
-            background-image: 
-                radial-gradient(at 10% 10%, rgba(36, 161, 222, 0.15) 0px, transparent 40%),
-                radial-gradient(at 90% 90%, rgba(99, 102, 241, 0.15) 0px, transparent 40%);
+            position: relative; 
+            overflow-x: hidden; 
         }
 
-        .app-container { max-width: 480px; margin: 0 auto; padding: 16px; }
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .bg-item { position: absolute; top: -10%; font-size: 20px; opacity: 0.15; animation: fall 9s linear infinite; filter: drop-shadow(0 0 8px #00ffcc); }
+        @keyframes fall { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(110vh) rotate(360deg); } }
+        .bg-item:nth-child(1) { left: 8%; animation-duration: 7s; }
+        .bg-item:nth-child(2) { left: 30%; animation-duration: 10s; animation-delay: 2s; }
+        .bg-item:nth-child(3) { left: 60%; animation-duration: 8s; animation-delay: 1s; }
+        .bg-item:nth-child(4) { left: 82%; animation-duration: 11s; animation-delay: 3s; }
+
+        .app-container { position: relative; z-index: 1; padding: 14px; }
 
         .user-header-card { 
-            background: rgba(30, 41, 59, 0.7); 
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.12); 
-            border-radius: 20px; 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 22px; 
             padding: 14px 18px; 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
-            margin-bottom: 20px; 
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); 
+            margin-bottom: 15px; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4); 
         }
         .user-info { display: flex; align-items: center; gap: 12px; }
         .avatar-circle { 
-            width: 44px; 
-            height: 44px; 
-            background: linear-gradient(135deg, #24A1DE, #0077b5); 
-            color: #ffffff; 
+            width: 46px; 
+            height: 46px; 
+            background: linear-gradient(135deg, #a100ff, #00e5ff); 
+            color: #fff; 
             border-radius: 50%; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            font-size: 18px; 
-            font-weight: 800; 
-            box-shadow: 0 4px 12px rgba(36, 161, 222, 0.3);
+            font-size: 20px; 
+            font-weight: 900; 
+            box-shadow: 0 0 12px rgba(0, 229, 255, 0.6); 
         }
-        .user-text h3 { font-size: 15px; font-weight: 700; color: #ffffff; }
-        .user-text p { font-size: 12px; color: #38bdf8; font-weight: 600; }
+        .user-text h3 { font-size: 15px; font-weight: 800; color: #fff; letter-spacing: 0.5px; }
+        .user-text p { font-size: 11px; color: #a29bfe; font-weight: 600; }
 
         .balance-badge { 
-            background: rgba(16, 185, 129, 0.15); 
-            border: 1px solid #10b981;
+            background: linear-gradient(135deg, #ffe600, #ff0078); 
             padding: 8px 16px; 
-            border-radius: 30px; 
-            font-weight: 800; 
-            color: #10b981; 
-            font-size: 16px; 
-            box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+            border-radius: 20px; 
+            font-weight: 900; 
+            color: #fff; 
+            font-size: 15px; 
+            box-shadow: 0 0 15px rgba(255, 0, 120, 0.5); 
         }
 
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: popIn 0.3s ease-out; }
-        @keyframes popIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .banner-card { 
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9)); 
+            background: linear-gradient(135deg, #2a085c, #140033); 
             border-radius: 20px; 
-            padding: 20px; 
-            border: 1px solid rgba(56, 189, 248, 0.2); 
-            margin-bottom: 22px; 
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            padding: 18px; 
+            color: white; 
+            border: 1px solid rgba(0, 229, 255, 0.3); 
+            margin-bottom: 15px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5); 
         }
-        .banner-card h2 { font-size: 19px; font-weight: 800; color: #38bdf8; margin-bottom: 6px; }
-        .banner-card p { font-size: 13px; color: #94a3b8; line-height: 1.5; font-weight: 500; }
+        .banner-card h2 { font-size: 17px; font-weight: 800; color: #00f6ff; margin-bottom: 6px; text-shadow: 0 0 8px rgba(0,246,255,0.4); }
+        .banner-card p { font-size: 12px; color: #dcdde1; line-height: 1.5; }
 
-        .section-title { 
-            font-size: 13px; 
-            font-weight: 800; 
-            color: #cbd5e1; 
-            text-transform: uppercase; 
-            margin-bottom: 16px; 
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .channels-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-            margin-bottom: 22px;
-        }
-
-        .task-square-box { 
-            background: rgba(30, 41, 59, 0.7); 
+        .card-box { 
+            background: rgba(255, 255, 255, 0.04); 
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.08); 
-            border-radius: 22px; 
-            padding: 18px 14px; 
+            border-radius: 20px; 
+            padding: 16px; 
+            margin-bottom: 15px; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3); 
+        }
+        .card-title { font-size: 12px; font-weight: 900; color: #ffe600; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; letter-spacing: 1px; }
+        .card-title::before { content: ''; width: 4px; height: 14px; background: #00f6ff; border-radius: 2px; box-shadow: 0 0 8px #00f6ff; }
+
+        .task-card { 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.06); 
+            border-radius: 14px; 
+            padding: 10px 14px; 
             display: flex; 
-            flex-direction: column;
             align-items: center; 
-            justify-content: center;
-            text-align: center;
-            aspect-ratio: 1 / 1;
-            transition: all 0.25s ease;
-            position: relative;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            justify-content: space-between; 
+            margin-bottom: 9px; 
         }
+        .channel-info { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 13px; color: #f5f6fa; }
+        .channel-info i { color: #ff0078; font-size: 16px; animation: pulseGlow 1.5s infinite ease-in-out; }
+        @keyframes pulseGlow { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
 
-        .telegram-icon-box {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: #24A1DE; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-size: 24px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 15px rgba(36, 161, 222, 0.4);
-        }
-
-        .channel-name { font-size: 13.5px; font-weight: 700; color: #ffffff; margin-bottom: 12px; }
-
+        /* Join Button States */
         .btn-join { 
-            width: 100%;
-            background: linear-gradient(135deg, #24A1DE, #0088cc); 
-            color: #ffffff; 
-            border: none;
-            padding: 10px 0; 
-            border-radius: 12px; 
-            font-size: 12px; 
-            font-weight: 800; 
+            background: linear-gradient(135deg, #00f6ff, #0066ff); 
+            color: #000; 
+            text-decoration: none; 
+            padding: 7px 16px; 
+            border-radius: 20px; 
+            font-size: 11px; 
+            font-weight: 900; 
+            border: none; 
             cursor: pointer; 
-            transition: all 0.2s;
-            box-shadow: 0 4px 12px rgba(36, 161, 222, 0.3);
+            box-shadow: 0 0 10px rgba(0, 246, 255, 0.4); 
+            transition: 0.2s;
         }
 
         .btn-join.waiting {
-            background: linear-gradient(135deg, #0284c7, #0369a1) !important;
-            color: #fff !important;
+            background: linear-gradient(135deg, #ffe600, #ff9900) !important;
+            color: #000 !important;
+            box-shadow: 0 0 10px rgba(255, 230, 0, 0.6) !important;
             cursor: wait;
         }
 
         .btn-join.joined { 
-            background: linear-gradient(135deg, #10b981, #059669) !important; 
-            color: #ffffff !important; 
+            background: linear-gradient(135deg, #000, #00b894) !important; 
+            color: #00ffcc !important; 
+            border: 1px solid #00ffcc !important;
+            box-shadow: none !important; 
             pointer-events: none;
         }
 
         .btn-action { 
             width: 100%; 
-            background: linear-gradient(135deg, #6366f1, #4f46e5); 
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 16px; 
-            border-radius: 18px; 
-            font-weight: 800; 
-            font-size: 15px; 
+            background: linear-gradient(135deg, #ffe600, #ff0078); 
+            border: none; 
+            padding: 14px; 
+            border-radius: 25px; 
+            font-weight: 900; 
+            font-size: 14px; 
             color: #ffffff; 
             cursor: pointer; 
-            transition: all 0.25s;
+            box-shadow: 0 5px 20px rgba(255, 0, 120, 0.4); 
+            text-transform: uppercase; 
+            margin-top: 10px; 
             letter-spacing: 0.5px;
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
-        }
-
-        .card-box { 
-            background: rgba(30, 41, 59, 0.7); 
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-            border-radius: 20px; 
-            padding: 20px; 
-            margin-bottom: 16px; 
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         .custom-input { 
             width: 100%; 
-            padding: 14px; 
+            padding: 13px; 
             border-radius: 14px; 
-            border: 1px solid rgba(56, 189, 248, 0.3); 
-            background: #0f172a; 
+            border: 1px solid rgba(0, 246, 255, 0.4); 
+            background: rgba(0, 0, 0, 0.4); 
             font-size: 14px; 
             text-align: center; 
-            font-weight: 700; 
-            margin: 14px 0; 
-            color: #38bdf8; 
+            font-weight: bold; 
+            margin: 10px 0; 
+            color: #00f6ff; 
             outline: none;
         }
 
-        .rules-list { font-size: 13px; color: #94a3b8; line-height: 1.6; padding-left: 18px; font-weight: 500; }
-        .rules-list li { margin-bottom: 8px; }
+        .rules-list { font-size: 12px; color: #b2bec3; line-height: 1.7; padding-left: 18px; }
+        .rules-list li { margin-bottom: 6px; }
 
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
         .grid-card { 
-            background: rgba(30, 41, 59, 0.7); 
+            background: rgba(255, 255, 255, 0.04); 
             border: 1px solid rgba(255, 255, 255, 0.08); 
-            padding: 18px; 
-            border-radius: 18px; 
+            padding: 14px; 
+            border-radius: 16px; 
             text-align: center; 
         }
-        .grid-card p { font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; }
-        .grid-card h3 { font-size: 22px; font-weight: 800; color: #38bdf8; margin-top: 4px; }
+        .grid-card p { font-size: 10px; font-weight: 800; color: #a29bfe; }
+        .grid-card h3 { font-size: 18px; font-weight: 900; color: #00f6ff; margin-top: 4px; }
 
         .bottom-nav { 
             position: fixed; 
-            bottom: 0; 
-            left: 0; 
-            width: 100%; 
-            background: rgba(15, 23, 42, 0.85); 
-            backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            bottom: 12px; 
+            left: 4%; 
+            width: 92%; 
+            background: rgba(20, 5, 45, 0.85); 
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 35px; 
             display: flex; 
             justify-content: space-around; 
-            padding: 12px 0 16px 0; 
+            padding: 9px 0; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
             z-index: 100; 
         }
-        .nav-item { text-align: center; color: #64748b; font-size: 11px; font-weight: 700; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
-        .nav-item i { font-size: 19px; }
-        .nav-item.active { color: #38bdf8; }
+        .nav-item { text-align: center; color: #a29bfe; font-size: 10px; font-weight: 800; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+        .nav-item i { font-size: 16px; }
+        .nav-item.active { color: #00f6ff; }
+        .nav-item.active i { background: linear-gradient(135deg, #a100ff, #00f6ff); color: #fff; padding: 6px 14px; border-radius: 18px; box-shadow: 0 0 10px rgba(0, 246, 255, 0.5); }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); justify-content: center; align-items: center; z-index: 1000; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { 
-            background: #1e293b; 
-            padding: 26px; 
+            background: linear-gradient(135deg, #1f0842, #0d0221); 
+            padding: 25px; 
             border-radius: 24px; 
             text-align: center; 
-            max-width: 320px; 
+            max-width: 310px; 
             width: 85%; 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border: 1px solid #00f6ff; 
+            box-shadow: 0 0 30px rgba(0, 246, 255, 0.4); 
         }
-        .modal-content i { font-size: 42px; color: #38bdf8; margin-bottom: 12px; }
-        .modal-content h2 { color: #ffffff; font-size: 19px; font-weight: 800; margin-bottom: 8px; }
-        .modal-content p { color: #94a3b8; font-size: 13px; margin-bottom: 20px; line-height: 1.5; font-weight: 500; }
-        .modal-btn { background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; border: none; padding: 12px 24px; border-radius: 14px; font-weight: 800; font-size: 14px; cursor: pointer; width: 100%; }
+        .modal-content i { font-size: 55px; color: #ffe600; margin-bottom: 12px; text-shadow: 0 0 15px rgba(255, 230, 0, 0.6); display: inline-block; }
+        .modal-content h2 { color: #fff; font-size: 18px; font-weight: 900; margin-bottom: 8px; }
+        .modal-content p { color: #b2bec3; font-size: 13px; font-weight: 600; margin-bottom: 18px; line-height: 1.4; }
+        .modal-btn { background: linear-gradient(135deg, #ffe600, #ff0078); color: #fff; border: none; padding: 12px 28px; border-radius: 25px; font-weight: 900; font-size: 13px; cursor: pointer; box-shadow: 0 4px 15px rgba(255,0,120,0.4); }
     </style>
 </head>
 <body>
 
-    <!-- Welcome Modal -->
+    <div class="bg-animation">
+        <div class="bg-item">🎉</div>
+        <div class="bg-item">💸</div>
+        <div class="bg-item">💰</div>
+        <div class="bg-item">🎁</div>
+    </div>
+
+    <!-- New User Bonus Modal Popup -->
     <div class="modal" id="bonusModal">
         <div class="modal-content">
             <i class="fa-solid fa-gift"></i>
-            <h2>Welcome Bonus! 🎉</h2>
-            <p>You received a <b>₹100 Sign-up Bonus</b>. Join all 10 channels to unlock your withdrawal.</p>
-            <button class="modal-btn" onclick="closeModal()">Claim ₹100 Bonus</button>
+            <h2>बधाई हो! 🎉</h2>
+            <p>आपको <b>₹100 साइन अप बोनस</b> मिला है। विथड्रॉ करने के लिए सभी 10 टास्क पूरे करें।</p>
+            <button class="modal-btn" onclick="closeModal()">CLAIM ₹100 NOW</button>
         </div>
     </div>
 
     <div class="app-container">
-        <!-- User Header Card -->
         <div class="user-header-card">
             <div class="user-info">
                 <div class="avatar-circle" id="avatar-letter">U</div>
@@ -273,42 +256,54 @@
         <!-- 1. TASKS TAB -->
         <div id="tasks-tab" class="tab-content active">
             <div class="banner-card">
-                <h2>Join & Earn Instant ₹100</h2>
-                <p>Join all 10 Telegram channels below to unlock your payout.</p>
+                <h2>🎁 Complete All 10 Mandatory Tasks</h2>
+                <p>नीचे दिए गए सभी Telegram Channels को Join करें और <b>₹100 Instant Withdrawal Balance</b> क्लेम करें!</p>
             </div>
 
-            <div class="section-title"><i class="fa-solid fa-list-check"></i> Required Tasks (10)</div>
+            <div class="card-box">
+                <div class="card-title">CHANNELS TO JOIN (10/10)</div>
 
-            <div class="channels-grid" id="channels-container"></div>
+                <!-- 10 Channels List -->
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Channel 1</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-rocket"></i> Channel 2</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-rocket"></i> Channel 3</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-rocket"></i> Channel 4</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-rocket"></i> Channel 5</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-rocket"></i> Channel 6</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-rocket"></i> Channel 7</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-rocket"></i> Channel 8</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-rocket"></i> Channel 9</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><i class="fa-solid fa-rocket"></i> Channel 10</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
 
-            <button class="btn-action" onclick="verifyTasks()"><i class="fa-solid fa-circle-check"></i> Verify & Unlock Balance</button>
+                <button class="btn-action" onclick="verifyTasks()"><i class="fa-solid fa-circle-check"></i> VERIFY TASKS & UNLOCK ₹100</button>
+            </div>
         </div>
 
         <!-- 2. REFER TAB -->
         <div id="refer-tab" class="tab-content">
             <div class="card-box">
-                <div class="section-title"><i class="fa-solid fa-user-plus"></i> Invite Friends</div>
-                <p style="font-size:13px; color:#94a3b8; margin-bottom:10px; text-align:center; font-weight:500;">Invite your friends and earn an extra <b>₹20 Extra</b> per referral!</p>
+                <div class="card-title">REFER & EARN MORE</div>
+                <p style="font-size:13px; color:#b2bec3; margin-bottom:10px;">अपने दोस्तों को शेयर करें और हर रेफ़र पर <b>₹20 Extra</b> कमाएं!</p>
                 <input type="text" id="refer-link" class="custom-input" readonly value="https://t.me/Bot?start=12345">
-                <button class="btn-action" onclick="copyReferLink()"><i class="fa-solid fa-copy"></i> Copy Referral Link</button>
+                <button class="btn-action" onclick="copyReferLink()"><i class="fa-solid fa-copy"></i> COPY REFERRAL LINK</button>
             </div>
         </div>
 
         <!-- 3. WITHDRAW TAB -->
         <div id="withdraw-tab" class="tab-content">
             <div class="card-box">
-                <div class="section-title"><i class="fa-solid fa-wallet"></i> UPI Withdrawal</div>
-                <p style="font-size:13px; color:#94a3b8; text-align:center; font-weight:500;">Available Balance: <b style="color:#10b981;">₹<span id="withdraw-balance">100.00</span></b></p>
+                <div class="card-title">INSTANT UPI TRANSFER</div>
+                <p style="font-size:12px; color:#b2bec3;">Available Balance: <b style="color:#00f6ff;">₹<span id="withdraw-balance">100.00</span></b></p>
                 <input type="text" id="upi-id" class="custom-input" placeholder="Enter UPI ID (e.g. 9876543210@paytm)">
-                <button class="btn-action" onclick="processWithdraw()"><i class="fa-solid fa-paper-plane"></i> Request Withdrawal</button>
+                <button class="btn-action" onclick="processWithdraw()"><i class="fa-solid fa-wallet"></i> REQUEST WITHDRAWAL</button>
             </div>
 
             <div class="card-box">
-                <div class="section-title"><i class="fa-solid fa-shield-halved"></i> Payment Terms</div>
+                <div class="card-title">WITHDRAWAL RULES</div>
                 <ul class="rules-list">
-                    <li>Minimum withdrawal amount is <b>₹100</b>.</li>
-                    <li>Withdrawal will be processed only after joining and verifying all 10 channels.</li>
-                    <li>The bonus is valid once per Telegram ID.</li>
+                    <li>Minimum Withdrawal amount <b>₹100</b> है।</li>
+                    <li>सभी 10 चैनल्स ज्वाइन किए बिना विथड्रॉल अप्रूव नहीं होगा।</li>
+                    <li>बोनस एक ID पर सिर्फ 1 बार ही मिलेगा।</li>
                 </ul>
             </div>
         </div>
@@ -317,26 +312,26 @@
         <div id="profile-tab" class="tab-content">
             <div class="grid-2">
                 <div class="grid-card">
-                    <p>Total Earned</p>
+                    <p>TOTAL EARNED</p>
                     <h3>₹100.00</h3>
                 </div>
                 <div class="grid-card">
-                    <p>Total Withdrawn</p>
-                    <h3 style="color:#f43f5e;" id="total-withdrawn">₹0.00</h3>
+                    <p>TOTAL WITHDRAWAL</p>
+                    <h3 style="color:#ff0078;" id="total-withdrawn">₹0.00</h3>
                 </div>
             </div>
             
             <div class="card-box">
-                <div class="section-title"><i class="fa-solid fa-id-card"></i> Account Summary</div>
-                <p style="font-size:13px; color:#94a3b8; margin-bottom:8px; font-weight:500;"><b>Status:</b> <span id="account-status" style="color:#f59e0b; font-weight:700;">Unverified</span></p>
-                <p style="font-size:13px; color:#94a3b8; font-weight:500;"><b>Signup Bonus:</b> ₹100.00 Claimed</p>
+                <div class="card-title">ACCOUNT STATUS</div>
+                <p style="font-size:13px; color:#b2bec3; margin-bottom:6px;"><b>Verification Status:</b> <span style="color:#00ffcc;">ACTIVE</span></p>
+                <p style="font-size:13px; color:#b2bec3;"><b>Claimed Bonus:</b> ₹100 Instant Bonus</p>
             </div>
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- Navigation -->
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="switchTab('tasks-tab', this)"><i class="fa-solid fa-border-all"></i>Tasks</div>
+        <div class="nav-item active" onclick="switchTab('tasks-tab', this)"><i class="fa-solid fa-list-check"></i>Tasks</div>
         <div class="nav-item" onclick="switchTab('refer-tab', this)"><i class="fa-solid fa-users"></i>Refer</div>
         <div class="nav-item" onclick="switchTab('withdraw-tab', this)"><i class="fa-solid fa-wallet"></i>Withdraw</div>
         <div class="nav-item" onclick="switchTab('profile-tab', this)"><i class="fa-solid fa-user"></i>Profile</div>
@@ -359,42 +354,14 @@
         }
 
         let userBalanceKey = `balance_${currentUserId}`;
-        let userVerifiedKey = `verified_${currentUserId}`;
-        let userJoinedTasksKey = `joined_tasks_${currentUserId}`;
-
         let userBalance = localStorage.getItem(userBalanceKey) !== null 
                           ? parseFloat(localStorage.getItem(userBalanceKey)) 
                           : 100.00;
 
-        let isVerified = localStorage.getItem(userVerifiedKey) === "true";
-        let joinedTasks = JSON.parse(localStorage.getItem(userJoinedTasksKey) || "[]");
+        updateUI();
 
-        window.onload = function() {
-            renderChannels();
-            updateUI();
-        };
-
-        function renderChannels() {
-            const container = document.getElementById('channels-container');
-            container.innerHTML = '';
-            
-            for(let i = 1; i <= 10; i++) {
-                const isJoined = joinedTasks.includes(i);
-                const btnClass = isJoined ? 'btn-join joined' : 'btn-join';
-                const btnText = isJoined ? 'Joined ✓' : 'JOIN';
-
-                const cardHTML = `
-                    <div class="task-square-box">
-                        <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
-                        <div class="channel-name">Channel ${i}</div>
-                        <button class="${btnClass}" id="task-btn-${i}" onclick="handleJoinClick(this, ${i}, 'https://t.me/+kCr0xkaeeEgwNzRl')">${btnText}</button>
-                    </div>
-                `;
-                container.insertAdjacentHTML('beforeend', cardHTML);
-            }
-        }
-
-        if (userBalance > 0 && !isVerified) {
+        // Show "बधाई हो!" Modal ONLY to new users (whose balance > 0)
+        if (userBalance > 0) {
             document.getElementById('bonusModal').style.display = 'flex';
         }
 
@@ -407,44 +374,31 @@
             } else {
                 document.getElementById('total-withdrawn').innerText = "₹0.00";
             }
-
-            const statusElem = document.getElementById('account-status');
-            if (isVerified) {
-                statusElem.innerText = "Verified & Unlocked";
-                statusElem.style.color = "#10b981";
-            } else {
-                statusElem.innerText = "Unverified (Tasks Pending)";
-                statusElem.style.color = "#f59e0b";
-            }
         }
 
         function closeModal() {
             document.getElementById('bonusModal').style.display = 'none';
         }
 
-        function handleJoinClick(btn, taskId, link) {
+        // 5-SECOND TIMER LOGIC FOR JOIN BUTTON
+        function handleJoinClick(btn, link) {
             if (btn.classList.contains('joined') || btn.classList.contains('waiting')) return;
 
             window.open(link, '_blank');
 
             btn.classList.add('waiting');
             let timeLeft = 5;
-            btn.innerText = `Wait (${timeLeft}s)`;
+            btn.innerText = `WAIT (${timeLeft}s)`;
 
             let countdown = setInterval(() => {
                 timeLeft--;
                 if (timeLeft > 0) {
-                    btn.innerText = `Wait (${timeLeft}s)`;
+                    btn.innerText = `WAIT (${timeLeft}s)`;
                 } else {
                     clearInterval(countdown);
                     btn.classList.remove('waiting');
                     btn.classList.add('joined');
-                    btn.innerText = 'Joined ✓';
-
-                    if (!joinedTasks.includes(taskId)) {
-                        joinedTasks.push(taskId);
-                        localStorage.setItem(userJoinedTasksKey, JSON.stringify(joinedTasks));
-                    }
+                    btn.innerText = 'JOINED ✓';
                 }
             }, 1000);
         }
@@ -456,32 +410,45 @@
             element.classList.add('active');
         }
 
+        // EXACT LOGIC: CHECK CHANNELS FIRST, THEN SHOW ALREADY STARTED IF OLD USER
         function verifyTasks() {
-            if (joinedTasks.length < 10) {
-                alert(`⚠️ You have joined only ${joinedTasks.length}/10 channels so far! Please join all 10 channels first.`);
-            } else {
-                isVerified = true;
-                localStorage.setItem(userVerifiedKey, "true");
-                updateUI();
-                alert("✅ Congratulations! All 10 channels have been successfully verified. You can now withdraw.");
+            const allButtons = document.querySelectorAll('.btn-join');
+            let allJoined = true;
+
+            // 1. First, check if all 10 channels are joined
+            allButtons.forEach(btn => {
+                if (!btn.classList.contains('joined')) {
+                    allJoined = false;
+                }
+            });
+
+            // 2. If ANY channel is NOT joined, ALWAYS show channel join message
+            if (!allJoined) {
+                alert("⚠️ कृपया पहले ऊपर दिए गए सभी 10 चैनल्स को ज्वाइन करें!");
+            } 
+            // 3. If ALL channels ARE joined:
+            else {
+                // If it's an Old User (Balance 0), show already withdrawn/started alert
+                if (userBalance === 0) {
+                    alert("⚠️ You have already claimed and withdrawn your ₹100 bonus!");
+                } 
+                // If it's a New User (Balance > 0), show success alert
+                else {
+                    alert("✅ All 10 Tasks Verified Successfully! आपका Wallet Balance अनलॉक हो गया है।");
+                }
             }
         }
 
         function processWithdraw() {
-            if (!isVerified || joinedTasks.length < 10) {
-                alert("🚫 Request Blocked! You cannot withdraw without joining and verifying all 10 channels.");
-                switchTab('tasks-tab', document.querySelectorAll('.nav-item')[0]);
-                return;
-            }
+            const upiVal = document.getElementById('upi-id').value.trim();
 
             if (userBalance <= 0) {
-                alert("⚠️ Insufficient balance! You do not have enough balance to withdraw.");
+                alert("⚠️ Insufficient Balance! You don't have enough balance to withdraw.");
                 return;
             }
 
-            const upiVal = document.getElementById('upi-id').value.trim();
             if (upiVal === "" || !upiVal.includes("@")) {
-                alert("⚠️ Please enter a valid UPI ID (e.g., 9876543210@paytm)");
+                alert("⚠️ Please enter a valid UPI ID (e.g. 9876543210@paytm)");
                 return;
             }
 
@@ -491,15 +458,16 @@
             updateUI();
             document.getElementById('upi-id').value = "";
 
-            alert("🎉 Withdrawal request submitted! Payment will be credited within 24 hours.");
+            alert("🎉 Withdrawal Request Submitted Successfully! Payment 24 घंटे के अंदर ट्रांसफर कर दिया जाएगा।");
         }
 
         function copyReferLink() {
             const copyText = document.getElementById("refer-link");
             copyText.select();
-            navigator.clipboard.writeText(copyText.value);
-            alert("📋 Referral Link Copied!");
+            document.execCommand("copy");
+            alert("📋 Refer Link Copied!");
         }
     </script>
 </body>
 </html>
+
