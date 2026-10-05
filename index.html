@@ -11,10 +11,10 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; user-select: none; }
         
-        /* Deep Maroon Background Theme */
+        /* Premium Obsidian & Gold Glow Theme */
         body { 
-            background: #4a0404 linear-gradient(180deg, #5c0606 0%, #2b0202 100%); 
-            color: #1e293b; 
+            background: #080c14 linear-gradient(180deg, #0d1322 0%, #050810 100%); 
+            color: #ffffff; 
             min-height: 100vh; 
             padding-bottom: 95px; 
             position: relative; 
@@ -22,7 +22,7 @@
         }
 
         .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-        .bg-item { position: absolute; top: -10%; font-size: 20px; opacity: 0.15; animation: fall 9s linear infinite; filter: drop-shadow(0 0 8px #ffd700); }
+        .bg-item { position: absolute; top: -10%; font-size: 20px; opacity: 0.2; animation: fall 9s linear infinite; filter: drop-shadow(0 0 8px #ffd700); }
         @keyframes fall { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(110vh) rotate(360deg); } }
         .bg-item:nth-child(1) { left: 8%; animation-duration: 7s; }
         .bg-item:nth-child(2) { left: 32%; animation-duration: 10s; animation-delay: 2s; }
@@ -31,119 +31,101 @@
 
         .app-container { position: relative; z-index: 1; padding: 16px; max-width: 480px; margin: 0 auto; }
 
-        /* Modern White User Header Card */
+        /* Modern User Header Card */
         .user-header-card { 
-            background: #ffffff; 
+            background: rgba(18, 26, 43, 0.8); 
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.3); 
             border-radius: 22px; 
             padding: 12px 16px; 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
             margin-bottom: 16px; 
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
         }
-
         .user-info { display: flex; align-items: center; gap: 12px; }
         .avatar-circle { 
             width: 42px; 
             height: 42px; 
-            background: linear-gradient(135deg, #800000, #b30000); 
-            color: #fff; 
+            background: linear-gradient(135deg, #ffd700, #ff8c00); 
+            color: #000; 
             border-radius: 50%; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             font-size: 18px; 
             font-weight: 900; 
-            box-shadow: 0 4px 10px rgba(128, 0, 0, 0.3); 
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.5); 
         }
-
-        .user-text h3 { font-size: 14px; font-weight: 800; color: #0f172a; }
-        .user-text p { font-size: 11px; color: #16a34a; font-weight: 700; }
+        .user-text h3 { font-size: 14px; font-weight: 800; color: #fff; }
+        .user-text p { font-size: 11px; color: #00ffaa; font-weight: 600; }
 
         .balance-badge { 
-            background: linear-gradient(135deg, #16a34a, #15803d); 
+            background: linear-gradient(135deg, #00ffaa, #00b87a); 
             padding: 8px 14px; 
             border-radius: 18px; 
             font-weight: 900; 
-            color: #ffffff; 
+            color: #05100a; 
             font-size: 13px; 
-            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3); 
+            box-shadow: 0 0 15px rgba(0, 255, 170, 0.3); 
             text-transform: uppercase;
         }
 
-        /* Distinct Unique Colored Dashboard Buttons */
+        /* Modern Dashboard Navigation Buttons */
         .dashboard-nav {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 8px;
             margin-bottom: 16px;
         }
-
         .nav-btn {
+            background: rgba(18, 26, 43, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
-            padding: 12px 4px;
+            padding: 10px 4px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            border: 2px solid transparent;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
         }
-
-        /* 1. Tasks Button - Purple */
-        #nav-tasks { background: #f3e8ff; color: #6b21a8; }
-        #nav-tasks i { color: #7e22ce; }
-        #nav-tasks.active { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: #fff; border-color: #f3e8ff; }
-        #nav-tasks.active i { color: #fff; }
-
-        /* 2. Refer Button - Blue */
-        #nav-refer { background: #e0f2fe; color: #0369a1; }
-        #nav-refer i { color: #0284c7; }
-        #nav-refer.active { background: linear-gradient(135deg, #0284c7, #0369a1); color: #fff; border-color: #e0f2fe; }
-        #nav-refer.active i { color: #fff; }
-
-        /* 3. Withdraw Button - Emerald Green */
-        #nav-withdraw { background: #dcfce7; color: #15803d; }
-        #nav-withdraw i { color: #16a34a; }
-        #nav-withdraw.active { background: linear-gradient(135deg, #16a34a, #15803d); color: #fff; border-color: #dcfce7; }
-        #nav-withdraw.active i { color: #fff; }
-
-        /* 4. Profile Button - Orange */
-        #nav-profile { background: #ffedd5; color: #c2410c; }
-        #nav-profile i { color: #ea580c; }
-        #nav-profile.active { background: linear-gradient(135deg, #ea580c, #c2410c); color: #fff; border-color: #ffedd5; }
-        #nav-profile.active i { color: #fff; }
-
-        .nav-btn i { font-size: 18px; margin-bottom: 4px; display: block; }
-        .nav-btn span { font-size: 10px; font-weight: 800; }
+        .nav-btn.active {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 140, 0, 0.05));
+            border: 1px solid #ffd700;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+        }
+        .nav-btn i { font-size: 16px; margin-bottom: 6px; color: #64748b; display: block; }
+        .nav-btn.active i { color: #ffd700; }
+        .nav-btn span { font-size: 10px; font-weight: 800; color: #94a3b8; }
+        .nav-btn.active span { color: #ffffff; }
 
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: slideUp 0.35s ease-out; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* White Interface Cards */
+        /* Jackpot Banner Card */
         .banner-card { 
-            background: #ffffff; 
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(0, 255, 170, 0.05)); 
+            backdrop-filter: blur(15px);
             border-radius: 20px; 
             padding: 16px; 
-            color: #0f172a; 
+            color: white; 
+            border: 1px solid rgba(255, 215, 0, 0.4); 
             margin-bottom: 16px; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.25); 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4); 
             text-align: center;
-            border-left: 5px solid #800000;
         }
+        .banner-card h2 { font-size: 16px; font-weight: 800; color: #ffd700; margin-bottom: 6px; letter-spacing: 0.5px; }
+        .banner-card p { font-size: 12px; color: #cbd5e1; line-height: 1.5; }
 
-        .banner-card h2 { font-size: 15px; font-weight: 800; color: #800000; margin-bottom: 6px; }
-        .banner-card p { font-size: 12px; color: #475569; line-height: 1.5; }
-
+        /* Live Task Progress Line Container */
         .progress-box {
-            background: #ffffff;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
             padding: 12px 14px;
             margin-bottom: 16px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
         }
-
         .progress-header {
             display: flex;
             justify-content: space-between;
@@ -152,125 +134,69 @@
             font-size: 11px;
             font-weight: 800;
         }
-
-        .progress-header span:first-child { color: #64748b; text-transform: uppercase; }
-        .progress-header span:last-child { color: #16a34a; }
+        .progress-header span:first-child { color: #94a3b8; text-transform: uppercase; }
+        .progress-header span:last-child { color: #00ffaa; }
 
         .progress-bar-bg {
             width: 100%;
-            height: 10px;
-            background: #f1f5f9;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 10px;
             overflow: hidden;
+            position: relative;
         }
-
         .progress-bar-fill {
             width: 0%;
             height: 100%;
-            background: linear-gradient(90deg, #2563eb, #16a34a);
+            background: linear-gradient(90deg, #00ffaa, #ffd700);
             border-radius: 10px;
             transition: width 0.4s ease-in-out;
+            box-shadow: 0 0 10px rgba(0, 255, 170, 0.6);
         }
 
         .card-box { 
-            background: #ffffff; 
+            background: rgba(18, 26, 43, 0.75); 
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08); 
             border-radius: 22px; 
             padding: 18px; 
             margin-bottom: 16px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.25); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
         }
+        .card-title { font-size: 12px; font-weight: 900; color: #ffd700; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; letter-spacing: 1px; }
+        .card-title::before { content: ''; width: 4px; height: 14px; background: #00ffaa; border-radius: 2px; box-shadow: 0 0 8px #00ffaa; }
 
-        .card-title { font-size: 12px; font-weight: 900; color: #800000; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; letter-spacing: 0.5px; }
-        .card-title::before { content: ''; width: 4px; height: 14px; background: #800000; border-radius: 2px; }
-
+        /* Channel Item Row */
         .task-card { 
-            background: #f8fafc; 
-            border: 1px solid #e2e8f0; 
+            background: rgba(255, 255, 255, 0.02); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
             border-radius: 16px; 
-            padding: 10px 14px; 
+            padding: 12px 14px; 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
             margin-bottom: 10px; 
         }
-
-        .channel-info { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 13px; color: #1e293b; }
-
-        /* --- OPEN/CLOSE GIFT BOX ANIMATION --- */
-        .gift-container {
-            width: 24px;
-            height: 24px;
-            position: relative;
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-end;
-            cursor: pointer;
+        
+        .channel-info { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 13px; color: #f1f5f9; }
+        
+        .animated-emoji { 
+            font-size: 18px; 
+            display: inline-block;
+            line-height: 1;
+            animation: pulseGlow 1.5s infinite ease-in-out; 
         }
 
-        .gift-box-body {
-            width: 20px;
-            height: 14px;
-            background: linear-gradient(135deg, #dc2626, #991b1b);
-            border-radius: 3px;
-            position: relative;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        @keyframes pulseGlow { 
+            0% { transform: scale(1); } 
+            50% { transform: scale(1.22); } 
+            100% { transform: scale(1); } 
         }
 
-        /* Ribbon on Box Body */
-        .gift-box-body::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 100%;
-            background: #facc15;
-        }
-
-        /* Gift Lid / Cap */
-        .gift-box-lid {
-            width: 22px;
-            height: 5px;
-            background: linear-gradient(135deg, #ef4444, #b91c1c);
-            border-radius: 2px;
-            position: absolute;
-            top: 5px;
-            left: 1px;
-            z-index: 2;
-            transform-origin: left bottom;
-            animation: openCloseLid 1.2s infinite ease-in-out;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-
-        /* Ribbon Bow on Top of Lid */
-        .gift-box-lid::before {
-            content: '';
-            position: absolute;
-            top: -4px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 6px;
-            height: 4px;
-            background: #facc15;
-            border-radius: 2px 2px 0 0;
-        }
-
-        /* Continuous Lid Open & Close Keyframes */
-        @keyframes openCloseLid {
-            0%, 100% {
-                transform: rotate(0deg) translateY(0);
-            }
-            35%, 65% {
-                transform: rotate(-35deg) translateY(-4px);
-            }
-        }
-
-        /* Focusing Electric Blue Channel Buttons */
+        /* Buttons */
         .btn-join { 
-            background: linear-gradient(135deg, #2563eb, #1d4ed8); 
-            color: #ffffff; 
+            background: linear-gradient(135deg, #ffd700, #ff8c00); 
+            color: #000; 
             text-decoration: none; 
             padding: 8px 18px; 
             border-radius: 20px; 
@@ -278,35 +204,36 @@
             font-weight: 900; 
             border: none; 
             cursor: pointer; 
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35); 
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3); 
             transition: 0.2s;
         }
 
         .btn-join.waiting {
-            background: linear-gradient(135deg, #16a34a, #15803d) !important;
-            color: #fff !important;
-            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.35) !important;
+            background: linear-gradient(135deg, #00ffaa, #00b87a) !important;
+            color: #000 !important;
+            box-shadow: 0 4px 12px rgba(0, 255, 170, 0.4) !important;
             cursor: wait;
         }
 
         .btn-join.joined { 
-            background: #e2e8f0 !important; 
-            color: #94a3b8 !important; 
+            background: rgba(255, 255, 255, 0.05) !important; 
+            color: #64748b !important; 
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
             box-shadow: none !important; 
             pointer-events: none;
         }
 
         .btn-action { 
             width: 100%; 
-            background: linear-gradient(135deg, #800000, #b30000); 
+            background: linear-gradient(135deg, #00ffaa, #00b87a); 
             border: none; 
             padding: 16px; 
             border-radius: 20px; 
             font-weight: 900; 
             font-size: 13px; 
-            color: #ffffff; 
+            color: #05100a; 
             cursor: pointer; 
-            box-shadow: 0 6px 18px rgba(128, 0, 0, 0.4); 
+            box-shadow: 0 6px 20px rgba(0, 255, 170, 0.3); 
             text-transform: uppercase; 
             margin-top: 10px; 
             letter-spacing: 0.5px;
@@ -314,52 +241,48 @@
 
         .custom-input { 
             width: 100%; 
-            padding: 14px; 
+            padding: 15px; 
             border-radius: 16px; 
-            border: 2px solid #e2e8f0; 
-            background: #f8fafc; 
+            border: 1px solid rgba(255, 215, 0, 0.3); 
+            background: rgba(8, 12, 20, 0.7); 
             font-size: 14px; 
             text-align: center; 
             font-weight: bold; 
             margin: 12px 0; 
-            color: #0f172a; 
+            color: #ffd700; 
             outline: none;
         }
 
-        .custom-input:focus { border-color: #800000; }
-
-        .rules-list { font-size: 12px; color: #475569; line-height: 1.8; padding-left: 18px; }
+        .rules-list { font-size: 12px; color: #94a3b8; line-height: 1.8; padding-left: 18px; }
         .rules-list li { margin-bottom: 6px; }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
         .grid-card { 
-            background: #ffffff; 
+            background: rgba(18, 26, 43, 0.75); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
             padding: 16px; 
             border-radius: 20px; 
             text-align: center; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
-
-        .grid-card p { font-size: 10px; font-weight: 800; color: #64748b; text-transform: uppercase; }
-        .grid-card h3 { font-size: 18px; font-weight: 900; color: #800000; margin-top: 4px; }
+        .grid-card p { font-size: 10px; font-weight: 800; color: #94a3b8; text-transform: uppercase; }
+        .grid-card h3 { font-size: 18px; font-weight: 900; color: #ffd700; margin-top: 4px; }
 
         /* Modal Popup */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); justify-content: center; align-items: center; z-index: 1000; }
-
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { 
-            background: #ffffff; 
+            background: linear-gradient(135deg, #0d1322, #050810); 
             padding: 26px; 
             border-radius: 28px; 
             text-align: center; 
             max-width: 320px; 
             width: 85%; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            border: 1px solid rgba(255, 215, 0, 0.4); 
+            box-shadow: 0 0 35px rgba(0,0,0,0.8); 
         }
-
-        .modal-content i { font-size: 50px; color: #eab308; margin-bottom: 12px; display: inline-block; }
-        .modal-content h2 { color: #0f172a; font-size: 18px; font-weight: 900; margin-bottom: 8px; }
-        .modal-content p { color: #475569; font-size: 12px; font-weight: 600; margin-bottom: 20px; line-height: 1.5; }
-        .modal-btn { background: linear-gradient(135deg, #800000, #b30000); color: #fff; border: none; padding: 12px 30px; border-radius: 20px; font-weight: 900; font-size: 12px; cursor: pointer; box-shadow: 0 4px 15px rgba(128,0,0,0.3); }
+        .modal-content i { font-size: 50px; color: #ffd700; margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); display: inline-block; }
+        .modal-content h2 { color: #fff; font-size: 18px; font-weight: 900; margin-bottom: 8px; }
+        .modal-content p { color: #94a3b8; font-size: 12px; font-weight: 600; margin-bottom: 20px; line-height: 1.5; }
+        .modal-btn { background: linear-gradient(135deg, #ffd700, #ff8c00); color: #000; border: none; padding: 12px 30px; border-radius: 20px; font-weight: 900; font-size: 12px; cursor: pointer; box-shadow: 0 4px 15px rgba(255,215,0,0.3); }
     </style>
 </head>
 <body>
@@ -371,7 +294,7 @@
         <div class="bg-item">🎁</div>
     </div>
 
-    <!-- Bonus Modal Popup -->
+    <!-- New User Bonus Modal Popup -->
     <div class="modal" id="bonusModal">
         <div class="modal-content">
             <i class="fa-solid fa-trophy"></i>
@@ -396,7 +319,7 @@
             </div>
         </div>
 
-        <!-- Distinct Stylish Dashboard Navigation Buttons -->
+        <!-- Dashboard Fast Navigation -->
         <div class="dashboard-nav">
             <div class="nav-btn active" id="nav-tasks" onclick="switchTab('tasks-tab', this)">
                 <i class="fa-solid fa-list-check"></i>
@@ -423,7 +346,7 @@
                 <p>नीचे दिए गए सभी Telegram Channels को Join करें और अपना <b>₹100 Winning Prize</b> तुरंत Withdraw करें!</p>
             </div>
 
-            <!-- Task Verification Line -->
+            <!-- LIVE TASK PROGRESS LINE BOX -->
             <div class="progress-box">
                 <div class="progress-header">
                     <span>Task Verification Line</span>
@@ -437,86 +360,17 @@
             <div class="card-box">
                 <div class="card-title">LUCKY DRAW CHANNELS (10/10)</div>
 
-                <!-- 10 Channels List with Open/Close Gift Box Animation -->
-                <div class="task-card">
-                    <div class="channel-info">
-                        <div class="gift-container"><div class="gift-box-lid"></div><div class="gift-box-body"></div></div> 
-                        Channel 1
-                    </div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-                </div>
-
-                <div class="task-card">
-                    <div class="channel-info">
-                        <div class="gift-container"><div class="gift-box-lid"></div><div class="gift-box-body"></div></div> 
-                        Channel 2
-                    </div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'KKKKKKKKKKKKK')">JOIN</button>
-                </div>
-
-                <div class="task-card">
-                    <div class="channel-info">
-                        <div class="gift-container"><div class="gift-box-lid"></div><div class="gift-box-body"></div></div> 
-                        Channel 3
-                    </div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'KKKKKKKKKKKKK')">JOIN</button>
-                </div>
-
-                <div class="task-card">
-                    <div class="channel-info">
-                        <div class="gift-container"><div class="gift-box-lid"></div><div class="gift-box-body"></div></div> 
-                        Channel 4
-                    </div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'KKKKKKKKKKKKK')">JOIN</button>
-                </div>
-
-                <div class="task-card">
-                    <div class="channel-info">
-                        <div class="gift-container"><div class="gift-box-lid"></div><div class="gift-box-body"></div></div> 
-                        Channel 5
-                    </div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'KKKKKKKKKKKKK')">JOIN</button>
-                </div>
-
-                <div class="task-card">
-                    <div class="channel-info">
-                        <div class="gift-container"><div class="gift-box-lid"></div><div class="gift-box-body"></div></div> 
-                        Channel 6
-                    </div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'KKKKKKKKKKKKK')">JOIN</button>
-                </div>
-
-                <div class="task-card">
-                    <div class="channel-info">
-                        <div class="gift-container"><div class="gift-box-lid"></div><div class="gift-box-body"></div></div> 
-                        Channel 7
-                    </div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'KKKKKKKKKKKKK')">JOIN</button>
-                </div>
-
-                <div class="task-card">
-                    <div class="channel-info">
-                        <div class="gift-container"><div class="gift-box-lid"></div><div class="gift-box-body"></div></div> 
-                        Channel 8
-                    </div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'KKKKKKKKKKKKK')">JOIN</button>
-                </div>
-
-                <div class="task-card">
-                    <div class="channel-info">
-                        <div class="gift-container"><div class="gift-box-lid"></div><div class="gift-box-body"></div></div> 
-                        Channel 9
-                    </div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'KKKKKKKKKKKKK')">JOIN</button>
-                </div>
-
-                <div class="task-card">
-                    <div class="channel-info">
-                        <div class="gift-container"><div class="gift-box-lid"></div><div class="gift-box-body"></div></div> 
-                        Channel 10
-                    </div>
-                    <button class="btn-join" onclick="handleJoinClick(this, 'KKKKKKKKKKKKK')">JOIN</button>
-                </div>
+                <!-- 10 Channels List -->
+                <div class="task-card"><div class="channel-info"><span class="animated-emoji">🎁</span> Channel 1</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><span class="animated-emoji">🚀</span> Channel 2</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><span class="animated-emoji">🚀</span> Channel 3</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><span class="animated-emoji">🚀</span> Channel 4</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><span class="animated-emoji">🚀</span> Channel 5</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><span class="animated-emoji">🚀</span> Channel 6</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><span class="animated-emoji">🚀</span> Channel 7</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><span class="animated-emoji">🚀</span> Channel 8</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><span class="animated-emoji">🚀</span> Channel 9</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
+                <div class="task-card"><div class="channel-info"><span class="animated-emoji">🚀</span> Channel 10</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
 
                 <button class="btn-action" onclick="verifyTasks()"><i class="fa-solid fa-circle-check"></i> VERIFY TASKS & UNLOCK ₹100</button>
             </div>
@@ -526,7 +380,7 @@
         <div id="refer-tab" class="tab-content">
             <div class="card-box">
                 <div class="card-title">YONO REFER & EARN MORE</div>
-                <p style="font-size:12px; color:#64748b; margin-bottom:12px;">अपने दोस्तों को शेयर करें और हर रेफ़र पर <b>₹20 Extra Cash</b> जीतें!</p>
+                <p style="font-size:12px; color:#94a3b8; margin-bottom:12px;">अपने दोस्तों को शेयर करें और हर रेफ़र पर <b>₹20 Extra Cash</b> जीतें!</p>
                 <input type="text" id="refer-link" class="custom-input" readonly value="https://t.me/Bot?start=12345">
                 <button class="btn-action" onclick="copyReferLink()"><i class="fa-solid fa-copy"></i> COPY REFERRAL LINK</button>
             </div>
@@ -536,7 +390,7 @@
         <div id="withdraw-tab" class="tab-content">
             <div class="card-box">
                 <div class="card-title">INSTANT YONO UPI TRANSFER</div>
-                <p style="font-size:12px; color:#64748b;">Available Balance: <b style="color:#16a34a;">₹<span id="withdraw-balance">100.00</span></b></p>
+                <p style="font-size:12px; color:#94a3b8;">Available Balance: <b style="color:#00ffaa;">₹<span id="withdraw-balance">100.00</span></b></p>
                 <input type="text" id="upi-id" class="custom-input" placeholder="Enter UPI ID (e.g. 9876543210@paytm)">
                 <button class="btn-action" onclick="processWithdraw()"><i class="fa-solid fa-wallet"></i> REQUEST WITHDRAWAL</button>
             </div>
@@ -560,14 +414,14 @@
                 </div>
                 <div class="grid-card">
                     <p>TOTAL WITHDRAWAL</p>
-                    <h3 style="color:#dc2626;" id="total-withdrawn">₹0.00</h3>
+                    <h3 style="color:#ff0078;" id="total-withdrawn">₹0.00</h3>
                 </div>
             </div>
             
             <div class="card-box">
                 <div class="card-title">YONO ACCOUNT STATUS</div>
-                <p style="font-size:13px; color:#475569; margin-bottom:8px;"><b>Verification Status:</b> <span style="color:#16a34a; font-weight: bold;">ACTIVE</span></p>
-                <p style="font-size:13px; color:#475569;"><b>Lucky Draw Prize:</b> ₹100 Won</p>
+                <p style="font-size:13px; color:#94a3b8; margin-bottom:8px;"><b>Verification Status:</b> <span style="color:#00ffaa;">ACTIVE</span></p>
+                <p style="font-size:13px; color:#94a3b8;"><b>Lucky Draw Prize:</b> ₹100 Won</p>
             </div>
         </div>
     </div>
@@ -615,6 +469,7 @@
             document.getElementById('bonusModal').style.display = 'none';
         }
 
+        /* Updates the Animated Line Progress when channels are joined */
         function updateProgressBar() {
             const joinedCount = document.querySelectorAll('.btn-join.joined').length;
             document.getElementById('progress-text').innerText = `${joinedCount} / 10 Joined`;
@@ -651,6 +506,7 @@
             element.classList.add('active');
         }
 
+        /* VERIFY TASKS PAGE LOGIC */
         function verifyTasks() {
             const joinedCount = document.querySelectorAll('.btn-join.joined').length;
             
@@ -662,11 +518,13 @@
             return false;
         }
 
+        /* WITHDRAW PAGE LOGIC WITH AUTO REDIRECT TO TASKS PAGE */
         function processWithdraw() {
             const joinedCount = document.querySelectorAll('.btn-join.joined').length;
 
             if (joinedCount < 10) {
                 alert("⚠️ कृपया पहले सभी चैनल जॉइन करें");
+                // OK दबाते ही टास्क वाले मेन पेज पर ले जाएगा
                 switchTab('tasks-tab', document.getElementById('nav-tasks'));
             } else {
                 alert("⏳ कृपया पहले सभी चैनल में ज्वाइन होने की पुष्टि होने दें");
