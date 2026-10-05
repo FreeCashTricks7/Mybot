@@ -7,7 +7,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Impact&display=swap');
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; user-select: none; }
         
@@ -31,7 +31,7 @@
 
         .app-container { position: relative; z-index: 1; padding: 16px; max-width: 480px; margin: 0 auto; }
 
-        /* Modern White User Header Card */
+        /* User Header Card */
         .user-header-card { 
             background: #ffffff; 
             border-radius: 22px; 
@@ -70,7 +70,7 @@
             text-transform: uppercase;
         }
 
-        /* Distinct Unique Colored Dashboard Buttons */
+        /* Dashboard Navigation Buttons */
         .dashboard-nav {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -87,25 +87,21 @@
             border: 2px solid transparent;
         }
 
-        /* 1. Tasks Button - Purple */
         #nav-tasks { background: #f3e8ff; color: #6b21a8; }
         #nav-tasks i { color: #7e22ce; }
         #nav-tasks.active { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: #fff; border-color: #f3e8ff; }
         #nav-tasks.active i { color: #fff; }
 
-        /* 2. Refer Button - Blue */
         #nav-refer { background: #e0f2fe; color: #0369a1; }
         #nav-refer i { color: #0284c7; }
         #nav-refer.active { background: linear-gradient(135deg, #0284c7, #0369a1); color: #fff; border-color: #e0f2fe; }
         #nav-refer.active i { color: #fff; }
 
-        /* 3. Withdraw Button - Emerald Green */
         #nav-withdraw { background: #dcfce7; color: #15803d; }
         #nav-withdraw i { color: #16a34a; }
         #nav-withdraw.active { background: linear-gradient(135deg, #16a34a, #15803d); color: #fff; border-color: #dcfce7; }
         #nav-withdraw.active i { color: #fff; }
 
-        /* 4. Profile Button - Orange */
         #nav-profile { background: #ffedd5; color: #c2410c; }
         #nav-profile i { color: #ea580c; }
         #nav-profile.active { background: linear-gradient(135deg, #ea580c, #c2410c); color: #fff; border-color: #ffedd5; }
@@ -118,58 +114,58 @@
         .tab-content.active { display: block; animation: slideUp 0.35s ease-out; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- GREEN DIAMOND IMAGE-STYLE BANNER CARD --- */
+        /* --- BANNER CARD IN EXACT STYLE OF 2ND PHOTO --- */
         .banner-card { 
-            background: linear-gradient(135deg, #0f5128, #052e16); 
+            background: linear-gradient(135deg, #063819, #021a0b); 
             border-radius: 22px; 
-            padding: 22px 16px 18px 16px; 
+            padding: 24px 16px 18px 16px; 
             color: #ffffff; 
             margin-bottom: 16px; 
             box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
             text-align: center;
-            border: 2px solid #22c55e;
+            border: 2px solid #15803d;
             position: relative;
             overflow: hidden;
         }
 
-        /* Diamond Outer Shape */
         .diamond-badge-wrapper {
             position: relative;
             display: inline-block;
-            margin: 10px auto 14px auto;
+            margin: 15px auto 18px auto;
         }
 
         /* Top Glowing Stars */
         .stars-top {
             position: absolute;
-            top: -20px;
+            top: -24px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 6px;
-            z-index: 1;
+            gap: 8px;
+            z-index: 2;
         }
         .stars-top i {
             color: #facc15;
-            font-size: 22px;
-            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+            font-size: 26px;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.8));
             animation: starGlow 1.5s infinite alternate ease-in-out;
         }
-        .stars-top i:nth-child(2) { font-size: 28px; color: #fbbf24; }
+        .stars-top i:nth-child(2) { font-size: 32px; color: #fbbf24; }
 
         @keyframes starGlow {
-            0% { transform: scale(0.9); filter: drop-shadow(0 0 2px #facc15); }
-            100% { transform: scale(1.15); filter: drop-shadow(0 0 10px #fde047); }
+            0% { transform: scale(0.95); filter: drop-shadow(0 0 4px #facc15); }
+            100% { transform: scale(1.15); filter: drop-shadow(0 0 12px #fde047); }
         }
 
+        /* Larger Green Diamond Outer Box */
         .diamond-box {
-            width: 140px;
-            height: 140px;
-            background: linear-gradient(135deg, #15803d, #166534);
+            width: 170px;
+            height: 170px;
+            background: linear-gradient(135deg, #0d6e30, #06401a);
             transform: rotate(45deg);
-            border-radius: 24px;
-            border: 4px solid #4ade80;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 8px 20px rgba(0,0,0,0.4);
+            border-radius: 28px;
+            border: 4px solid #22c55e;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.6), 0 8px 25px rgba(0,0,0,0.5);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -178,35 +174,52 @@
 
         .diamond-content {
             transform: rotate(-45deg);
-            width: 170px;
+            width: 220px;
             text-align: center;
         }
 
-        /* Yellow 3D YONO Text */
+        /* Large Bold 3D Yellow YONO Text */
         .yono-text-yellow {
-            font-size: 26px;
+            font-family: 'Impact', sans-serif, 'Plus Jakarta Sans';
+            font-size: 42px;
             font-weight: 900;
-            color: #facc15;
-            text-shadow: 2px 3px 0px #b45309, 0 0 10px rgba(250, 204, 21, 0.5);
-            letter-spacing: 1px;
-            line-height: 1;
-            margin-bottom: 2px;
+            background: linear-gradient(180deg, #fffbeb 0%, #facc15 50%, #eab308 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(2px 4px 0px #78350f) drop-shadow(0px 0px 8px rgba(250, 204, 21, 0.6));
+            letter-spacing: 2px;
+            line-height: 0.95;
+            margin-bottom: 6px;
+            text-transform: uppercase;
         }
 
-        /* White 3D Pill Badge Text */
-        .lucky-draw-pill {
-            background: linear-gradient(135deg, #22c55e, #15803d);
-            border: 2px solid #86efac;
-            padding: 4px 10px;
-            border-radius: 20px;
-            color: #ffffff;
-            font-size: 13px;
+        /* White Roller Slot-Machine Style Capsule for LUCKY DRAW */
+        .lucky-draw-roller {
+            background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 50%, #e2e8f0 100%);
+            border: 3px solid #22c55e;
+            border-radius: 30px;
+            padding: 6px 12px;
+            box-shadow: inset 0 3px 6px rgba(0,0,0,0.3), 0 5px 12px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 0 auto;
+            width: 92%;
+        }
+
+        .spade-icon {
+            color: #15803d;
+            font-size: 14px;
+        }
+
+        .lucky-draw-text {
+            font-family: 'Impact', sans-serif, 'Plus Jakarta Sans';
+            color: #15803d;
+            font-size: 18px;
             font-weight: 900;
-            text-shadow: 1px 2px 0px #064e3b;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            display: inline-block;
-            letter-spacing: 0.5px;
-            width: 100%;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 0px #86efac;
+            text-transform: uppercase;
         }
 
         .banner-card p { 
@@ -214,10 +227,11 @@
             color: #fef08a; 
             line-height: 1.5; 
             font-weight: 700;
-            margin-top: 6px;
+            margin-top: 8px;
             text-shadow: 0 1px 3px rgba(0,0,0,0.8);
         }
 
+        /* Progress Bar Section */
         .progress-box {
             background: #ffffff;
             border-radius: 16px;
@@ -274,7 +288,7 @@
         
         .channel-info { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 13px; color: #1e293b; }
 
-        /* --- OPEN/CLOSE GIFT BOX ANIMATION --- */
+        /* Gift Box Animation */
         .gift-container {
             width: 24px;
             height: 24px;
@@ -295,7 +309,6 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        /* Ribbon on Box Body */
         .gift-box-body::after {
             content: '';
             position: absolute;
@@ -307,7 +320,6 @@
             background: #facc15;
         }
 
-        /* Gift Lid / Cap */
         .gift-box-lid {
             width: 22px;
             height: 5px;
@@ -322,7 +334,6 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        /* Ribbon Bow on Top of Lid */
         .gift-box-lid::before {
             content: '';
             position: absolute;
@@ -335,17 +346,12 @@
             border-radius: 2px 2px 0 0;
         }
 
-        /* Continuous Lid Open & Close Keyframes */
         @keyframes openCloseLid {
-            0%, 100% {
-                transform: rotate(0deg) translateY(0);
-            }
-            35%, 65% {
-                transform: rotate(-35deg) translateY(-4px);
-            }
+            0%, 100% { transform: rotate(0deg) translateY(0); }
+            35%, 65% { transform: rotate(-35deg) translateY(-4px); }
         }
 
-        /* Focusing Electric Blue Channel Buttons */
+        /* Channel Buttons */
         .btn-join { 
             background: linear-gradient(135deg, #2563eb, #1d4ed8); 
             color: #ffffff; 
@@ -456,7 +462,7 @@
     </div>
 
     <div class="app-container">
-        <!-- User Profile Card -->
+        <!-- User Header Card -->
         <div class="user-header-card">
             <div class="user-info">
                 <div class="avatar-circle" id="avatar-letter">U</div>
@@ -470,7 +476,7 @@
             </div>
         </div>
 
-        <!-- Distinct Stylish Dashboard Navigation Buttons -->
+        <!-- Dashboard Navigation Buttons -->
         <div class="dashboard-nav">
             <div class="nav-btn active" id="nav-tasks" onclick="switchTab('tasks-tab', this)">
                 <i class="fa-solid fa-list-check"></i>
@@ -493,7 +499,7 @@
         <!-- 1. TASKS TAB -->
         <div id="tasks-tab" class="tab-content active">
             
-            <!-- Updated Green Diamond Image-Style Banner -->
+            <!-- Banner Matching Photo #2 -->
             <div class="banner-card">
                 <div class="diamond-badge-wrapper">
                     <div class="stars-top">
@@ -504,14 +510,18 @@
                     <div class="diamond-box">
                         <div class="diamond-content">
                             <div class="yono-text-yellow">YONO</div>
-                            <div class="lucky-draw-pill">LUCKY DRAW</div>
+                            <div class="lucky-draw-roller">
+                                <i class="fa-solid fa-spade spade-icon"></i>
+                                <span class="lucky-draw-text">LUCKY DRAW</span>
+                                <i class="fa-solid fa-spade spade-icon"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <p>नीचे दिए गए सभी Telegram Channels को Join करें और अपना <b>₹100 Winning Prize</b> तुरंत Withdraw करें!</p>
             </div>
 
-            <!-- Task Verification Line -->
+            <!-- Task Verification Progress -->
             <div class="progress-box">
                 <div class="progress-header">
                     <span>Task Verification Line</span>
@@ -525,7 +535,7 @@
             <div class="card-box">
                 <div class="card-title">LUCKY DRAW CHANNELS (10/10)</div>
 
-                <!-- 10 Channels List with Open/Close Gift Box Animation -->
+                <!-- 10 Channels List -->
                 <div class="task-card">
                     <div class="channel-info">
                         <div class="gift-container"><div class="gift-box-lid"></div><div class="gift-box-body"></div></div> 
