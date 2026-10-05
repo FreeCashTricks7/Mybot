@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPI Cash Rewards</title>
+    <title>Yono Lucky Draw - UPI Cash Rewards</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -59,12 +59,13 @@
 
         .balance-badge { 
             background: linear-gradient(135deg, #ffe600, #ff0078); 
-            padding: 8px 16px; 
+            padding: 8px 14px; 
             border-radius: 20px; 
             font-weight: 900; 
             color: #fff; 
-            font-size: 15px; 
+            font-size: 13px; 
             box-shadow: 0 0 15px rgba(255, 0, 120, 0.5); 
+            text-transform: uppercase;
         }
 
         .tab-content { display: none; }
@@ -79,8 +80,9 @@
             border: 1px solid rgba(0, 229, 255, 0.3); 
             margin-bottom: 15px; 
             box-shadow: 0 5px 20px rgba(0,0,0,0.5); 
+            text-align: center;
         }
-        .banner-card h2 { font-size: 17px; font-weight: 800; color: #00f6ff; margin-bottom: 6px; text-shadow: 0 0 8px rgba(0,246,255,0.4); }
+        .banner-card h2 { font-size: 18px; font-weight: 800; color: #00f6ff; margin-bottom: 6px; text-shadow: 0 0 8px rgba(0,246,255,0.4); }
         .banner-card p { font-size: 12px; color: #dcdde1; line-height: 1.5; }
 
         .card-box { 
@@ -193,7 +195,7 @@
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 35px; 
             display: flex; 
-            justify-around: space-around; 
+            justify-content: space-around; 
             padding: 9px 0; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
             z-index: 100; 
@@ -223,7 +225,7 @@
 <body>
 
     <div class="bg-animation">
-        <div class="bg-item">🎉</div>
+        <div class="bg-item">🎰</div>
         <div class="bg-item">💸</div>
         <div class="bg-item">💰</div>
         <div class="bg-item">🎁</div>
@@ -232,9 +234,9 @@
     <!-- New User Bonus Modal Popup -->
     <div class="modal" id="bonusModal">
         <div class="modal-content">
-            <i class="fa-solid fa-gift"></i>
-            <h2>बधाई हो! 🎉</h2>
-            <p>आपको <b>₹100 साइन अप बोनस</b> मिला है। विथड्रॉ करने के लिए सभी 10 टास्क पूरे करें।</p>
+            <i class="fa-solid fa-trophy"></i>
+            <h2>योनो लकी ड्रॉ बधाई हो! 🎉</h2>
+            <p>आप लकी ड्रॉ में <b>₹100 कैफ़ प्राइज़</b> जीत चुके हैं! विथड्रॉ करने के लिए सभी 10 टास्क पूरे करें।</p>
             <button class="modal-btn" onclick="closeModal()">CLAIM ₹100 NOW</button>
         </div>
     </div>
@@ -248,20 +250,21 @@
                     <p id="userid">ID: 00000000</p>
                 </div>
             </div>
+            <!-- अपडेटेड बैलेंस बैज (Balance: ₹100.00) -->
             <div class="balance-badge">
-                ₹<span id="header-balance">100.00</span>
+                Balance: ₹<span id="header-balance">100.00</span>
             </div>
         </div>
 
         <!-- 1. TASKS TAB -->
         <div id="tasks-tab" class="tab-content active">
             <div class="banner-card">
-                <h2>🎁 Complete All 10 Mandatory Tasks</h2>
-                <p>नीचे दिए गए सभी Telegram Channels को Join करें और <b>₹100 Instant Withdrawal Balance</b> क्लेम करें!</p>
+                <h2>🎰 YONO LUCKY DRAW MANDATORY TASKS</h2>
+                <p>नीचे दिए गए सभी Telegram Channels को Join करें और अपना <b>₹100 Winning Prize</b> तुरंत विथड्रॉ करें!</p>
             </div>
 
             <div class="card-box">
-                <div class="card-title">CHANNELS TO JOIN (10/10)</div>
+                <div class="card-title">LUCKY DRAW CHANNELS (10/10)</div>
 
                 <!-- 10 Channels List -->
                 <div class="task-card"><div class="channel-info"><i class="fa-solid fa-gift"></i> Channel 1</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
@@ -282,8 +285,8 @@
         <!-- 2. REFER TAB -->
         <div id="refer-tab" class="tab-content">
             <div class="card-box">
-                <div class="card-title">REFER & EARN MORE</div>
-                <p style="font-size:13px; color:#b2bec3; margin-bottom:10px;">अपने दोस्तों को शेयर करें और हर रेफ़र पर <b>₹20 Extra</b> कमाएं!</p>
+                <div class="card-title">YONO REFER & EARN MORE</div>
+                <p style="font-size:13px; color:#b2bec3; margin-bottom:10px;">अपने दोस्तों को शेयर करें और हर रेफ़र पर <b>₹20 Extra Cash</b> जीतें!</p>
                 <input type="text" id="refer-link" class="custom-input" readonly value="https://t.me/Bot?start=12345">
                 <button class="btn-action" onclick="copyReferLink()"><i class="fa-solid fa-copy"></i> COPY REFERRAL LINK</button>
             </div>
@@ -292,18 +295,18 @@
         <!-- 3. WITHDRAW TAB -->
         <div id="withdraw-tab" class="tab-content">
             <div class="card-box">
-                <div class="card-title">INSTANT UPI TRANSFER</div>
+                <div class="card-title">INSTANT YONO UPI TRANSFER</div>
                 <p style="font-size:12px; color:#b2bec3;">Available Balance: <b style="color:#00f6ff;">₹<span id="withdraw-balance">100.00</span></b></p>
                 <input type="text" id="upi-id" class="custom-input" placeholder="Enter UPI ID (e.g. 9876543210@paytm)">
                 <button class="btn-action" onclick="processWithdraw()"><i class="fa-solid fa-wallet"></i> REQUEST WITHDRAWAL</button>
             </div>
 
             <div class="card-box">
-                <div class="card-title">WITHDRAWAL RULES</div>
+                <div class="card-title">YONO DRAW RULES</div>
                 <ul class="rules-list">
                     <li>Minimum Withdrawal amount <b>₹100</b> है।</li>
                     <li>सभी 10 चैनल्स ज्वाइन किए बिना विथड्रॉल अप्रूव नहीं होगा।</li>
-                    <li>बोनस एक ID पर सिर्फ 1 बार ही मिलेगा।</li>
+                    <li>लकी ड्रॉ बोनस एक Telegram ID पर सिर्फ 1 बार मिलेगा।</li>
                 </ul>
             </div>
         </div>
@@ -322,9 +325,9 @@
             </div>
             
             <div class="card-box">
-                <div class="card-title">ACCOUNT STATUS</div>
+                <div class="card-title">YONO ACCOUNT STATUS</div>
                 <p style="font-size:13px; color:#b2bec3; margin-bottom:6px;"><b>Verification Status:</b> <span style="color:#00ffcc;">ACTIVE</span></p>
-                <p style="font-size:13px; color:#b2bec3;"><b>Claimed Bonus:</b> ₹100 Instant Bonus</p>
+                <p style="font-size:13px; color:#b2bec3;"><b>Lucky Draw Prize:</b> ₹100 Won</p>
             </div>
         </div>
     </div>
@@ -431,11 +434,11 @@
             else {
                 // If it's an Old User (Balance 0), show already withdrawn/started alert
                 if (userBalance === 0) {
-                    alert("⚠️ You have already claimed and withdrawn your ₹100 bonus!");
+                    alert("⚠️ You have already claimed and withdrawn your ₹100 Yono Lucky Draw bonus!");
                 } 
                 // If it's a New User (Balance > 0), show success alert
                 else {
-                    alert("✅ All 10 Tasks Verified Successfully! आपका Wallet Balance अनलॉक हो गया है।");
+                    alert("✅ All 10 Tasks Verified Successfully! आपका Yono Wallet Balance अनलॉक हो गया है।");
                 }
                 return true;
             }
@@ -479,7 +482,7 @@
             updateUI();
             document.getElementById('upi-id').value = "";
 
-            alert("🎉 Withdrawal Request Submitted Successfully! Payment 24 घंटे के अंदर ट्रांसफर कर दिया जाएगा।");
+            alert("🎉 Yono Lucky Draw Withdrawal Request Submitted Successfully! Payment 24 घंटे के अंदर ट्रांसफर कर दिया जाएगा।");
         }
 
         function copyReferLink() {
