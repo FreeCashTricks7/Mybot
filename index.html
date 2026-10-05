@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -126,7 +126,6 @@
             color: #ffffff;
             font-size: 24px;
             margin-bottom: 10px;
-            padding-right: 2px;
             box-shadow: 0 4px 15px rgba(36, 161, 222, 0.4);
         }
 
@@ -251,7 +250,7 @@
         <div class="modal-content">
             <i class="fa-solid fa-gift"></i>
             <h2>Welcome Bonus! 🎉</h2>
-            <p>आपको <b>₹100 साइन अप बोनस</b> मिला है। इसे विथड्रॉ करने के लिए सभी 10 चैनल्स को ज्वाइन करें।</p>
+            <p>You received a <b>₹100 Sign-up Bonus</b>. Join all 10 channels to unlock your withdrawal.</p>
             <button class="modal-btn" onclick="closeModal()">Claim ₹100 Bonus</button>
         </div>
     </div>
@@ -275,25 +274,12 @@
         <div id="tasks-tab" class="tab-content active">
             <div class="banner-card">
                 <h2>Join & Earn Instant ₹100</h2>
-                <p>नीचे दिए गए सभी 10 Telegram चैनल्स को ज्वाइन करें और अपना पेमेंट अनलॉक करें।</p>
+                <p>Join all 10 Telegram channels below to unlock your payout.</p>
             </div>
 
             <div class="section-title"><i class="fa-solid fa-list-check"></i> Required Tasks (10)</div>
 
-            <div class="channels-grid">
-                <!-- 10 Channels -->
-                <script>
-                    for(let i=1; i<=10; i++) {
-                        document.write(`
-                            <div class="task-square-box">
-                                <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
-                                <div class="channel-name">Channel ${i}</div>
-                                <button class="btn-join" id="task-btn-${i}" onclick="handleJoinClick(this, ${i}, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button>
-                            </div>
-                        `);
-                    }
-                </script>
-            </div>
+            <div class="channels-grid" id="channels-container"></div>
 
             <button class="btn-action" onclick="verifyTasks()"><i class="fa-solid fa-circle-check"></i> Verify & Unlock Balance</button>
         </div>
@@ -302,7 +288,7 @@
         <div id="refer-tab" class="tab-content">
             <div class="card-box">
                 <div class="section-title"><i class="fa-solid fa-user-plus"></i> Invite Friends</div>
-                <p style="font-size:13px; color:#94a3b8; margin-bottom:10px; text-align:center; font-weight:500;">अपने दोस्तों को इनवाइट करें और प्रति रेफ़रल <b>₹20 Extra</b> पाएं!</p>
+                <p style="font-size:13px; color:#94a3b8; margin-bottom:10px; text-align:center; font-weight:500;">Invite your friends and earn an extra <b>₹20 Extra</b> per referral!</p>
                 <input type="text" id="refer-link" class="custom-input" readonly value="https://t.me/Bot?start=12345">
                 <button class="btn-action" onclick="copyReferLink()"><i class="fa-solid fa-copy"></i> Copy Referral Link</button>
             </div>
@@ -320,9 +306,9 @@
             <div class="card-box">
                 <div class="section-title"><i class="fa-solid fa-shield-halved"></i> Payment Terms</div>
                 <ul class="rules-list">
-                    <li>न्यूनतम विथड्रॉल राशि <b>₹100</b> है।</li>
-                    <li>सभी 10 चैनल्स ज्वाइन और वेरिफाई करने के बाद ही विथड्रॉल प्रोसेस होगा।</li>
-                    <li>एक Telegram आईडी पर बोनस केवल एक बार मिलेगा।</li>
+                    <li>Minimum withdrawal amount is <b>₹100</b>.</li>
+                    <li>Withdrawal will be processed only after joining and verifying all 10 channels.</li>
+                    <li>The bonus is valid once per Telegram ID.</li>
                 </ul>
             </div>
         </div>
@@ -372,7 +358,6 @@
             document.getElementById('refer-link').value = `https://t.me/CashFree_CB_Bot?start=${user.id}`;
         }
 
-        // Keys for local memory
         let userBalanceKey = `balance_${currentUserId}`;
         let userVerifiedKey = `verified_${currentUserId}`;
         let userJoinedTasksKey = `joined_tasks_${currentUserId}`;
@@ -384,17 +369,30 @@
         let isVerified = localStorage.getItem(userVerifiedKey) === "true";
         let joinedTasks = JSON.parse(localStorage.getItem(userJoinedTasksKey) || "[]");
 
-        // Restore Task Buttons State
         window.onload = function() {
-            joinedTasks.forEach(taskId => {
-                let btn = document.getElementById(`task-btn-${taskId}`);
-                if(btn) {
-                    btn.classList.add('joined');
-                    btn.innerText = 'Joined ✓';
-                }
-            });
+            renderChannels();
             updateUI();
         };
+
+        function renderChannels() {
+            const container = document.getElementById('channels-container');
+            container.innerHTML = '';
+            
+            for(let i = 1; i <= 10; i++) {
+                const isJoined = joinedTasks.includes(i);
+                const btnClass = isJoined ? 'btn-join joined' : 'btn-join';
+                const btnText = isJoined ? 'Joined ✓' : 'JOIN';
+
+                const cardHTML = `
+                    <div class="task-square-box">
+                        <div class="telegram-icon-box"><i class="fa-brands fa-telegram"></i></div>
+                        <div class="channel-name">Channel ${i}</div>
+                        <button class="${btnClass}" id="task-btn-${i}" onclick="handleJoinClick(this, ${i}, 'https://t.me/+kCr0xkaeeEgwNzRl')">${btnText}</button>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', cardHTML);
+            }
+        }
 
         if (userBalance > 0 && !isVerified) {
             document.getElementById('bonusModal').style.display = 'flex';
@@ -443,7 +441,6 @@
                     btn.classList.add('joined');
                     btn.innerText = 'Joined ✓';
 
-                    // Save joined state
                     if (!joinedTasks.includes(taskId)) {
                         joinedTasks.push(taskId);
                         localStorage.setItem(userJoinedTasksKey, JSON.stringify(joinedTasks));
@@ -461,51 +458,46 @@
 
         function verifyTasks() {
             if (joinedTasks.length < 10) {
-                alert(`⚠️ आपने अभी तक केवल ${joinedTasks.length}/10 चैनल्स ही ज्वाइन किए हैं! कृपया पहले सभी 10 चैनल्स ज्वाइन करें।`);
+                alert(`⚠️ You have joined only ${joinedTasks.length}/10 channels so far! Please join all 10 channels first.`);
             } else {
                 isVerified = true;
                 localStorage.setItem(userVerifiedKey, "true");
                 updateUI();
-                alert("✅ बधाई हो! आपके सभी 10 चैनल्स सफलतापूर्वक वेरिफाई हो चुके हैं। अब आप विथड्रॉ कर सकते हैं।");
+                alert("✅ Congratulations! All 10 channels have been successfully verified. You can now withdraw.");
             }
         }
 
-        /* HARD SECURITY CHECK BEFORE WITHDRAWAL */
         function processWithdraw() {
-            // Check 1: Must be Verified
             if (!isVerified || joinedTasks.length < 10) {
-                alert("🚫 सिक्योरिटी ब्लॉक! आप बिना सभी 10 चैनल्स को ज्वाइन और वेरिफाई किए विथड्रॉ नहीं कर सकते।");
+                alert("🚫 Request Blocked! You cannot withdraw without joining and verifying all 10 channels.");
                 switchTab('tasks-tab', document.querySelectorAll('.nav-item')[0]);
                 return;
             }
 
-            // Check 2: Balance Check
             if (userBalance <= 0) {
-                alert("⚠️ अपर्याप्त बैलेंस! विथड्रॉ करने के लिए पर्याप्त बैलेंस नहीं है।");
+                alert("⚠️ Insufficient balance! You do not have enough balance to withdraw.");
                 return;
             }
 
-            // Check 3: Valid UPI ID
             const upiVal = document.getElementById('upi-id').value.trim();
             if (upiVal === "" || !upiVal.includes("@")) {
-                alert("⚠️ कृपया सही UPI ID दर्ज करें (उदा. 9876543210@paytm)");
+                alert("⚠️ Please enter a valid UPI ID (e.g., 9876543210@paytm)");
                 return;
             }
 
-            // Success Withdrawal
             userBalance = 0.00;
             localStorage.setItem(userBalanceKey, "0");
 
             updateUI();
             document.getElementById('upi-id').value = "";
 
-            alert("🎉 विथड्रॉल रिक्वेस्ट सबमिट हो गई है! 24 घंटे के अंदर पेमेंट क्रेडिट कर दिया जाएगा।");
+            alert("🎉 Withdrawal request submitted! Payment will be credited within 24 hours.");
         }
 
         function copyReferLink() {
             const copyText = document.getElementById("refer-link");
             copyText.select();
-            document.execCommand("copy");
+            navigator.clipboard.writeText(copyText.value);
             alert("📋 Referral Link Copied!");
         }
     </script>
