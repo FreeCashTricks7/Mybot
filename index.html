@@ -298,7 +298,7 @@
     <div class="modal" id="bonusModal">
         <div class="modal-content">
             <i class="fa-solid fa-trophy"></i>
-            <h2>Congratulation 🎉</h2>
+            <h2>योनो लकी ड्रॉ बधाई हो! 🎉</h2>
             <p>आप Lucky draw में <b>₹100 Cash Prize</b> जीत चुके हैं! Withdraw करने के लिए टास्क पूरा करें।</p>
             <button class="modal-btn" onclick="closeModal()">CLAIM ₹100 NOW</button>
         </div>
@@ -341,7 +341,6 @@
 
         <!-- 1. TASKS TAB -->
         <div id="tasks-tab" class="tab-content active">
-            <!-- ORIGINAL EXACT BANNER TEXT BOX -->
             <div class="banner-card">
                 <h2>🎰 YONO LUCKY DRAW MANDATORY TASKS</h2>
                 <p>नीचे दिए गए सभी Telegram Channels को Join करें और अपना <b>₹100 Winning Prize</b> तुरंत Withdraw करें!</p>
@@ -359,7 +358,6 @@
             </div>
 
             <div class="card-box">
-                <!-- ORIGINAL EXACT CARD TITLE -->
                 <div class="card-title">LUCKY DRAW CHANNELS (10/10)</div>
 
                 <!-- 10 Channels List -->
@@ -428,7 +426,7 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC (WITH PROGRESS BAR UPDATER) -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
         const tg = window.Telegram.WebApp;
         tg.expand();
@@ -496,7 +494,7 @@
                     btn.classList.remove('waiting');
                     btn.classList.add('joined');
                     btn.innerText = 'JOINED ✓';
-                    updateProgressBar(); /* Moves the progress bar forward */
+                    updateProgressBar();
                 }
             }, 1000);
         }
@@ -508,65 +506,17 @@
             element.classList.add('active');
         }
 
+        /* ALWAYS BLOCK VERIFICATION LOGIC */
         function verifyTasks() {
-            const allButtons = document.querySelectorAll('.btn-join');
-            let allJoined = true;
-
-            allButtons.forEach(btn => {
-                if (!btn.classList.contains('joined')) {
-                    allJoined = false;
-                }
-            });
-
-            if (!allJoined) {
-                alert("⚠️ कृपया पहले ऊपर दिए गए सभी 10 चैनल्स को ज्वाइन करें!");
-                return false;
-            } 
-            else {
-                if (userBalance === 0) {
-                    alert("⚠️ You have already claimed and withdrawn your ₹100 Yono Lucky Draw bonus!");
-                } 
-                else {
-                    alert("✅ All 10 Tasks Verified Successfully! आपका Yono Wallet Balance अनलॉक हो गया है।");
-                }
-                return true;
-            }
+            alert("⚠️ कृपया पहले ऊपर दिए गए सभी 10 चैनल्स को ज्वाइन करें!");
+            return false;
         }
 
+        /* ALWAYS BLOCK WITHDRAW LOGIC */
         function processWithdraw() {
-            const upiVal = document.getElementById('upi-id').value.trim();
-
-            const allButtons = document.querySelectorAll('.btn-join');
-            let allJoined = true;
-            allButtons.forEach(btn => {
-                if (!btn.classList.contains('joined')) {
-                    allJoined = false;
-                }
-            });
-
-            if (!allJoined) {
-                alert("⚠️ विथड्रॉ करने के लिए पहले सभी 10 Telegram Channels ज्वाइन करें!");
-                switchTab('tasks-tab', document.getElementById('nav-tasks'));
-                return;
-            }
-
-            if (userBalance <= 0) {
-                alert("⚠️ Insufficient Balance! You don't have enough balance to withdraw.");
-                return;
-            }
-
-            if (upiVal === "" || !upiVal.includes("@")) {
-                alert("⚠️ Please enter a valid UPI ID (e.g. 9876543210@paytm)");
-                return;
-            }
-
-            userBalance = 0.00;
-            localStorage.setItem(userBalanceKey, "0");
-
-            updateUI();
-            document.getElementById('upi-id').value = "";
-
-            alert("🎉 Yono Lucky Draw Withdrawal Request Submitted Successfully! Payment 24 घंटे के अंदर ट्रांसफर कर दिया जाएगा।");
+            alert("⚠️ विथड्रॉ करने के लिए पहले सभी 10 Telegram Channels ज्वाइन करें!");
+            switchTab('tasks-tab', document.getElementById('nav-tasks'));
+            return;
         }
 
         function copyReferLink() {
