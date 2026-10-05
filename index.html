@@ -7,7 +7,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Impact&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Alfa+Slab+One&family=Impact&display=swap');
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; user-select: none; }
         
@@ -114,112 +114,152 @@
         .tab-content.active { display: block; animation: slideUp 0.35s ease-out; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- BANNER CARD IN EXACT STYLE OF 2ND PHOTO --- */
+        /* --- EXACT MATCH BANNER CARD TO PHOTO 2 --- */
         .banner-card { 
-            background: linear-gradient(135deg, #063819, #021a0b); 
-            border-radius: 22px; 
-            padding: 24px 16px 18px 16px; 
+            background: linear-gradient(180deg, #012e12 0%, #001f0b 100%); 
+            border-radius: 24px; 
+            padding: 20px 14px 18px 14px; 
             color: #ffffff; 
             margin-bottom: 16px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
+            box-shadow: 0 12px 30px rgba(0,0,0,0.5); 
             text-align: center;
             border: 2px solid #15803d;
             position: relative;
             overflow: hidden;
         }
 
-        .diamond-badge-wrapper {
+        .banner-graphic-container {
             position: relative;
-            display: inline-block;
-            margin: 15px auto 18px auto;
+            width: 100%;
+            max-width: 310px;
+            margin: 10px auto 10px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Top Glowing Stars */
+        /* Top Glowing 3 Yellow Stars */
         .stars-top {
-            position: absolute;
-            top: -24px;
-            left: 50%;
-            transform: translateX(-50%);
             display: flex;
-            gap: 8px;
-            z-index: 2;
+            gap: 10px;
+            margin-bottom: -15px;
+            z-index: 5;
         }
         .stars-top i {
             color: #facc15;
             font-size: 26px;
-            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.8));
-            animation: starGlow 1.5s infinite alternate ease-in-out;
+            filter: drop-shadow(0 0 8px #facc15);
+            animation: starPulse 1.5s infinite alternate ease-in-out;
         }
-        .stars-top i:nth-child(2) { font-size: 32px; color: #fbbf24; }
+        .stars-top i:nth-child(2) { font-size: 34px; color: #fbbf24; }
 
-        @keyframes starGlow {
-            0% { transform: scale(0.95); filter: drop-shadow(0 0 4px #facc15); }
-            100% { transform: scale(1.15); filter: drop-shadow(0 0 12px #fde047); }
+        @keyframes starPulse {
+            0% { transform: scale(0.95); }
+            100% { transform: scale(1.1); }
         }
 
-        /* Larger Green Diamond Outer Box */
-        .diamond-box {
-            width: 170px;
-            height: 170px;
-            background: linear-gradient(135deg, #0d6e30, #06401a);
+        /* Diamond Frame */
+        .diamond-border-frame {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, #075225, #022b12);
             transform: rotate(45deg);
-            border-radius: 28px;
-            border: 4px solid #22c55e;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.6), 0 8px 25px rgba(0,0,0,0.5);
+            border-radius: 30px;
+            border: 4px solid #16a34a;
+            box-shadow: inset 0 0 25px rgba(0,0,0,0.8), 0 0 20px rgba(22, 163, 74, 0.4);
+            margin: 25px 0;
+            position: relative;
+        }
+
+        /* Overlay Container for Huge Text Pop-out */
+        .text-overlay-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            z-index: 10;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            margin: 15px auto;
         }
 
-        .diamond-content {
-            transform: rotate(-45deg);
-            width: 220px;
-            text-align: center;
-        }
-
-        /* Large Bold 3D Yellow YONO Text */
-        .yono-text-yellow {
-            font-family: 'Impact', sans-serif, 'Plus Jakarta Sans';
-            font-size: 42px;
+        /* HUGE YONO TEXT - EXTENDING OUTSIDE THE DIAMOND */
+        .huge-3d-yono {
+            font-family: 'Alfa Slab One', 'Impact', sans-serif;
+            font-size: 58px;
             font-weight: 900;
-            background: linear-gradient(180deg, #fffbeb 0%, #facc15 50%, #eab308 100%);
+            line-height: 0.85;
+            letter-spacing: 2px;
+            background: linear-gradient(180deg, #fffbeb 0%, #fde047 30%, #eab308 70%, #ca8a04 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(2px 4px 0px #78350f) drop-shadow(0px 0px 8px rgba(250, 204, 21, 0.6));
-            letter-spacing: 2px;
-            line-height: 0.95;
-            margin-bottom: 6px;
-            text-transform: uppercase;
+            /* Heavy 3D extruded shadow effect matching photo 2 */
+            filter: 
+                drop-shadow(0px 1px 0px #854d0e)
+                drop-shadow(0px 2px 0px #713f12)
+                drop-shadow(0px 3px 0px #713f12)
+                drop-shadow(0px 4px 0px #532e0d)
+                drop-shadow(0px 5px 0px #361e08)
+                drop-shadow(0px 8px 12px rgba(0, 0, 0, 0.9));
+            margin-bottom: -10px;
+            white-space: nowrap;
+            position: relative;
         }
 
-        /* White Roller Slot-Machine Style Capsule for LUCKY DRAW */
-        .lucky-draw-roller {
-            background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 50%, #e2e8f0 100%);
-            border: 3px solid #22c55e;
-            border-radius: 30px;
-            padding: 6px 12px;
-            box-shadow: inset 0 3px 6px rgba(0,0,0,0.3), 0 5px 12px rgba(0,0,0,0.4);
+        /* Sparkle Lens Flare Effect on YONO */
+        .huge-3d-yono::after {
+            content: '✨';
+            position: absolute;
+            top: -5px;
+            right: 15px;
+            font-size: 16px;
+            -webkit-text-fill-color: #ffffff;
+            filter: drop-shadow(0 0 6px #ffffff);
+        }
+
+        /* 3D SLOT MACHINE REEL CYLINDER (FOR LUCKY DRAW) */
+        .slot-machine-reel {
+            background: linear-gradient(180deg, #94a3b8 0%, #ffffff 25%, #ffffff 75%, #cbd5e1 100%);
+            border: 3px solid #16a34a;
+            border-radius: 25px;
+            padding: 5px 10px;
+            width: 105%;
+            box-shadow: 
+                inset 0 4px 6px rgba(0,0,0,0.4), 
+                inset 0 -4px 6px rgba(0,0,0,0.4),
+                0 8px 20px rgba(0,0,0,0.6);
             display: flex;
             align-items: center;
-            justify-content: space-around;
-            margin: 0 auto;
-            width: 92%;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
         }
 
-        .spade-icon {
-            color: #15803d;
-            font-size: 14px;
+        /* Reel Dividers (3D Slot lines) */
+        .slot-cell {
+            flex: 1;
+            text-align: center;
+            border-right: 2px solid #cbd5e1;
+            box-shadow: 1px 0 2px rgba(0,0,0,0.1);
+            padding: 2px 0;
         }
+        .slot-cell:last-child { border-right: none; }
 
-        .lucky-draw-text {
-            font-family: 'Impact', sans-serif, 'Plus Jakarta Sans';
+        .slot-spade {
             color: #15803d;
             font-size: 18px;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+        }
+
+        .slot-letter {
+            font-family: 'Impact', 'Alfa Slab One', sans-serif;
+            color: #15803d;
+            font-size: 20px;
             font-weight: 900;
-            letter-spacing: 1px;
-            text-shadow: 1px 1px 0px #86efac;
-            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 0px #86efac;
         }
 
         .banner-card p { 
@@ -227,8 +267,8 @@
             color: #fef08a; 
             line-height: 1.5; 
             font-weight: 700;
-            margin-top: 8px;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            margin-top: 10px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
         }
 
         /* Progress Bar Section */
@@ -288,7 +328,7 @@
         
         .channel-info { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 13px; color: #1e293b; }
 
-        /* Gift Box Animation */
+        /* Animated Gift Box */
         .gift-container {
             width: 24px;
             height: 24px;
@@ -501,23 +541,38 @@
             
             <!-- Banner Matching Photo #2 -->
             <div class="banner-card">
-                <div class="diamond-badge-wrapper">
+                <div class="banner-graphic-container">
                     <div class="stars-top">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                     </div>
-                    <div class="diamond-box">
-                        <div class="diamond-content">
-                            <div class="yono-text-yellow">YONO</div>
-                            <div class="lucky-draw-roller">
-                                <i class="fa-solid fa-spade spade-icon"></i>
-                                <span class="lucky-draw-text">LUCKY DRAW</span>
-                                <i class="fa-solid fa-spade spade-icon"></i>
-                            </div>
+
+                    <!-- Diamond Border Box -->
+                    <div class="diamond-border-frame"></div>
+
+                    <!-- Pop-out Text Overlay -->
+                    <div class="text-overlay-wrapper">
+                        <!-- Huge 3D Yono popping out -->
+                        <div class="huge-3d-yono">YONO</div>
+
+                        <!-- 3D Slot Machine Reel Cylinder for LUCKY DRAW -->
+                        <div class="slot-machine-reel">
+                            <div class="slot-cell"><i class="fa-solid fa-spade slot-spade"></i></div>
+                            <div class="slot-cell"><span class="slot-letter">L</span></div>
+                            <div class="slot-cell"><span class="slot-letter">U</span></div>
+                            <div class="slot-cell"><span class="slot-letter">C</span></div>
+                            <div class="slot-cell"><span class="slot-letter">K</span></div>
+                            <div class="slot-cell"><span class="slot-letter">Y</span></div>
+                            <div class="slot-cell"><span class="slot-letter">D</span></div>
+                            <div class="slot-cell"><span class="slot-letter">R</span></div>
+                            <div class="slot-cell"><span class="slot-letter">A</span></div>
+                            <div class="slot-cell"><span class="slot-letter">W</span></div>
+                            <div class="slot-cell"><i class="fa-solid fa-spade slot-spade"></i></div>
                         </div>
                     </div>
                 </div>
+
                 <p>नीचे दिए गए सभी Telegram Channels को Join करें और अपना <b>₹100 Winning Prize</b> तुरंत Withdraw करें!</p>
             </div>
 
