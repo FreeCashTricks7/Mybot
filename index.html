@@ -118,19 +118,105 @@
         .tab-content.active { display: block; animation: slideUp 0.35s ease-out; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* White Interface Cards */
+        /* --- GREEN DIAMOND IMAGE-STYLE BANNER CARD --- */
         .banner-card { 
-            background: #ffffff; 
-            border-radius: 20px; 
-            padding: 16px; 
-            color: #0f172a; 
+            background: linear-gradient(135deg, #0f5128, #052e16); 
+            border-radius: 22px; 
+            padding: 22px 16px 18px 16px; 
+            color: #ffffff; 
             margin-bottom: 16px; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.25); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
             text-align: center;
-            border-left: 5px solid #800000;
+            border: 2px solid #22c55e;
+            position: relative;
+            overflow: hidden;
         }
-        .banner-card h2 { font-size: 15px; font-weight: 800; color: #800000; margin-bottom: 6px; }
-        .banner-card p { font-size: 12px; color: #475569; line-height: 1.5; }
+
+        /* Diamond Outer Shape */
+        .diamond-badge-wrapper {
+            position: relative;
+            display: inline-block;
+            margin: 10px auto 14px auto;
+        }
+
+        /* Top Glowing Stars */
+        .stars-top {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 1;
+        }
+        .stars-top i {
+            color: #facc15;
+            font-size: 22px;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+            animation: starGlow 1.5s infinite alternate ease-in-out;
+        }
+        .stars-top i:nth-child(2) { font-size: 28px; color: #fbbf24; }
+
+        @keyframes starGlow {
+            0% { transform: scale(0.9); filter: drop-shadow(0 0 2px #facc15); }
+            100% { transform: scale(1.15); filter: drop-shadow(0 0 10px #fde047); }
+        }
+
+        .diamond-box {
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, #15803d, #166534);
+            transform: rotate(45deg);
+            border-radius: 24px;
+            border: 4px solid #4ade80;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 8px 20px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px auto;
+        }
+
+        .diamond-content {
+            transform: rotate(-45deg);
+            width: 170px;
+            text-align: center;
+        }
+
+        /* Yellow 3D YONO Text */
+        .yono-text-yellow {
+            font-size: 26px;
+            font-weight: 900;
+            color: #facc15;
+            text-shadow: 2px 3px 0px #b45309, 0 0 10px rgba(250, 204, 21, 0.5);
+            letter-spacing: 1px;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        /* White 3D Pill Badge Text */
+        .lucky-draw-pill {
+            background: linear-gradient(135deg, #22c55e, #15803d);
+            border: 2px solid #86efac;
+            padding: 4px 10px;
+            border-radius: 20px;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 900;
+            text-shadow: 1px 2px 0px #064e3b;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: inline-block;
+            letter-spacing: 0.5px;
+            width: 100%;
+        }
+
+        .banner-card p { 
+            font-size: 12px; 
+            color: #fef08a; 
+            line-height: 1.5; 
+            font-weight: 700;
+            margin-top: 6px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
 
         .progress-box {
             background: #ffffff;
@@ -406,8 +492,22 @@
 
         <!-- 1. TASKS TAB -->
         <div id="tasks-tab" class="tab-content active">
+            
+            <!-- Updated Green Diamond Image-Style Banner -->
             <div class="banner-card">
-                <h2>🎰 YONO LUCKY DRAW MANDATORY TASKS</h2>
+                <div class="diamond-badge-wrapper">
+                    <div class="stars-top">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="diamond-box">
+                        <div class="diamond-content">
+                            <div class="yono-text-yellow">YONO</div>
+                            <div class="lucky-draw-pill">LUCKY DRAW</div>
+                        </div>
+                    </div>
+                </div>
                 <p>नीचे दिए गए सभी Telegram Channels को Join करें और अपना <b>₹100 Winning Prize</b> तुरंत Withdraw करें!</p>
             </div>
 
