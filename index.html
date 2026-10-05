@@ -7,121 +7,129 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; user-select: none; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; user-select: none; }
         
-        /* Royale Dark Violet & Gold Theme */
+        /* Cyber Gold & Dark Emerald Theme */
         body { 
-            background: #0f0720 linear-gradient(180deg, #0f0720 0%, #1c0b38 50%, #090314 100%); 
+            background: #0a0e17 linear-gradient(180deg, #0a0e17 0%, #101929 50%, #060910 100%); 
             color: #ffffff; 
             min-height: 100vh; 
-            padding-bottom: 95px; 
+            padding-bottom: 100px; 
             position: relative; 
             overflow-x: hidden; 
         }
 
-        /* Neon Grid Mesh Overlay */
+        /* Abstract Glowing Orbs in Background */
         body::before {
             content: '';
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(90deg, rgba(157, 78, 221, 0.04) 0px, rgba(157, 78, 221, 0.04) 2px, transparent 2px, transparent 24px);
+            top: -10%; left: 50%; transform: translateX(-50%);
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, rgba(0, 255, 170, 0.05) 50%, transparent 70%);
             pointer-events: none;
             z-index: 0;
+            filter: blur(40px);
         }
 
         .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-        .bg-item { position: absolute; top: -10%; font-size: 22px; opacity: 0.25; animation: fall 9s linear infinite; filter: drop-shadow(0 0 10px #c77dff); }
+        .bg-item { position: absolute; top: -10%; font-size: 22px; opacity: 0.2; animation: fall 9s linear infinite; filter: drop-shadow(0 0 8px #ffd700); }
         @keyframes fall { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(110vh) rotate(360deg); } }
         .bg-item:nth-child(1) { left: 8%; animation-duration: 7s; }
         .bg-item:nth-child(2) { left: 30%; animation-duration: 10s; animation-delay: 2s; }
         .bg-item:nth-child(3) { left: 60%; animation-duration: 8s; animation-delay: 1s; }
         .bg-item:nth-child(4) { left: 82%; animation-duration: 11s; animation-delay: 3s; }
 
-        .app-container { position: relative; z-index: 1; padding: 14px; }
+        .app-container { position: relative; z-index: 1; padding: 16px; }
 
-        /* Luxe User Header Card */
+        /* Sleek Modern Profile Header */
         .user-header-card { 
-            background: rgba(36, 16, 68, 0.75); 
+            background: rgba(16, 25, 41, 0.7); 
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.4); 
-            border-radius: 22px; 
-            padding: 14px 18px; 
+            border: 1px solid rgba(255, 215, 0, 0.25); 
+            border-radius: 24px; 
+            padding: 12px 16px; 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
-            margin-bottom: 15px; 
-            box-shadow: 0 8px 30px rgba(0,0,0,0.7), inset 0 0 15px rgba(212, 175, 55, 0.1); 
+            margin-bottom: 16px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
         }
         .user-info { display: flex; align-items: center; gap: 12px; }
         .avatar-circle { 
-            width: 46px; 
-            height: 46px; 
-            background: linear-gradient(135deg, #ffe259, #ffa751); 
+            width: 44px; 
+            height: 44px; 
+            background: linear-gradient(135deg, #ffd700, #ff8c00); 
             color: #000; 
-            border-radius: 50%; 
+            border-radius: 16px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             font-size: 20px; 
             font-weight: 900; 
-            box-shadow: 0 0 15px rgba(255, 226, 89, 0.7); 
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); 
         }
-        .user-text h3 { font-size: 15px; font-weight: 800; color: #fff; letter-spacing: 0.5px; }
-        .user-text p { font-size: 11px; color: #e0aaff; font-weight: 600; }
+        .user-text h3 { font-size: 14px; font-weight: 800; color: #fff; }
+        .user-text p { font-size: 11px; color: #00ffaa; font-weight: 600; }
 
         .balance-badge { 
-            background: linear-gradient(135deg, #ffd700, #ff8c00); 
+            background: linear-gradient(135deg, #00ffaa, #00b87a); 
             padding: 8px 14px; 
-            border-radius: 20px; 
+            border-radius: 18px; 
             font-weight: 900; 
-            color: #000; 
+            color: #05100a; 
             font-size: 13px; 
-            box-shadow: 0 0 18px rgba(255, 215, 0, 0.6); 
+            box-shadow: 0 0 15px rgba(0, 255, 170, 0.3); 
             text-transform: uppercase;
         }
 
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-content.active { display: block; animation: slideUp 0.35s cubic-bezier(0.1, 0.9, 0.2, 1); }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Jackpot Royal Banner Card */
+        /* Jackpot Live Widget Banner */
         .banner-card { 
-            background: linear-gradient(135deg, #3c096c, #1a0438); 
-            border-radius: 20px; 
-            padding: 18px; 
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(0, 255, 170, 0.05)); 
+            backdrop-filter: blur(10px);
+            border-radius: 22px; 
+            padding: 16px; 
             color: white; 
-            border: 1px solid rgba(255, 215, 0, 0.6); 
-            margin-bottom: 15px; 
-            box-shadow: 0 8px 25px rgba(123, 44, 191, 0.3); 
-            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.3); 
+            margin-bottom: 16px; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4); 
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        .banner-card h2 { font-size: 18px; font-weight: 800; color: #ffd700; margin-bottom: 6px; text-shadow: 0 0 10px rgba(255,215,0,0.6); }
-        .banner-card p { font-size: 12px; color: #e0aaff; line-height: 1.5; }
+        .banner-icon { font-size: 32px; background: rgba(255, 215, 0, 0.15); padding: 10px; border-radius: 18px; border: 1px solid rgba(255,215,0,0.3); }
+        .banner-text h2 { font-size: 15px; font-weight: 800; color: #ffd700; margin-bottom: 4px; }
+        .banner-text p { font-size: 11px; color: #94a3b8; line-height: 1.4; }
 
         .card-box { 
-            background: rgba(23, 10, 45, 0.85); 
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(157, 78, 221, 0.3); 
-            border-radius: 20px; 
-            padding: 16px; 
-            margin-bottom: 15px; 
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5); 
+            background: rgba(16, 25, 41, 0.75); 
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border-radius: 24px; 
+            padding: 18px; 
+            margin-bottom: 16px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
         }
-        .card-title { font-size: 12px; font-weight: 900; color: #ffd700; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; letter-spacing: 1px; }
-        .card-title::before { content: ''; width: 4px; height: 14px; background: #c77dff; border-radius: 2px; box-shadow: 0 0 8px #c77dff; }
+        .card-title { font-size: 11px; font-weight: 900; color: #ffd700; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; letter-spacing: 1px; }
+        .badge-status { background: rgba(0, 255, 170, 0.15); color: #00ffaa; padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 800; border: 1px solid rgba(0, 255, 170, 0.3); }
 
+        /* Sleek Task Row */
         .task-card { 
-            background: rgba(255, 255, 255, 0.03); 
-            border: 1px solid rgba(157, 78, 221, 0.25); 
-            border-radius: 14px; 
-            padding: 10px 14px; 
+            background: rgba(255, 255, 255, 0.02); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            border-radius: 16px; 
+            padding: 12px 14px; 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
-            margin-bottom: 9px; 
+            margin-bottom: 10px; 
+            transition: all 0.2s ease;
         }
         
-        .channel-info { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 13px; color: #f5f6fa; }
+        .channel-info { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 13px; color: #f1f5f9; }
         
         .animated-emoji { 
             font-size: 18px; 
@@ -132,51 +140,51 @@
 
         @keyframes pulseGlow { 
             0% { transform: scale(1); } 
-            50% { transform: scale(1.25); } 
+            50% { transform: scale(1.22); } 
             100% { transform: scale(1); } 
         }
 
-        /* Golden Glow Join Button States */
+        /* Pill Buttons */
         .btn-join { 
-            background: linear-gradient(135deg, #e0aaff, #9d4edd); 
-            color: #ffffff; 
+            background: linear-gradient(135deg, #ffd700, #ff9900); 
+            color: #000; 
             text-decoration: none; 
-            padding: 7px 16px; 
+            padding: 8px 18px; 
             border-radius: 20px; 
             font-size: 11px; 
             font-weight: 900; 
             border: none; 
             cursor: pointer; 
-            box-shadow: 0 0 12px rgba(157, 78, 221, 0.5); 
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.25); 
             transition: 0.2s;
         }
 
         .btn-join.waiting {
-            background: linear-gradient(135deg, #ffe600, #ff9900) !important;
+            background: linear-gradient(135deg, #00ffaa, #00b87a) !important;
             color: #000 !important;
-            box-shadow: 0 0 12px rgba(255, 230, 0, 0.7) !important;
+            box-shadow: 0 4px 12px rgba(0, 255, 170, 0.3) !important;
             cursor: wait;
         }
 
         .btn-join.joined { 
-            background: linear-gradient(135deg, #10002b, #3c096c) !important; 
-            color: #7b2cbf !important; 
-            border: 1px solid #7b2cbf !important;
+            background: rgba(255, 255, 255, 0.05) !important; 
+            color: #64748b !important; 
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
             box-shadow: none !important; 
             pointer-events: none;
         }
 
         .btn-action { 
             width: 100%; 
-            background: linear-gradient(135deg, #ffd700, #ff8c00); 
+            background: linear-gradient(135deg, #00ffaa, #00b87a); 
             border: none; 
-            padding: 14px; 
-            border-radius: 25px; 
+            padding: 15px; 
+            border-radius: 20px; 
             font-weight: 900; 
-            font-size: 14px; 
-            color: #000; 
+            font-size: 13px; 
+            color: #05100a; 
             cursor: pointer; 
-            box-shadow: 0 5px 22px rgba(255, 215, 0, 0.5); 
+            box-shadow: 0 6px 20px rgba(0, 255, 170, 0.3); 
             text-transform: uppercase; 
             margin-top: 10px; 
             letter-spacing: 0.5px;
@@ -184,67 +192,69 @@
 
         .custom-input { 
             width: 100%; 
-            padding: 13px; 
-            border-radius: 14px; 
-            border: 1px solid rgba(157, 78, 221, 0.5); 
-            background: rgba(10, 3, 20, 0.6); 
+            padding: 14px; 
+            border-radius: 16px; 
+            border: 1px solid rgba(255, 215, 0, 0.3); 
+            background: rgba(10, 14, 23, 0.6); 
             font-size: 14px; 
             text-align: center; 
             font-weight: bold; 
-            margin: 10px 0; 
+            margin: 12px 0; 
             color: #ffd700; 
             outline: none;
         }
 
-        .rules-list { font-size: 12px; color: #c77dff; line-height: 1.7; padding-left: 18px; }
+        .rules-list { font-size: 12px; color: #94a3b8; line-height: 1.8; padding-left: 18px; }
         .rules-list li { margin-bottom: 6px; }
 
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
         .grid-card { 
-            background: rgba(23, 10, 45, 0.85); 
-            border: 1px solid rgba(157, 78, 221, 0.3); 
-            padding: 14px; 
-            border-radius: 16px; 
+            background: rgba(16, 25, 41, 0.75); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            padding: 16px; 
+            border-radius: 20px; 
             text-align: center; 
         }
-        .grid-card p { font-size: 10px; font-weight: 800; color: #e0aaff; }
-        .grid-card h3 { font-size: 18px; font-weight: 900; color: #ffd700; margin-top: 4px; }
+        .grid-card p { font-size: 10px; font-weight: 800; color: #94a3b8; text-transform: uppercase; }
+        .grid-card h3 { font-size: 18px; font-weight: 900; color: #ffd700; margin-top: 6px; }
 
+        /* Floating Curved Bottom Bar */
         .bottom-nav { 
             position: fixed; 
-            bottom: 12px; 
-            left: 4%; 
-            width: 92%; 
-            background: rgba(15, 7, 32, 0.95); 
+            bottom: 16px; 
+            left: 5%; 
+            width: 90%; 
+            background: rgba(16, 25, 41, 0.92); 
             backdrop-filter: blur(25px);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            border-radius: 35px; 
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 30px; 
             display: flex; 
             justify-content: space-around; 
-            padding: 9px 0; 
-            box-shadow: 0 10px 35px rgba(0,0,0,0.9); 
+            padding: 8px 0; 
+            box-shadow: 0 12px 35px rgba(0,0,0,0.7); 
             z-index: 100; 
         }
-        .nav-item { text-align: center; color: #9d4edd; font-size: 10px; font-weight: 800; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+        .nav-item { text-align: center; color: #64748b; font-size: 10px; font-weight: 800; cursor: pointer; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
         .nav-item i { font-size: 16px; }
         .nav-item.active { color: #ffd700; }
-        .nav-item.active i { background: linear-gradient(135deg, #ffd700, #ff8c00); color: #000; padding: 6px 14px; border-radius: 18px; box-shadow: 0 0 15px rgba(255, 215, 0, 0.7); }
+        .nav-item.active i { background: linear-gradient(135deg, #ffd700, #ff9900); color: #000; padding: 6px 14px; border-radius: 16px; box-shadow: 0 0 12px rgba(255, 215, 0, 0.4); }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); justify-content: center; align-items: center; z-index: 1000; }
+        /* Premium Modal Popup */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { 
-            background: linear-gradient(135deg, #241044, #090314); 
-            padding: 25px; 
-            border-radius: 24px; 
+            background: linear-gradient(135deg, #101929, #0a0e17); 
+            padding: 26px; 
+            border-radius: 28px; 
             text-align: center; 
-            max-width: 310px; 
+            max-width: 320px; 
             width: 85%; 
-            border: 1px solid #ffd700; 
-            box-shadow: 0 0 35px rgba(255, 215, 0, 0.5); 
+            border: 1px solid rgba(255, 215, 0, 0.4); 
+            box-shadow: 0 0 35px rgba(0,0,0,0.8); 
         }
-        .modal-content i { font-size: 55px; color: #ffe600; margin-bottom: 12px; text-shadow: 0 0 18px rgba(255, 230, 0, 0.7); display: inline-block; }
+        .modal-content i { font-size: 50px; color: #ffd700; margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); display: inline-block; }
         .modal-content h2 { color: #fff; font-size: 18px; font-weight: 900; margin-bottom: 8px; }
-        .modal-content p { color: #e0aaff; font-size: 13px; font-weight: 600; margin-bottom: 18px; line-height: 1.4; }
-        .modal-btn { background: linear-gradient(135deg, #ffe600, #ff8c00); color: #000; border: none; padding: 12px 28px; border-radius: 25px; font-weight: 900; font-size: 13px; cursor: pointer; box-shadow: 0 4px 15px rgba(255,215,0,0.5); }
+        .modal-content p { color: #94a3b8; font-size: 12px; font-weight: 600; margin-bottom: 20px; line-height: 1.5; }
+        .modal-btn { background: linear-gradient(135deg, #ffd700, #ff9900); color: #000; border: none; padding: 12px 30px; border-radius: 20px; font-weight: 900; font-size: 12px; cursor: pointer; box-shadow: 0 4px 15px rgba(255,215,0,0.3); }
     </style>
 </head>
 <body>
@@ -261,12 +271,13 @@
         <div class="modal-content">
             <i class="fa-solid fa-trophy"></i>
             <h2>योनो लकी ड्रॉ बधाई हो! 🎉</h2>
-            <p>आप Lucky draw में<b>₹100 Cash Prize</b> जीत चुके हैं! Withdraw करने के लिए टास्क पूरा करें।</p>
+            <p>आप Lucky draw में <b>₹100 Cash Prize</b> जीत चुके हैं! Withdraw करने के लिए टास्क पूरा करें।</p>
             <button class="modal-btn" onclick="closeModal()">CLAIM ₹100 NOW</button>
         </div>
     </div>
 
     <div class="app-container">
+        <!-- Profile & Balance Header Card -->
         <div class="user-header-card">
             <div class="user-info">
                 <div class="avatar-circle" id="avatar-letter">U</div>
@@ -283,12 +294,18 @@
         <!-- 1. TASKS TAB -->
         <div id="tasks-tab" class="tab-content active">
             <div class="banner-card">
-                <h2>🎰 YONO LUCKY DRAW MANDATORY TASKS</h2>
-                <p>नीचे दिए गए सभी Telegram Channels को Join करें और अपना <b>₹100 Winning Prize</b> तुरंत Withdraw करें!</p>
+                <div class="banner-icon">🎁</div>
+                <div class="banner-text">
+                    <h2>🎰 YONO LUCKY DRAW TASKS</h2>
+                    <p>नीचे दिए गए सभी Telegram Channels को Join करें और अपना <b>₹100 Winning Prize</b> तुरंत Withdraw करें!</p>
+                </div>
             </div>
 
             <div class="card-box">
-                <div class="card-title">LUCKY DRAW CHANNELS (10/10)</div>
+                <div class="card-title">
+                    <span>LUCKY DRAW CHANNELS</span>
+                    <span class="badge-status">10/10 REQUIRED</span>
+                </div>
 
                 <!-- 10 Channels List with Original HD/3D Emojis & Pulse Animation -->
                 <div class="task-card"><div class="channel-info"><span class="animated-emoji">🎁</span> Channel 1</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
@@ -310,7 +327,7 @@
         <div id="refer-tab" class="tab-content">
             <div class="card-box">
                 <div class="card-title">YONO REFER & EARN MORE</div>
-                <p style="font-size:13px; color:#c77dff; margin-bottom:10px;">अपने दोस्तों को शेयर करें और हर रेफ़र पर <b>₹20 Extra Cash</b> जीतें!</p>
+                <p style="font-size:12px; color:#94a3b8; margin-bottom:12px;">अपने दोस्तों को शेयर करें और हर रेफ़र पर <b>₹20 Extra Cash</b> जीतें!</p>
                 <input type="text" id="refer-link" class="custom-input" readonly value="https://t.me/Bot?start=12345">
                 <button class="btn-action" onclick="copyReferLink()"><i class="fa-solid fa-copy"></i> COPY REFERRAL LINK</button>
             </div>
@@ -320,13 +337,13 @@
         <div id="withdraw-tab" class="tab-content">
             <div class="card-box">
                 <div class="card-title">INSTANT YONO UPI TRANSFER</div>
-                <p style="font-size:12px; color:#c77dff;">Available Balance: <b style="color:#ffd700;">₹<span id="withdraw-balance">100.00</span></b></p>
+                <p style="font-size:12px; color:#94a3b8;">Available Balance: <b style="color:#00ffaa;">₹<span id="withdraw-balance">100.00</span></b></p>
                 <input type="text" id="upi-id" class="custom-input" placeholder="Enter UPI ID (e.g. 9876543210@paytm)">
                 <button class="btn-action" onclick="processWithdraw()"><i class="fa-solid fa-wallet"></i> REQUEST WITHDRAWAL</button>
             </div>
 
             <div class="card-box">
-                <div class="card-title">YONO Lucky DRAW RULES</div>
+                <div class="card-title">YONO LUCKY DRAW RULES</div>
                 <ul class="rules-list">
                     <li>Minimum Withdrawal amount <b>₹100</b> है।</li>
                     <li>सभी चैनल्स ज्वाइन किए बिना Withdraw Approve नहीं होगा।</li>
@@ -343,15 +360,15 @@
                     <h3>₹100.00</h3>
                 </div>
                 <div class="grid-card">
-                    <p>TOTAL WITHDRAWAL</p>
+                    <p>Total Withdrawal</p>
                     <h3 style="color:#ff0078;" id="total-withdrawn">₹0.00</h3>
                 </div>
             </div>
             
             <div class="card-box">
                 <div class="card-title">YONO ACCOUNT STATUS</div>
-                <p style="font-size:13px; color:#c77dff; margin-bottom:6px;"><b>Verification Status:</b> <span style="color:#00ff88;">ACTIVE</span></p>
-                <p style="font-size:13px; color:#c77dff;"><b>Lucky Draw Prize:</b> ₹100 Won</p>
+                <p style="font-size:13px; color:#94a3b8; margin-bottom:8px;"><b>Verification Status:</b> <span style="color:#00ffaa;">ACTIVE</span></p>
+                <p style="font-size:13px; color:#94a3b8;"><b>Lucky Draw Prize:</b> ₹100 Won</p>
             </div>
         </div>
     </div>
@@ -364,6 +381,7 @@
         <div class="nav-item" id="nav-profile" onclick="switchTab('profile-tab', this)"><i class="fa-solid fa-user"></i>Profile</div>
     </div>
 
+    <!-- UNTOUCHED ORIGINAL JAVASCRIPT LOGIC -->
     <script>
         const tg = window.Telegram.WebApp;
         tg.expand();
@@ -451,7 +469,7 @@
             } 
             else {
                 if (userBalance === 0) {
-                    alert("⚠️ You have already claimed and withdrawn your ₹100 Yono Lucky Draw bonus!");
+                    alert("⚠️️ You have already claimed and withdrawn your ₹100 Yono Lucky Draw bonus!");
                 } 
                 else {
                     alert("✅ All 10 Tasks Verified Successfully! आपका Yono Wallet Balance अनलॉक हो गया है।");
