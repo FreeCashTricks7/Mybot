@@ -193,7 +193,7 @@
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 35px; 
             display: flex; 
-            justify-content: space-around; 
+            justify-around: space-around; 
             padding: 9px 0; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
             z-index: 100; 
@@ -331,10 +331,10 @@
 
     <!-- Navigation -->
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="switchTab('tasks-tab', this)"><i class="fa-solid fa-list-check"></i>Tasks</div>
-        <div class="nav-item" onclick="switchTab('refer-tab', this)"><i class="fa-solid fa-users"></i>Refer</div>
-        <div class="nav-item" onclick="switchTab('withdraw-tab', this)"><i class="fa-solid fa-wallet"></i>Withdraw</div>
-        <div class="nav-item" onclick="switchTab('profile-tab', this)"><i class="fa-solid fa-user"></i>Profile</div>
+        <div class="nav-item active" id="nav-tasks" onclick="switchTab('tasks-tab', this)"><i class="fa-solid fa-list-check"></i>Tasks</div>
+        <div class="nav-item" id="nav-refer" onclick="switchTab('refer-tab', this)"><i class="fa-solid fa-users"></i>Refer</div>
+        <div class="nav-item" id="nav-withdraw" onclick="switchTab('withdraw-tab', this)"><i class="fa-solid fa-wallet"></i>Withdraw</div>
+        <div class="nav-item" id="nav-profile" onclick="switchTab('profile-tab', this)"><i class="fa-solid fa-user"></i>Profile</div>
     </div>
 
     <script>
@@ -425,6 +425,7 @@
             // 2. If ANY channel is NOT joined, ALWAYS show channel join message
             if (!allJoined) {
                 alert("⚠️ कृपया पहले ऊपर दिए गए सभी 10 चैनल्स को ज्वाइन करें!");
+                return false;
             } 
             // 3. If ALL channels ARE joined:
             else {
@@ -436,22 +437,42 @@
                 else {
                     alert("✅ All 10 Tasks Verified Successfully! आपका Wallet Balance अनलॉक हो गया है।");
                 }
+                return true;
             }
         }
 
         function processWithdraw() {
             const upiVal = document.getElementById('upi-id').value.trim();
 
+            // 1. सबसे पहले चेक करेंगे कि क्या सारे 10 चैनल जॉइन किए गए हैं
+            const allButtons = document.querySelectorAll('.btn-join');
+            let allJoined = true;
+            allButtons.forEach(btn => {
+                if (!btn.classList.contains('joined')) {
+                    allJoined = false;
+                }
+            });
+
+            // 2. अगर सभी चैनल जॉइन नहीं हैं, तो अलार्ट दिखाकर Tasks Tab पर भेज देंगे
+            if (!allJoined) {
+                alert("⚠️ विथड्रॉ करने के लिए पहले सभी 10 Telegram Channels ज्वाइन करें!");
+                switchTab('tasks-tab', document.getElementById('nav-tasks'));
+                return;
+            }
+
+            // 3. अगर बैलेंस 0 है
             if (userBalance <= 0) {
                 alert("⚠️ Insufficient Balance! You don't have enough balance to withdraw.");
                 return;
             }
 
+            // 4. अगर UPI ID सही नहीं है
             if (upiVal === "" || !upiVal.includes("@")) {
                 alert("⚠️ Please enter a valid UPI ID (e.g. 9876543210@paytm)");
                 return;
             }
 
+            // विथड्रॉल प्रोसेस
             userBalance = 0.00;
             localStorage.setItem(userBalanceKey, "0");
 
@@ -470,4 +491,3 @@
     </script>
 </body>
 </html>
-
