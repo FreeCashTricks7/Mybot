@@ -298,7 +298,7 @@
     <div class="modal" id="bonusModal">
         <div class="modal-content">
             <i class="fa-solid fa-trophy"></i>
-            <h2>योनो लकी ड्रॉ बधाई हो! 🎉</h2>
+            <h2>Yono Lucky Draw Congratulations 🎉</h2>
             <p>आप Lucky draw में <b>₹100 Cash Prize</b> जीत चुके हैं! Withdraw करने के लिए टास्क पूरा करें।</p>
             <button class="modal-btn" onclick="closeModal()">CLAIM ₹100 NOW</button>
         </div>
@@ -506,15 +506,15 @@
             element.classList.add('active');
         }
 
-        /* ALWAYS BLOCK VERIFICATION LOGIC */
+        /* ALWAYS SHOW EXACT ERROR MESSAGE ON VERIFY */
         function verifyTasks() {
-            alert("⚠️ कृपया पहले ऊपर दिए गए सभी 10 चैनल्स को ज्वाइन करें!");
+            alert("कृपया पहले सभी चैनल में ज्वाइन होने की पुष्टि होने दें");
             return false;
         }
 
         /* ALWAYS BLOCK WITHDRAW LOGIC */
         function processWithdraw() {
-            alert("⚠️ विथड्रॉ करने के लिए पहले सभी 10 Telegram Channels ज्वाइन करें!");
+            alert("कृपया पहले सभी चैनल में ज्वाइन होने की पुष्टि होने दें");
             switchTab('tasks-tab', document.getElementById('nav-tasks'));
             return;
         }
