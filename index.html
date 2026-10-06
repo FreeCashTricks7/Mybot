@@ -70,6 +70,64 @@
             text-transform: uppercase;
         }
 
+        /* 1. पृथक इमेज बॉक्स */
+        .banner-box { 
+            background: rgba(22, 15, 41, 0.65);
+            backdrop-filter: blur(15px);
+            border-radius: 20px; 
+            padding: 10px; 
+            border: 1px solid rgba(0, 242, 254, 0.25); 
+            margin-bottom: 12px; 
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5); 
+        }
+        .banner-img {
+            width: 100%;
+            border-radius: 14px;
+            display: block;
+            border: 1px solid rgba(0, 242, 254, 0.3);
+        }
+
+        /* 2. एनिमेटेड और ग्लो करने वाला नोटिस बॉक्स */
+        .glowing-notice-box {
+            background: linear-gradient(135deg, rgba(120, 75, 255, 0.15), rgba(0, 242, 254, 0.1));
+            border: 1px solid #00f2fe;
+            border-radius: 18px;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+            text-align: center;
+            position: relative;
+            animation: pulseGlowBox 2s infinite ease-in-out;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+        }
+
+        @keyframes pulseGlowBox {
+            0% { 
+                box-shadow: 0 0 12px rgba(0, 242, 254, 0.25), inset 0 0 10px rgba(0, 242, 254, 0.1); 
+                border-color: rgba(0, 242, 254, 0.6);
+            }
+            50% { 
+                box-shadow: 0 0 25px rgba(0, 242, 254, 0.6), inset 0 0 15px rgba(0, 242, 254, 0.2); 
+                border-color: #00f2fe;
+            }
+            100% { 
+                box-shadow: 0 0 12px rgba(0, 242, 254, 0.25), inset 0 0 10px rgba(0, 242, 254, 0.1); 
+                border-color: rgba(0, 242, 254, 0.6);
+            }
+        }
+
+        .glowing-notice-box p {
+            font-size: 12.5px;
+            line-height: 1.5;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .highlight-text {
+            color: #00f2fe;
+            font-weight: 900;
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.8);
+        }
+
         .dashboard-nav {
             position: fixed;
             bottom: 0;
@@ -109,33 +167,6 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: slideUp 0.35s ease-out; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-
-        .banner-card { 
-            background: linear-gradient(135deg, rgba(120, 75, 255, 0.2), rgba(0, 242, 254, 0.1)); 
-            backdrop-filter: blur(15px);
-            border-radius: 20px; 
-            padding: 14px; 
-            color: white; 
-            border: 1px solid rgba(0, 242, 254, 0.3); 
-            margin-bottom: 16px; 
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5); 
-            text-align: center;
-        }
-        .banner-img {
-            width: 100%;
-            border-radius: 14px;
-            margin-bottom: 10px;
-            display: block;
-            border: 1px solid rgba(0, 242, 254, 0.3);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-        }
-        .banner-card p { 
-            font-size: 11px; 
-            color: #d0c8df; 
-            white-space: nowrap; 
-            overflow: hidden; 
-            text-overflow: ellipsis; 
-        }
 
         .progress-box {
             background: rgba(0, 0, 0, 0.35);
@@ -334,9 +365,15 @@
 
         <!-- 1. TASKS TAB -->
         <div id="tasks-tab" class="tab-content active">
-            <div class="banner-card">
+            
+            <!-- अलग फोटो का बॉक्स -->
+            <div class="banner-box">
                 <img src="https://i.ibb.co/DfCsBwPv/file-0000000041fc820b8218de53e151876e.png" alt="Yono Banner" class="banner-img">
-                <p>नीचे दिए गए सभी Telegram Channels को Join करें और अपना <b>₹500 Winning Prize</b> तुरंत Withdraw करें!</p>
+            </div>
+
+            <!-- अलग ग्लोइंग और एनिमेटेड टेक्स्ट का बॉक्स -->
+            <div class="glowing-notice-box">
+                <p>📢 नीचे दिए गए सभी Telegram Channels को Join करें और अपना <span class="highlight-text">₹500 Winning Prize</span> तुरंत Withdraw करें!</p>
             </div>
 
             <div class="progress-box">
