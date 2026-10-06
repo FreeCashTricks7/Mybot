@@ -11,7 +11,6 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; user-select: none; }
         
-        /* Ultra Premium Royal Purple & Neon Cyan Theme */
         body { 
             background: #090514 linear-gradient(180deg, #0f0a21 0%, #05020a 100%); 
             color: #ffffff; 
@@ -31,7 +30,6 @@
 
         .app-container { position: relative; z-index: 1; padding: 16px; max-width: 480px; margin: 0 auto; }
 
-        /* Modern User Header Card */
         .user-header-card { 
             background: rgba(22, 15, 41, 0.7); 
             backdrop-filter: blur(20px);
@@ -72,7 +70,6 @@
             text-transform: uppercase;
         }
 
-        /* Fixed Bottom Navigation Bar */
         .dashboard-nav {
             position: fixed;
             bottom: 0;
@@ -113,7 +110,6 @@
         .tab-content.active { display: block; animation: slideUp 0.35s ease-out; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Jackpot Banner Card */
         .banner-card { 
             background: linear-gradient(135deg, rgba(120, 75, 255, 0.2), rgba(0, 242, 254, 0.1)); 
             backdrop-filter: blur(15px);
@@ -141,7 +137,6 @@
             text-overflow: ellipsis; 
         }
 
-        /* Live Task Progress Line Container */
         .progress-box {
             background: rgba(0, 0, 0, 0.35);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -189,7 +184,6 @@
         .card-title { font-size: 12px; font-weight: 900; color: #00f2fe; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; letter-spacing: 1px; }
         .card-title::before { content: ''; width: 4px; height: 14px; background: #784bff; border-radius: 2px; box-shadow: 0 0 8px #784bff; }
 
-        /* Channel Item Row */
         .task-card { 
             background: rgba(255, 255, 255, 0.025); 
             border: 1px solid rgba(255, 255, 255, 0.05); 
@@ -216,7 +210,6 @@
             100% { transform: scale(1); } 
         }
 
-        /* Buttons */
         .btn-join { 
             background: linear-gradient(135deg, #00f2fe, #4facfe); 
             color: #05020a; 
@@ -290,7 +283,6 @@
         .grid-card p { font-size: 10px; font-weight: 800; color: #8a7b9c; text-transform: uppercase; }
         .grid-card h3 { font-size: 18px; font-weight: 900; color: #00f2fe; margin-top: 4px; }
 
-        /* Modal Popup */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { 
             background: linear-gradient(135deg, #0f0a21, #05020a); 
@@ -317,7 +309,6 @@
         <div class="bg-item">🎁</div>
     </div>
 
-    <!-- New User Bonus Modal Popup -->
     <div class="modal" id="bonusModal">
         <div class="modal-content">
             <i class="fa-solid fa-trophy"></i>
@@ -328,7 +319,6 @@
     </div>
 
     <div class="app-container">
-        <!-- User Profile Card -->
         <div class="user-header-card">
             <div class="user-info">
                 <div class="avatar-circle" id="avatar-letter">U</div>
@@ -345,11 +335,10 @@
         <!-- 1. TASKS TAB -->
         <div id="tasks-tab" class="tab-content active">
             <div class="banner-card">
-                <img src="https://t.me/btphotoys/2" alt="Yono Banner" class="banner-img">
+                <img src="https://i.ibb.co/DfCsBwPv/file-0000000041fc820b8218de53e151876e.png" alt="Yono Banner" class="banner-img">
                 <p>नीचे दिए गए सभी Telegram Channels को Join करें और अपना <b>₹500 Winning Prize</b> तुरंत Withdraw करें!</p>
             </div>
 
-            <!-- LIVE TASK PROGRESS LINE BOX -->
             <div class="progress-box">
                 <div class="progress-header">
                     <span>Task Verification Line</span>
@@ -363,7 +352,6 @@
             <div class="card-box">
                 <div class="card-title">LUCKY DRAW CHANNELS (20/20)</div>
 
-                <!-- 20 Channels List -->
                 <div class="task-card"><div class="channel-info"><span class="animated-emoji">🎁</span> Channel 1</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
                 <div class="task-card"><div class="channel-info"><span class="animated-emoji">🚀</span> Channel 2</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
                 <div class="task-card"><div class="channel-info"><span class="animated-emoji">🚀</span> Channel 3</div><button class="btn-join" onclick="handleJoinClick(this, 'https://t.me/+kCr0xkaeeEgwNzRl')">JOIN</button></div>
@@ -439,7 +427,6 @@
         </div>
     </div>
 
-    <!-- Dashboard Fast Navigation (Fixed at Bottom) -->
     <div class="dashboard-nav">
         <div class="nav-btn active" id="nav-tasks" onclick="switchTab('tasks-tab', this)">
             <i class="fa-solid fa-list-check"></i>
@@ -459,7 +446,6 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script>
         const tg = window.Telegram.WebApp;
         tg.expand();
@@ -502,7 +488,6 @@
             document.getElementById('bonusModal').style.display = 'none';
         }
 
-        /* Updates the Animated Line Progress when channels are joined */
         function updateProgressBar() {
             const joinedCount = document.querySelectorAll('.btn-join.joined').length;
             document.getElementById('progress-text').innerText = `${joinedCount} / 20 Joined`;
@@ -539,7 +524,6 @@
             element.classList.add('active');
         }
 
-        /* VERIFY TASKS PAGE LOGIC */
         function verifyTasks() {
             const joinedCount = document.querySelectorAll('.btn-join.joined').length;
             
@@ -551,13 +535,11 @@
             return false;
         }
 
-        /* WITHDRAW PAGE LOGIC WITH AUTO REDIRECT TO TASKS PAGE */
         function processWithdraw() {
             const joinedCount = document.querySelectorAll('.btn-join.joined').length;
 
             if (joinedCount < 20) {
                 alert("⚠️ कृपया पहले सभी चैनल जॉइन करें");
-                // OK दबाते ही टास्क वाले मेन पेज पर ले जाएगा
                 switchTab('tasks-tab', document.getElementById('nav-tasks'));
             } else {
                 alert("⏳ कृपया पहले सभी चैनल में ज्वाइन होने की पुष्टि होने दें");
